@@ -94,6 +94,7 @@ class AccessControlTest extends TestCase
                 'username' => 'operator-audit',
                 'password' => 'password123',
                 'password_confirmation' => 'password123',
+                'role' => 'operator',
                 'status' => 'aktif',
             ])
             ->assertRedirect(route('admin.users.index'));
@@ -106,6 +107,23 @@ class AccessControlTest extends TestCase
 
         $this->assertArrayNotHasKey('password', $audit->new_values);
         $this->assertArrayNotHasKey('remember_token', $audit->new_values);
+    }
+
+    public function test_admin_can_update_own_account_without_role_and_status_fields(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin', 'status' => 'aktif']);
+
+        $this->actingAs($admin)
+            ->put(route('admin.users.update', $admin), [
+                'name' => 'Admin Diperbarui',
+                'username' => $admin->username,
+            ])
+            ->assertRedirect(route('admin.users.index'));
+
+        $admin->refresh();
+        $this->assertSame('Admin Diperbarui', $admin->name);
+        $this->assertSame('admin', $admin->role);
+        $this->assertSame('aktif', $admin->status);
     }
 
     public function test_operator_can_open_dashboard_but_not_target_master(): void
@@ -205,6 +223,39 @@ class AccessControlTest extends TestCase
         $this->actingAs($operator)
             ->get(route('admin.users.index'))
             ->assertForbidden();
+    }
+
+    public function test_admin_can_create_multiple_users_per_role_and_cannot_delete_self(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin', 'status' => 'aktif']);
+        $payload = fn (string $username) => [
+            'name' => 'Operator '.$username,
+            'username' => $username,
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'role' => 'operator',
+            'status' => 'aktif',
+        ];
+
+        $this->actingAs($admin)->post(route('admin.users.store'), $payload('operator-a'))->assertRedirect(route('admin.users.index'));
+        $this->actingAs($admin)->post(route('admin.users.store'), $payload('operator-b'))->assertRedirect(route('admin.users.index'));
+        $this->assertSame(2, User::where('role', 'operator')->count());
+
+        $this->actingAs($admin)->delete(route('admin.users.destroy', User::where('username', 'operator-a')->first()))
+            ->assertRedirect(route('admin.users.index'));
+        $this->assertDatabaseMissing('users', ['username' => 'operator-a']);
+
+        $this->actingAs($admin)->delete(route('admin.users.destroy', $admin))->assertRedirect();
+        $this->assertDatabaseHas('users', ['id' => $admin->id]);
+
+        $this->actingAs($admin)->put(route('admin.users.update', $admin), [
+            'name' => $admin->name,
+            'username' => $admin->username,
+            'role' => 'operator',
+            'status' => 'nonaktif',
+        ])->assertRedirect();
+        $this->assertSame('admin', $admin->fresh()->role);
+        $this->assertSame('aktif', $admin->fresh()->status);
     }
 
     public function test_pimpinan_can_review_warnings_but_operator_cannot(): void

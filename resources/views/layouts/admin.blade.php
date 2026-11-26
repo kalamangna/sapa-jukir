@@ -1415,6 +1415,7 @@ SIDEBAR
         @if(auth()->user()->role === 'admin')
             <a href="{{ route('admin.gallery.index') }}" class="{{ request()->routeIs('admin.gallery.*') ? 'active' : '' }}"><i class="bi bi-images"></i><span>Galeri Publik</span></a>
             <a href="{{ route('admin.news.index') }}" class="{{ request()->routeIs('admin.news.*') ? 'active' : '' }}"><i class="bi bi-newspaper"></i><span>Pengaturan Berita</span></a>
+            <a href="{{ route('admin.users.index') }}" class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}"><i class="bi bi-people"></i><span>Manajemen Pengguna</span></a>
         @endif
     @endif
 

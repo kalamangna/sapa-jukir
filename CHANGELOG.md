@@ -3,6 +3,18 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.4.0] - 2026-11-26
+
+### Ditambahkan
+- Dukungan banyak pengguna per role dengan menghapus indeks unik `role` melalui migrasi `drop_unique_role_from_users_table`.
+- Fitur tambah dan hapus pengguna pada `UserController`, `StoreUserRequest`, route `admin.users`, serta tampilan `create.blade.php` dan `index.blade.php`.
+- Tautan menu Manajemen Pengguna pada sidebar admin di `layouts/admin.blade.php`.
+- Pengujian akses multi-akun per role, larangan hapus akun sendiri, dan pembaruan akun sendiri di `AccessControlTest`.
+
+### Diperbaiki
+- Validasi `UpdateUserRequest` saat admin memperbarui akunnya sendiri tanpa mengirim field `role` dan `status` yang dinonaktifkan di form.
+- Penguncian `role` dan `status` akun sendiri pada `UserController::update` serta pencegahan penghapusan akun yang sedang login pada `UserController::destroy`.
+
 ## [1.3.1] - 2026-11-26
 
 ### Diperbaiki
