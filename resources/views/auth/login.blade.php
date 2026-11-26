@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Login — SAPA JUKIR Sinjai</title>
+    <x-seo title="Login | SAPA JUKIR Sinjai" :noindex="true" />
 
     <style>
 

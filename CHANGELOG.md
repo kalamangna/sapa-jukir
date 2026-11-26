@@ -3,6 +3,21 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.3.0] - 2026-11-26
+
+### Ditambahkan
+- Komponen `x-seo` untuk title, description, canonical, Open Graph, Twitter Card, favicon, dan robots pada seluruh halaman publik.
+- Deskripsi dan gambar pratinjau tautan pada beranda dari Pengaturan Situs, serta pada detail berita dari ringkasan dan gambar beritanya.
+- Berkas `public/favicon.png` dari logo SAPA JUKIR dan pengujian `SeoTest`.
+
+### Diubah
+- Halaman login dan seluruh halaman admin memuat `noindex, nofollow`.
+- `robots.txt` melarang perayapan `/admin` dan `/login`. Berkas ini hanya berlaku jika berada di akar domain.
+- Form pengaduan dan detail titik parkir kini memiliki meta description.
+
+### Dihapus
+- `public/favicon.ico` berukuran 0 byte.
+
 ## [1.2.0] - 2026-11-26
 
 ### Diubah

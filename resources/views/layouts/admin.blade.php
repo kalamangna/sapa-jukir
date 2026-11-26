@@ -17,9 +17,7 @@
             : 'Administrator';
     @endphp
 
-    <title>
-        @yield('title', $layoutRoleLabel) | SAPA JUKIR Sinjai
-    </title>
+    <x-seo :title="trim($__env->yieldContent('title', $layoutRoleLabel)).' | SAPA JUKIR Sinjai'" :noindex="true" />
 
 
     {{-- Bootstrap --}}
