@@ -224,11 +224,11 @@
                 <div>
 
                     <h6 class="fw-bold mb-0">
-                        Filter Data
+                        Filter
                     </h6>
 
                     <small class="text-muted">
-                        Gunakan filter untuk mencari data setoran.
+                        Saring data setoran berdasarkan kriteria.
                     </small>
 
                 </div>
@@ -262,7 +262,7 @@
                                 name="search"
                                 class="form-control"
                                 value="{{ $search }}"
-                                placeholder="Kode / nama Petugas / titik/objek pendapatan..."
+                                placeholder="JKR-00001 atau Pasar Sentral"
                             >
 
                         </div>
@@ -308,7 +308,7 @@
                     <div class="col-12 col-md-6 col-lg-3">
 
                         <label class="form-label fw-semibold">
-                            Titik/Objek Pendapatan
+                            Objek Pendapatan
                         </label>
 
                         <select
@@ -547,7 +547,7 @@
                             </th>
 
                             <th>
-                                Titik/Objek Pendapatan
+                                Objek Pendapatan
                             </th>
 
                             <th>
@@ -795,6 +795,7 @@
                                             href="{{ route('admin.setoran.show', $setoran->id) }}"
                                             class="btn btn-sm btn-outline-primary"
                                             title="Detail"
+                                            aria-label="Detail setoran {{ $setoran->jukir?->nama }}"
                                         >
 
                                             <i class="bi bi-eye"></i>
@@ -808,7 +809,8 @@
                                         <a
                                             href="{{ route('admin.setoran.edit', $setoran->id) }}"
                                             class="btn btn-sm btn-outline-warning"
-                                            title="Edit"
+                                            title="Ubah"
+                                            aria-label="Ubah setoran {{ $setoran->jukir?->nama }}"
                                         >
 
                                             <i class="bi bi-pencil"></i>
@@ -822,7 +824,7 @@
                                             action="{{ route('admin.setoran.destroy', $setoran->id) }}"
                                             method="POST"
                                             class="d-inline"
-                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus data setoran ini? Data yang sudah diverifikasi juga akan dihapus.')"
+                                            onsubmit="return confirm('Hapus data setoran ini? Data yang sudah diverifikasi juga akan ikut terhapus.')"
                                         >
 
                                             @csrf
@@ -833,6 +835,7 @@
                                                 type="submit"
                                                 class="btn btn-sm btn-outline-danger"
                                                 title="Hapus"
+                                                aria-label="Hapus setoran {{ $setoran->jukir?->nama }}"
                                             >
 
                                                 <i class="bi bi-trash"></i>

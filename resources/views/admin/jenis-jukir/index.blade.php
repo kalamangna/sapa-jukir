@@ -66,7 +66,7 @@
                             type="text"
                             name="search"
                             class="form-control"
-                            placeholder="Cari kode atau nama jenis Petugas..."
+                            placeholder="JP-01 atau Petugas Pasar"
                             value="{{ $search }}"
                         >
 
@@ -82,7 +82,7 @@
                         class="btn btn-primary"
                     >
                         <i class="bi bi-search me-1"></i>
-                        Cari
+                        Filter
                     </button>
 
                 </div>
@@ -300,6 +300,7 @@
                                             href="{{ route('admin.jenis-jukir.show', $jenisJukir) }}"
                                             class="btn btn-sm btn-outline-primary"
                                             title="Detail"
+                                            aria-label="Detail {{ $jenisJukir->nama }}"
                                         >
                                             <i class="bi bi-eye"></i>
                                         </a>
@@ -310,7 +311,8 @@
                                         <a
                                             href="{{ route('admin.jenis-jukir.edit', $jenisJukir) }}"
                                             class="btn btn-sm btn-outline-warning"
-                                            title="Edit"
+                                            title="Ubah"
+                                            aria-label="Ubah {{ $jenisJukir->nama }}"
                                         >
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
@@ -322,6 +324,7 @@
     type="button"
     class="btn btn-sm btn-outline-danger btn-delete-jenis-jukir"
     title="Hapus"
+    aria-label="Hapus {{ $jenisJukir->nama }}"
     data-bs-toggle="modal"
     data-bs-target="#deleteJenisJukirModal"
     data-url="{{ route('admin.jenis-jukir.destroy', $jenisJukir) }}"
@@ -467,7 +470,7 @@
                     type="button"
                     class="btn-close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
+                    aria-label="Tutup dialog"
                 ></button>
 
             </div>
@@ -480,7 +483,7 @@
 
                 <p class="mb-2">
 
-                    Apakah Anda yakin ingin menghapus jenis Petugas:
+                    Hapus jenis petugas berikut?
 
                 </p>
 
@@ -500,7 +503,7 @@
 
                     Data yang sudah dihapus tidak dapat dikembalikan.
 
-                    Jika jenis Petugas ini masih digunakan oleh data Petugas,
+                    Jika jenis petugas ini masih digunakan oleh data petugas,
                     sistem tidak akan mengizinkan penghapusan.
 
                 </p>

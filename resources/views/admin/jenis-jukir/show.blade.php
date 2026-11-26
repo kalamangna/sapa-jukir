@@ -51,7 +51,7 @@
 
             <i class="bi bi-pencil-square me-1"></i>
 
-            Edit Data
+            Ubah Data
 
         </a>
 
@@ -702,6 +702,7 @@
                                             href="{{ route('admin.jukir.show', $jukir) }}"
                                             class="btn btn-sm btn-outline-primary"
                                             title="Lihat Detail Petugas"
+                                            aria-label="Lihat Detail {{ $jukir->nama }}"
                                         >
 
                                             <i class="bi bi-eye"></i>

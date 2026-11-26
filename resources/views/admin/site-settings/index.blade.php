@@ -9,13 +9,6 @@
     <p class="text-muted mb-0">Atur konten utama halaman depan, foto hero, jam pelayanan, lokasi, kontak WhatsApp, Instagram, dan email.</p>
 </div>
 
-@if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show auto-dismiss-alert" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
-
 <form action="{{ route('admin.site-settings.update') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
@@ -47,7 +40,7 @@
 
                     <div class="mb-3">
                         <label for="hero_description" class="form-label fw-semibold">Deskripsi</label>
-                        <textarea id="hero_description" name="hero_description" rows="5" class="form-control @error('hero_description') is-invalid @enderror" placeholder="Masukkan deskripsi halaman publik">{{ old('hero_description', $settings?->hero_description ?? 'SAPA JUKIR adalah aplikasi yang bertujuan untuk membantu proses pencatatan dan monitoring kegiatan pengelolaan perparkiran di Kabupaten Sinjai.') }}</textarea>
+                        <textarea id="hero_description" name="hero_description" rows="5" class="form-control @error('hero_description') is-invalid @enderror" placeholder="SAPA JUKIR membantu pencatatan dan pemantauan retribusi daerah.">{{ old('hero_description', $settings?->hero_description ?? 'SAPA JUKIR adalah aplikasi yang bertujuan untuk membantu proses pencatatan dan monitoring kegiatan pengelolaan perparkiran di Kabupaten Sinjai.') }}</textarea>
                         @error('hero_description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -75,7 +68,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="location_url" class="form-label fw-semibold">Link Lokasi (Google Maps)</label>
+                    <label for="location_url" class="form-label fw-semibold">Tautan Google Maps</label>
                     <input id="location_url" name="location_url" value="{{ old('location_url', $settings?->location_url ?? 'https://maps.google.com/?q=Dinas+Perhubungan+Kabupaten+Sinjai') }}" class="form-control @error('location_url') is-invalid @enderror" placeholder="https://maps.google.com/?q=...">
                     @error('location_url')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -91,7 +84,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="whatsapp_url" class="form-label fw-semibold">Link WhatsApp</label>
+                    <label for="whatsapp_url" class="form-label fw-semibold">Tautan WhatsApp</label>
                     <input id="whatsapp_url" name="whatsapp_url" value="{{ old('whatsapp_url', $settings?->whatsapp_url ?? 'https://wa.me/628999084343') }}" class="form-control @error('whatsapp_url') is-invalid @enderror" placeholder="https://wa.me/628999084343">
                     @error('whatsapp_url')
                         <div class="invalid-feedback">{{ $message }}</div>

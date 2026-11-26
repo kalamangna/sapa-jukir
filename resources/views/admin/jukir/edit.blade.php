@@ -134,7 +134,7 @@
                         >
 
                             <option value="">
-                                -- Pilih Jenis Petugas --
+                                Pilih jenis petugas
                             </option>
 
                             @foreach($jenisJukirs as $jenisJukir)
@@ -200,7 +200,7 @@
                         value="{{ old('nik', $jukir->nik) }}"
                         maxlength="16"
                         inputmode="numeric"
-                        placeholder="Masukkan 16 digit NIK"
+                        placeholder="16 digit NIK"
                         required
                     >
 
@@ -305,7 +305,7 @@
                         id="nama"
                         class="form-control @error('nama') is-invalid @enderror"
                         value="{{ old('nama', $jukir->nama) }}"
-                        placeholder="Masukkan nama lengkap"
+                        placeholder="Budi Santoso"
                         required
                     >
 
@@ -451,7 +451,7 @@
                     >
 
                         <option value="">
-                            -- Pilih Jenis Kelamin --
+                            Pilih jenis kelamin
                         </option>
 
                         <option
@@ -534,7 +534,7 @@
                         id="alamat"
                         rows="3"
                         class="form-control @error('alamat') is-invalid @enderror"
-                        placeholder="Masukkan alamat lengkap"
+                        placeholder="Jl. Persatuan Raya, Kel. Bongki"
                     >{{ old('alamat', $jukir->alamat) }}</textarea>
 
 
@@ -572,7 +572,7 @@
                     >
 
                         <option value="">
-                            -- Pilih Kecamatan --
+                            Pilih kecamatan
                         </option>
 
                         @foreach($kecamatans as $kecamatan)
@@ -625,7 +625,7 @@
                     >
 
                         <option value="">
-                            -- Pilih Kelurahan --
+                            Pilih kelurahan
                         </option>
 
                         @foreach($kelurahans as $kelurahan)
@@ -934,7 +934,7 @@
                         id="nomor_kartu"
                         class="form-control @error('nomor_kartu') is-invalid @enderror"
                         value="{{ old('nomor_kartu', $jukir->nomor_kartu) }}"
-                        placeholder="Masukkan nomor kartu"
+                        placeholder="JKR-2026-001"
                     >
 
 
@@ -1048,7 +1048,7 @@
                         id="keterangan"
                         rows="4"
                         class="form-control @error('keterangan') is-invalid @enderror"
-                        placeholder="Tambahkan keterangan jika diperlukan..."
+                        placeholder="Contoh: Bertugas di shift pagi"
                     >{{ old('keterangan', $jukir->keterangan) }}</textarea>
 
 

@@ -40,37 +40,6 @@
 
 
     {{-- ==========================================================
-        ERROR VALIDASI
-    =========================================================== --}}
-
-    @if ($errors->any())
-
-        <div class="alert alert-danger border-0 shadow-sm">
-
-            <div class="fw-semibold mb-2">
-
-                <i class="bi bi-exclamation-triangle me-1"></i>
-
-                Terdapat kesalahan pada pengisian data.
-
-            </div>
-
-            <ul class="mb-0 ps-3">
-
-                @foreach ($errors->all() as $error)
-
-                    <li>{{ $error }}</li>
-
-                @endforeach
-
-            </ul>
-
-        </div>
-
-    @endif
-
-
-    {{-- ==========================================================
         FORM
     =========================================================== --}}
 
@@ -94,7 +63,7 @@
                     <div class="col-12">
                         <label for="sumber_pemasukan_id" class="form-label fw-semibold">Sumber Pendapatan <span class="text-danger">*</span></label>
                         <select name="sumber_pemasukan_id" id="sumber_pemasukan_id" class="form-select @error('sumber_pemasukan_id') is-invalid @enderror" required>
-                            <option value="">-- Pilih Sumber Pendapatan --</option>
+                            <option value="">Pilih sumber pendapatan</option>
                             @foreach($sumberPemasukans as $sumber)
                                 <option value="{{ $sumber->id }}" data-kode="{{ $sumber->kode }}" @selected(old('sumber_pemasukan_id', $setoran->sumber_pemasukan_id) == $sumber->id)>{{ $sumber->nama }}</option>
                             @endforeach
@@ -123,7 +92,7 @@
                         >
 
                             <option value="">
-                                -- Pilih Petugas --
+                                Pilih petugas
                             </option>
 
                             @foreach ($jukirs as $jukir)
@@ -172,7 +141,7 @@
                         >
 
                             <option value="">
-                                -- Pilih Titik Parkir --
+                                Pilih titik parkir
                             </option>
 
                             @foreach ($titikParkirs as $titik)
@@ -254,7 +223,7 @@
                                         <div class="col-12">
                                             <label class="form-label">Seri penyerahan</label>
                                             <select name="karcis_lines[{{ $index }}][allocation_id]" class="form-select karcis-allocation" @required($ticketRequired)>
-                                                <option value="">-- Pilih seri karcis --</option>
+                                                <option value="">Pilih seri karcis</option>
                                                 @foreach($karcisAllocations as $allocation)
                                                     <option value="{{ $allocation->id }}" data-source="{{ $allocation->sumber_pemasukan_id }}" data-jukir="{{ $allocation->jukir_id ?? '' }}" data-start="{{ $allocation->nomor_awal }}" data-end="{{ $allocation->nomor_akhir }}" data-value="{{ $allocation->nilai_per_karcis }}" @selected(($line['allocation_id'] ?? '') == $allocation->id)>
                                                         {{ $allocation->sumberPemasukan->nama }} — {{ $allocation->jenis_karcis }} — {{ $allocation->seri_prefix }}{{ str_pad($allocation->nomor_awal, $allocation->lebar_nomor, '0', STR_PAD_LEFT) }}–{{ $allocation->seri_prefix }}{{ str_pad($allocation->nomor_akhir, $allocation->lebar_nomor, '0', STR_PAD_LEFT) }} (sisa {{ $allocation->jumlah_tersedia }})
@@ -444,7 +413,7 @@
                         >
 
                             <option value="">
-                                -- Pilih Status --
+                                Pilih status
                             </option>
 
                             <option
@@ -499,7 +468,7 @@
                             id="keterangan"
                             rows="4"
                             class="form-control @error('keterangan') is-invalid @enderror"
-                            placeholder="Tambahkan keterangan jika diperlukan..."
+                            placeholder="Keterangan tambahan setoran"
                         >{{ old('keterangan', $setoran->keterangan) }}</textarea>
 
                         @error('keterangan')

@@ -43,7 +43,7 @@
                     class="btn btn-primary"
                 >
                     <i class="bi bi-pencil-square me-1"></i>
-                    Edit
+                    Ubah
                 </a>
 
             @endif
@@ -134,7 +134,7 @@
                         <div class="col-12 col-md-6">
 
                             <div class="text-muted small mb-1">
-                                Titik/Objek Pendapatan
+                                Objek Pendapatan
                             </div>
 
                             <div class="fw-semibold">
@@ -465,7 +465,7 @@
                                 <button
                                     type="submit"
                                     class="btn btn-success w-100"
-                                    onclick="return confirm('Apakah Anda yakin ingin memverifikasi setoran ini?')"
+                                    onclick="return confirm('Verifikasi setoran ini? Status setoran akan berubah menjadi terverifikasi.')"
                                 >
 
                                     <i class="bi bi-check-circle me-1"></i>
@@ -733,7 +733,7 @@
                     type="button"
                     class="btn-close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
+                    aria-label="Tutup dialog"
                 ></button>
 
             </div>
@@ -780,7 +780,7 @@
                             id="keterangan_penolakan"
                             class="form-control"
                             rows="4"
-                            placeholder="Masukkan alasan penolakan..."
+                            placeholder="Nominal setoran tidak sesuai bukti transfer"
                             required
                         ></textarea>
 

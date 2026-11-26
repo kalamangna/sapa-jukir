@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Detail Titik/Objek Pendapatan')
+@section('title', 'Detail Objek Pendapatan')
 
-@section('page-title', 'Detail Titik/Objek Pendapatan')
+@section('page-title', 'Detail Objek Pendapatan')
 
 @section('content')
 
@@ -15,7 +15,7 @@
     <div>
 
         <h4 class="mb-1 fw-bold">
-            Detail Titik/Objek Pendapatan
+            Detail Objek Pendapatan
         </h4>
 
         <p class="text-muted mb-0">
@@ -305,7 +305,7 @@
 
             <div class="p-4 text-center text-muted">
                 <i class="bi bi-people fs-3 d-block mb-2"></i>
-                Belum ada petugas yang ditugaskan pada titik/objek pendapatan ini.
+                Belum ada petugas yang ditugaskan pada objek pendapatan ini.
             </div>
 
         @endif
@@ -349,7 +349,7 @@
 
 
                     <dt class="col-sm-5 text-muted">
-                        Kode Titik/Objek
+                        Kode Objek
                     </dt>
 
                     <dd class="col-sm-7">
@@ -365,7 +365,7 @@
 
 
                     <dt class="col-sm-5 text-muted">
-                        Nama Titik/Objek
+                        Nama Objek
                     </dt>
 
                     <dd class="col-sm-7">
@@ -599,7 +599,7 @@
 
                     <i class="bi {{ $isBusinessAsset ? 'bi-building' : 'bi-car-front' }} me-2 text-success"></i>
 
-                    {{ $isBusinessAsset ? 'Kapasitas Unit / Luas' : 'Kapasitas Titik/Objek' }}
+                    {{ $isBusinessAsset ? 'Kapasitas Unit dan Luas' : 'Kapasitas Objek' }}
 
                 </h6>
 
@@ -729,7 +729,7 @@
 
                         <i class="bi bi-cash-stack me-2 text-success"></i>
 
-                        Potensi Titik/Objek
+                        Potensi Objek
 
                     </h6>
 

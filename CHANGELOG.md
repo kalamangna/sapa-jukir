@@ -3,6 +3,21 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.8.2] - 2026-11-26
+
+### Ditambahkan
+- Guard pencegahan klik ganda saat pengiriman formulir non-GET (dengan pengecekan `event.defaultPrevented`) serta cincin fokus `:focus-visible` pada elemen interaktif di `layouts/admin.blade.php`.
+- Validasi kontekstual `@error` dan pesan `invalid-feedback` per kolom pada formulir `karcis/index.blade.php`, `objek-pendapatan/form.blade.php`, `okupansi-parkir/create.blade.php`, `pemanfaatan-aset/form.blade.php`, `tagihan/create.blade.php`, `unit-usaha/form.blade.php`, `users/form.blade.php`, dan `sambutan/index.blade.php`.
+
+### Diubah
+- Perapian target sentuh mobile minimal `40px`, posisi notifikasi mengambang `.global-alert`, serta dukungan mode gelap (`.bg-light-subtle`, `.form-text`, `.border-top`, `.border-bottom`, `.table-warning`, dan kontras badge kuning) pada `layouts/admin.blade.php`.
+- Penyeragaman copywriting, penghapusan tanda kurung, garis miring, tanda `-- ... --` pada `<option>`, tombol aksi spesifik (`Simpan Dokumentasi`, `Simpan Okupansi`, `Simpan Pemanfaatan`, `Simpan Sumber`, `Simpan Unit Usaha`, `Unduh CSV`, `Unduh Excel`, `Unduh PDF`, `Cetak Laporan`, `Lihat Semua Setoran`, `Lihat Detail`), konfirmasi hapus informatif, serta perataan kolom tabel di halaman admin (`dashboard`, Data Master, Operasional & Konten, Laporan, Pengaturan & Pengguna).
+- Penyesuaian warna grafik Chart.js agar otomatis mengikuti tema terang dan gelap pada `admin/dashboard.blade.php`.
+- Penggantian seluruh `aria-label="Close"` menjadi `aria-label="Tutup dialog"` atau `aria-label="Tutup notifikasi"` serta penghapusan alert `session('success')`, `session('error')`, dan `$errors->any()` lokal yang duplikat dengan notifikasi global layout admin.
+
+### Diperbaiki
+- Sinkronisasi otomatis tema terang dan gelap, kontras elemen error pada mode gelap, pergantian ikon mata kata sandi, serta atribut `role` dan `aria-describedby` pada `auth/login.blade.php`.
+
 ## [1.8.1] - 2026-11-26
 
 ### Ditambahkan

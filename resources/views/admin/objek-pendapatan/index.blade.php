@@ -13,22 +13,6 @@
     </a>
 </div>
 
-@if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="bi bi-check-circle me-2"></i>
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
-
-@if(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <i class="bi bi-exclamation-triangle me-2"></i>
-        {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
-
 <div class="card mb-4">
     <div class="card-body">
         <form action="{{ route('admin.objek-pendapatan.index') }}" method="GET">
@@ -37,7 +21,7 @@
                     <label for="search" class="form-label fw-semibold">Cari Objek</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-search"></i></span>
-                        <input type="text" id="search" name="search" value="{{ $search }}" class="form-control" placeholder="Cari kode atau nama objek...">
+                        <input type="text" id="search" name="search" value="{{ $search }}" class="form-control" placeholder="OBJ-01 atau Kios Pasar">
                     </div>
                 </div>
 
@@ -108,14 +92,14 @@
                                 </td>
                                 <td class="text-center text-nowrap">
                                     <div class="d-flex justify-content-center gap-1">
-                                        <a href="{{ route('admin.objek-pendapatan.edit', $objek) }}" class="btn btn-sm btn-outline-warning" title="Ubah">
+                                        <a href="{{ route('admin.objek-pendapatan.edit', $objek) }}" class="btn btn-sm btn-outline-warning" title="Ubah" aria-label="Ubah {{ $objek->nama }}">
                                             <i class="bi bi-pencil"></i>
                                         </a>
 
-                                        <form method="POST" action="{{ route('admin.objek-pendapatan.destroy', $objek) }}" class="d-inline" onsubmit="return confirm('Hapus objek ini?')">
+                                        <form method="POST" action="{{ route('admin.objek-pendapatan.destroy', $objek) }}" class="d-inline" onsubmit="return confirm('Hapus objek pendapatan ini? Data terkait pada objek ini dapat terpengaruh.')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus" aria-label="Hapus {{ $objek->nama }}">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </form>

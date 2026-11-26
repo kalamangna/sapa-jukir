@@ -31,7 +31,7 @@
 
         <i class="bi bi-pencil-square me-1"></i>
 
-        Edit
+        Ubah
 
     </a>
     @endunless

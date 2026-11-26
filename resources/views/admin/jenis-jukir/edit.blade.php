@@ -199,7 +199,7 @@
                         name="deskripsi"
                         rows="5"
                         class="form-control @error('deskripsi') is-invalid @enderror"
-                        placeholder="Masukkan deskripsi jenis Petugas..."
+                        placeholder="Petugas lapangan khusus area pasar dan pertokoan"
                     >{{ old('deskripsi', $jenisJukir->deskripsi) }}</textarea>
 
 

@@ -19,7 +19,7 @@
         </h4>
 
         <p class="text-muted mb-0">
-            Kelola penempatan Petugas pada setiap titik/objek pendapatan.
+            Kelola penempatan Petugas pada setiap objek pendapatan.
         </p>
 
     </div>
@@ -97,7 +97,7 @@
                             </th>
 
                             <th>
-                                Titik/Objek Pendapatan
+                                Objek Pendapatan
                             </th>
 
                             <th>
@@ -303,6 +303,7 @@
                                             href="{{ route('admin.penempatan-jukir.show', $penempatan) }}"
                                             class="btn btn-sm btn-outline-primary"
                                             title="Detail"
+                                            aria-label="Detail penempatan {{ $penempatan->jukir?->nama }}"
                                         >
 
                                             <i class="bi bi-eye"></i>
@@ -316,7 +317,8 @@
                                         <a
                                             href="{{ route('admin.penempatan-jukir.edit', $penempatan) }}"
                                             class="btn btn-sm btn-outline-warning"
-                                            title="Edit"
+                                            title="Ubah"
+                                            aria-label="Ubah penempatan {{ $penempatan->jukir?->nama }}"
                                         >
 
                                             <i class="bi bi-pencil-square"></i>
@@ -330,7 +332,7 @@
                                             action="{{ route('admin.penempatan-jukir.destroy', $penempatan) }}"
                                             method="POST"
                                             class="d-inline"
-                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus penempatan ini?');"
+                                            onsubmit="return confirm('Hapus penempatan petugas ini? Riwayat penempatan pada titik ini akan dihapus.');"
                                         >
 
                                             @csrf
@@ -341,6 +343,7 @@
                                                 type="submit"
                                                 class="btn btn-sm btn-outline-danger"
                                                 title="Hapus"
+                                                aria-label="Hapus penempatan {{ $penempatan->jukir?->nama }}"
                                             >
 
                                                 <i class="bi bi-trash"></i>

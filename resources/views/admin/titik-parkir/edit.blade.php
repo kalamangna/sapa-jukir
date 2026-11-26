@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Titik/Objek Pendapatan')
+@section('title', 'Edit Objek Pendapatan')
 
-@section('page-title', 'Edit Titik/Objek Pendapatan')
+@section('page-title', 'Edit Objek Pendapatan')
 
 @section('content')
 
@@ -12,7 +12,7 @@
 
 
         <h4 class="mb-1 fw-bold">
-            Edit Titik/Objek Pendapatan
+            Edit Objek Pendapatan
         </h4>
 
         <p class="text-muted mb-0">
@@ -54,49 +54,6 @@
 
 
 {{-- ==========================================================
-    VALIDATION ERROR
-========================================================== --}}
-
-@if($errors->any())
-
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-
-        <div class="fw-semibold mb-2">
-
-            <i class="bi bi-exclamation-triangle me-2"></i>
-
-            Terdapat kesalahan pada data yang dimasukkan.
-
-        </div>
-
-
-        <ul class="mb-0">
-
-            @foreach($errors->all() as $error)
-
-                <li>
-                    {{ $error }}
-                </li>
-
-            @endforeach
-
-        </ul>
-
-
-        <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-        ></button>
-
-    </div>
-
-@endif
-
-
-
-{{-- ==========================================================
     FORM
 ========================================================== --}}
 
@@ -123,7 +80,7 @@
 
                 <i class="bi bi-geo-alt me-2 text-success"></i>
 
-                Informasi Titik/Objek Pendapatan
+                Informasi Objek Pendapatan
         <div class="card-body">
 
             <div class="row g-4">
@@ -138,7 +95,7 @@
                         class="form-label fw-semibold"
                     >
 
-                        Kode Titik/Objek
+                        Kode Objek
 
                     </label>
 
@@ -182,7 +139,7 @@
                         class="form-label fw-semibold"
                     >
 
-                        Nama Titik/Objek Pendapatan
+                        Nama Objek Pendapatan
 
                         <span class="text-danger">*</span>
 
@@ -234,7 +191,7 @@
                         name="alamat"
                         rows="3"
                         class="form-control @error('alamat') is-invalid @enderror"
-                        placeholder="Masukkan alamat lengkap titik/objek pendapatan..."
+                        placeholder="Jl. Persatuan Raya No. 12, Sinjai Utara"
                         required
                     >{{ old('alamat', $titikParkir->alamat) }}</textarea>
 
@@ -272,7 +229,7 @@
                     >
 
                         <option value="">
-                            -- Pilih Jenis Retribusi --
+                            Pilih jenis retribusi
                         </option>
 
 
@@ -315,7 +272,7 @@
                 <div class="col-md-6">
                     <label for="sumber_pemasukan_id" class="form-label fw-semibold">Sumber Pendapatan <span class="text-danger">*</span></label>
                     <select id="sumber_pemasukan_id" name="sumber_pemasukan_id" class="form-select @error('sumber_pemasukan_id') is-invalid @enderror" required>
-                        <option value="">-- Pilih Sumber Pendapatan --</option>
+                        <option value="">Pilih sumber pendapatan</option>
                         @foreach($sumberPemasukans as $sumberPemasukan)
                             <option
                                 value="{{ $sumberPemasukan->id }}"
@@ -462,7 +419,7 @@
                     >
 
                         <option value="">
-                            -- Pilih Kecamatan --
+                            Pilih kecamatan
                         </option>
 
 
@@ -523,7 +480,7 @@
                     >
 
                         <option value="">
-                            -- Pilih Kelurahan / Desa --
+                            Pilih kelurahan atau desa
                         </option>
 
 
@@ -746,7 +703,7 @@
                         class="form-label fw-semibold"
                     >
 
-                        Luas (m²)
+                        Luas m²
 
                     </label>
 
@@ -962,7 +919,7 @@
                         class="form-label fw-semibold"
                     >
 
-                        Jumlah Koordinator/Regu
+                        Jumlah Koordinator atau Regu
                         <span class="badge bg-info ms-2">Baru</span>
 
                     </label>
@@ -975,7 +932,7 @@
                         required
                     >
 
-                        <option value="">-- Pilih Jumlah Koordinator --</option>
+                        <option value="">Pilih jumlah koordinator</option>
 
                         <option value="1" {{ old('jumlah_koordinator', $titikParkir->jumlah_koordinator ?? 1) == 1 ? 'selected' : '' }}>
                             1 Regu (1 Koordinator)
@@ -1082,7 +1039,7 @@
 
     <div class="card mb-4">
         <div class="card-header bg-white border-bottom py-3"><h6 class="mb-0 fw-bold"><i class="bi bi-p-square me-2 text-success"></i>Penanggung Jawab Lokasi</h6></div>
-        <div class="card-body"><div class="row g-4"><div class="col-md-6"><label for="nama_pengelola" class="form-label fw-semibold">Nama penanggung jawab</label><input id="nama_pengelola" name="nama_pengelola" value="{{ old('nama_pengelola', $titikParkir->nama_pengelola) }}" class="form-control"></div><div class="col-md-6"><label for="telepon_pengelola" class="form-label fw-semibold">Nomor telepon (opsional)</label><input id="telepon_pengelola" name="telepon_pengelola" value="{{ old('telepon_pengelola', $titikParkir->telepon_pengelola) }}" class="form-control"></div></div></div>
+        <div class="card-body"><div class="row g-4"><div class="col-md-6"><label for="nama_pengelola" class="form-label fw-semibold">Nama penanggung jawab</label><input id="nama_pengelola" name="nama_pengelola" value="{{ old('nama_pengelola', $titikParkir->nama_pengelola) }}" class="form-control"></div><div class="col-md-6"><label for="telepon_pengelola" class="form-label fw-semibold">Nomor telepon</label><input id="telepon_pengelola" name="telepon_pengelola" value="{{ old('telepon_pengelola', $titikParkir->telepon_pengelola) }}" class="form-control"></div></div></div>
     </div>
 
     {{-- ======================================================
@@ -1202,7 +1159,7 @@
                         name="keterangan"
                         rows="4"
                         class="form-control @error('keterangan') is-invalid @enderror"
-                        placeholder="Tambahkan keterangan jika diperlukan..."
+                        placeholder="Contoh: Area parkir depan pasar"
                     >{{ old('keterangan', $titikParkir->keterangan) }}</textarea>
 
 

@@ -17,7 +17,7 @@
             </h4>
 
             <p class="text-muted mb-0">
-                Rekap dan monitoring setoran Petugas.
+                Rekap dan monitoring setoran petugas.
             </p>
 
         </div>
@@ -272,7 +272,7 @@
                         name="search"
                         value="{{ $search }}"
                         class="form-control"
-                        placeholder="Kode / nama Petugas..."
+                        placeholder="Contoh: JK-001 atau Ahmad"
                     >
 
                 </div>
@@ -318,7 +318,7 @@
                 <div class="col-12 col-md-6 col-lg-4">
 
                     <label class="form-label fw-semibold text-center d-block">
-                        Titik/Objek Pendapatan
+                        Objek Pendapatan
                     </label>
 
                     <select
@@ -532,7 +532,7 @@
                         </th>
 
                         <th>
-                            Titik/Objek Pendapatan
+                            Objek Pendapatan
                         </th>
 
                         <th class="text-end">
@@ -696,7 +696,8 @@
                                     <a
                                         href="{{ route('admin.setoran.edit', $setoran->id) }}"
                                         class="btn btn-sm btn-outline-warning"
-                                        title="Edit"
+                                        title="Ubah"
+                                        aria-label="Ubah setoran {{ $setoran->jukir?->nama }}"
                                     >
 
                                         <i class="bi bi-pencil"></i>

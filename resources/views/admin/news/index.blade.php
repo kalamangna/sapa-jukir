@@ -14,17 +14,13 @@
     </a>
 </div>
 
-@if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-@endif
-
 <div class="card">
     <div class="card-body border-bottom">
         <form method="GET" class="row g-2">
             <div class="col-md-5">
-                <input type="search" name="search" value="{{ $search }}" class="form-control" placeholder="Cari judul atau kategori">
+                <input type="search" name="search" value="{{ $search }}" class="form-control" placeholder="Penertiban Parkir Pasar">
             </div>
-            <div class="col-auto"><button class="btn btn-outline-secondary" type="submit">Cari</button></div>
+            <div class="col-auto"><button class="btn btn-outline-secondary" type="submit">Filter</button></div>
             @if($search)<div class="col-auto"><a class="btn btn-light" href="{{ route('admin.news.index') }}">Reset</a></div>@endif
         </form>
     </div>
@@ -46,7 +42,7 @@
                     <td><span class="badge {{ $news->is_published ? 'text-bg-success' : 'text-bg-secondary' }}">{{ $news->is_published ? 'Terbit' : 'Draft' }}</span></td>
                     <td class="text-end text-nowrap">
                         <a href="{{ route('admin.news.edit', $news) }}" class="btn btn-sm btn-outline-warning" aria-label="Ubah {{ $news->judul }}"><i class="bi bi-pencil"></i></a>
-                        <form action="{{ route('admin.news.destroy', $news) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus berita ini?')">
+                        <form action="{{ route('admin.news.destroy', $news) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus berita ini? Konten dan foto berita akan dihapus permanen.')">
                             @csrf @method('DELETE')
                             <button class="btn btn-sm btn-outline-danger" type="submit" aria-label="Hapus {{ $news->judul }}"><i class="bi bi-trash"></i></button>
                         </form>

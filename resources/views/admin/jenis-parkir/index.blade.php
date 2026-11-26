@@ -73,7 +73,7 @@
                             id="search"
                             name="search"
                             class="form-control"
-                            placeholder="Cari kode atau nama jenis sumber pendapatan..."
+                            placeholder="TJU-01 atau Parkir Tepi Jalan"
                             value="{{ $search }}"
                         >
 
@@ -91,7 +91,7 @@
 
                         <i class="bi bi-search me-1"></i>
 
-                        Cari
+                        Filter
 
                     </button>
 
@@ -181,7 +181,7 @@
                             </th>
 
                             <th class="text-center">
-                                Titik/Objek
+                                Objek
                             </th>
 
                             <th class="text-center">
@@ -342,6 +342,7 @@
                                             href="{{ route('admin.jenis-parkir.show', $jenisParkir) }}"
                                             class="btn btn-sm btn-outline-primary"
                                             title="Detail"
+                                            aria-label="Detail {{ $jenisParkir->nama }}"
                                         >
 
                                             <i class="bi bi-eye"></i>
@@ -355,7 +356,8 @@
                                         <a
                                             href="{{ route('admin.jenis-parkir.edit', $jenisParkir) }}"
                                             class="btn btn-sm btn-outline-warning"
-                                            title="Edit"
+                                            title="Ubah"
+                                            aria-label="Ubah {{ $jenisParkir->nama }}"
                                         >
 
                                             <i class="bi bi-pencil-square"></i>
@@ -370,6 +372,7 @@
                                             type="button"
                                             class="btn btn-sm btn-outline-danger btn-delete-jenis-parkir"
                                             title="Hapus"
+                                            aria-label="Hapus {{ $jenisParkir->nama }}"
                                             data-bs-toggle="modal"
                                             data-bs-target="#deleteJenisParkirModal"
                                             data-url="{{ route('admin.jenis-parkir.destroy', $jenisParkir) }}"
@@ -535,7 +538,7 @@
                     type="button"
                     class="btn-close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
+                    aria-label="Tutup dialog"
                 ></button>
 
             </div>
@@ -548,7 +551,7 @@
 
                 <p class="mb-2">
 
-                    Apakah Anda yakin ingin menghapus jenis parkir:
+                    Hapus jenis parkir berikut?
 
                 </p>
 

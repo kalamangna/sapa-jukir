@@ -231,7 +231,7 @@
                                    name="search"
                                    value="{{ $search ?? '' }}"
                                    class="form-control"
-                                   placeholder="Cari jenis kendaraan / keterangan...">
+                                   placeholder="Roda 2 atau Parkir Pasar">
 
                         </div>
 

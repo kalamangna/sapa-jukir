@@ -25,7 +25,7 @@
     <p class="text-muted mb-0">
         {{ auth()->check() && auth()->user()->role === 'pimpinan'
             ? 'Ringkasan data dan kondisi pengelolaan pendapatan dan operasional Kabupaten Sinjai.'
-            : 'Ringkasan data dan kondisi pengelolaan Petugas Kabupaten Sinjai.'
+            : 'Ringkasan data dan kondisi pengelolaan petugas Kabupaten Sinjai.'
         }}
     </p>
 
@@ -47,26 +47,26 @@
 
             <div class="card-body">
 
-                <div class="d-flex justify-content-between align-items-start">
+                <div class="d-flex justify-content-between align-items-start gap-3">
 
-                    <div class="flex-grow-1 text-center">
+                    <div class="flex-grow-1 text-start">
 
                         <small class="text-muted fw-semibold">
                             TOTAL PETUGAS
                         </small>
 
-                        <h2 class="fw-bold mb-1 mt-2">
+                        <div class="fs-3 fw-bold mb-1 mt-2">
                             {{ number_format($totalJukir) }}
-                        </h2>
+                        </div>
 
                         <small class="text-success">
-                            {{ number_format($jukirAktif) }} Petugas aktif
+                            {{ number_format($jukirAktif) }} petugas aktif
                         </small>
 
                     </div>
 
                     <div
-                        class="rounded-3 bg-success-subtle text-success d-flex align-items-center justify-content-center"
+                        class="rounded-3 bg-success-subtle text-success d-flex align-items-center justify-content-center flex-shrink-0"
                         style="width:52px;height:52px;"
                     >
 
@@ -94,17 +94,17 @@
 
             <div class="card-body">
 
-                <div class="d-flex justify-content-between align-items-start">
+                <div class="d-flex justify-content-between align-items-start gap-3">
 
-                    <div class="flex-grow-1 text-center">
+                    <div class="flex-grow-1 text-start">
 
                         <small class="text-muted fw-semibold">
                             OBJEK PENDAPATAN
                         </small>
 
-                        <h2 class="fw-bold mb-1 mt-2">
+                        <div class="fs-3 fw-bold mb-1 mt-2">
                             {{ number_format($totalTitikParkir) }}
-                        </h2>
+                        </div>
 
                         <small class="text-success">
                             {{ number_format($titikParkirAktif) }} objek aktif
@@ -113,7 +113,7 @@
                     </div>
 
                     <div
-                        class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center"
+                        class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0"
                         style="width:52px;height:52px;"
                     >
 
@@ -141,17 +141,17 @@
 
             <div class="card-body">
 
-                <div class="d-flex justify-content-between align-items-start">
+                <div class="d-flex justify-content-between align-items-start gap-3">
 
-                    <div class="flex-grow-1 text-center">
+                    <div class="flex-grow-1 text-start">
 
                         <small class="text-muted fw-semibold">
                             PENEMPATAN AKTIF
                         </small>
 
-                        <h2 class="fw-bold mb-1 mt-2">
+                        <div class="fs-3 fw-bold mb-1 mt-2">
                             {{ number_format($penempatanAktif) }}
-                        </h2>
+                        </div>
 
                         <small class="text-muted">
                             {{ number_format($totalPenempatan) }} total penempatan
@@ -160,7 +160,7 @@
                     </div>
 
                     <div
-                        class="rounded-3 bg-warning-subtle text-warning d-flex align-items-center justify-content-center"
+                        class="rounded-3 bg-warning-subtle text-warning d-flex align-items-center justify-content-center flex-shrink-0"
                         style="width:52px;height:52px;"
                     >
 
@@ -183,9 +183,9 @@
 </div>
 
 <div class="row g-4 mb-4">
-    <div class="col-xl-4 col-md-6"><div class="card h-100"><div class="card-body text-center"><small class="text-muted fw-semibold">TARGET TAHUNAN</small><div class="fs-4 fw-bold mt-2">Rp {{ number_format($targetTahunanDashboard, 0, ',', '.') }}</div><small class="text-muted">Target pendapatan {{ $tahunDashboard }}</small></div></div></div>
-    <div class="col-xl-4 col-md-6"><div class="card h-100"><div class="card-body text-center"><small class="text-muted fw-semibold">REALISASI TAHUNAN</small><div class="fs-4 fw-bold mt-2">Rp {{ number_format($realisasiTahunanDashboard, 0, ',', '.') }}</div><small class="text-muted">Setoran terverifikasi {{ $tahunDashboard }}</small></div></div></div>
-    <div class="col-xl-4 col-md-6"><div class="card h-100"><div class="card-body text-center"><small class="text-muted fw-semibold">CAPAIAN TAHUNAN</small><div class="fs-4 fw-bold mt-2">{{ number_format($persentaseCapaianTahunanDashboard, 2, ',', '.') }}%</div><small class="{{ $potensiBelumTergaliTahunanDashboard > 0 ? 'text-warning' : 'text-success' }}">Potensi belum tergali: Rp {{ number_format($potensiBelumTergaliTahunanDashboard, 0, ',', '.') }}</small></div></div></div>
+    <div class="col-xl-4 col-md-6"><div class="card h-100"><div class="card-body text-start"><small class="text-muted fw-semibold">TARGET TAHUNAN</small><div class="fs-4 fw-bold mb-1 mt-2">Rp {{ number_format($targetTahunanDashboard, 0, ',', '.') }}</div><small class="text-muted">Target pendapatan {{ $tahunDashboard }}</small></div></div></div>
+    <div class="col-xl-4 col-md-6"><div class="card h-100"><div class="card-body text-start"><small class="text-muted fw-semibold">REALISASI TAHUNAN</small><div class="fs-4 fw-bold mb-1 mt-2">Rp {{ number_format($realisasiTahunanDashboard, 0, ',', '.') }}</div><small class="text-muted">Setoran terverifikasi {{ $tahunDashboard }}</small></div></div></div>
+    <div class="col-xl-4 col-md-6"><div class="card h-100"><div class="card-body text-start"><small class="text-muted fw-semibold">CAPAIAN TAHUNAN</small><div class="fs-4 fw-bold mb-1 mt-2">{{ number_format($persentaseCapaianTahunanDashboard, 2, ',', '.') }}%</div><small class="{{ $potensiBelumTergaliTahunanDashboard > 0 ? 'text-warning' : 'text-success' }}">Potensi belum tergali: Rp {{ number_format($potensiBelumTergaliTahunanDashboard, 0, ',', '.') }}</small></div></div></div>
 </div>
 
 
@@ -205,9 +205,9 @@
 </div>
 
 <div class="row g-4 mb-4">
-    <div class="col-lg-4"><div class="card h-100"><div class="card-body text-center"><small class="text-muted fw-semibold">TARGET BULAN BERJALAN</small><div class="fs-3 fw-bold mt-2">Rp {{ number_format($targetBulanIni, 0, ',', '.') }}</div><small class="text-muted">Target dari sumber dan lokasi pendapatan</small></div></div></div>
-    <div class="col-lg-4"><div class="card h-100"><div class="card-body text-center"><small class="text-muted fw-semibold">REALISASI TERVERIFIKASI</small><div class="fs-3 fw-bold mt-2">Rp {{ number_format($realisasiBulanIni, 0, ',', '.') }}</div><small class="text-muted">Setoran terverifikasi bulan berjalan</small></div></div></div>
-    <div class="col-lg-4"><div class="card h-100"><div class="card-body text-center"><small class="text-muted fw-semibold">CAPAIAN BULAN BERJALAN</small><div class="fs-3 fw-bold mt-2">{{ number_format($persentaseCapaianBulanIni, 2, ',', '.') }}%</div><small class="{{ $persentaseCapaianBulanIni >= 80 ? 'text-success' : 'text-danger' }}">{{ $persentaseCapaianBulanIni >= 80 ? 'Capaian mendekati target' : 'Perlu perhatian' }}</small></div></div></div>
+    <div class="col-lg-4"><div class="card h-100"><div class="card-body text-start"><small class="text-muted fw-semibold">TARGET BULAN BERJALAN</small><div class="fs-4 fw-bold mb-1 mt-2">Rp {{ number_format($targetBulanIni, 0, ',', '.') }}</div><small class="text-muted">Target dari sumber dan lokasi pendapatan</small></div></div></div>
+    <div class="col-lg-4"><div class="card h-100"><div class="card-body text-start"><small class="text-muted fw-semibold">REALISASI TERVERIFIKASI</small><div class="fs-4 fw-bold mb-1 mt-2">Rp {{ number_format($realisasiBulanIni, 0, ',', '.') }}</div><small class="text-muted">Setoran terverifikasi bulan berjalan</small></div></div></div>
+    <div class="col-lg-4"><div class="card h-100"><div class="card-body text-start"><small class="text-muted fw-semibold">CAPAIAN BULAN BERJALAN</small><div class="fs-4 fw-bold mb-1 mt-2">{{ number_format($persentaseCapaianBulanIni, 2, ',', '.') }}%</div><small class="{{ $persentaseCapaianBulanIni >= 80 ? 'text-success' : 'text-danger' }}">{{ $persentaseCapaianBulanIni >= 80 ? 'Capaian mendekati target' : 'Perlu perhatian' }}</small></div></div></div>
 </div>
 
 {{-- ==========================================================
@@ -238,17 +238,17 @@
 
             <div class="card-body">
 
-                <div class="d-flex justify-content-between align-items-start">
+                <div class="d-flex justify-content-between align-items-start gap-3">
 
-                    <div class="flex-grow-1 text-center">
+                    <div class="flex-grow-1 text-start">
 
                         <small class="text-muted fw-semibold">
                             TOTAL TRANSAKSI PENDAPATAN
                         </small>
 
-                        <h2 class="fw-bold mb-1 mt-2">
+                        <div class="fs-3 fw-bold mb-1 mt-2">
                             {{ number_format($totalSetoran) }}
-                        </h2>
+                        </div>
 
                         <small class="text-muted">
                             Seluruh sumber pendapatan
@@ -257,7 +257,7 @@
                     </div>
 
                     <div
-                        class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center"
+                        class="rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0"
                         style="width:52px;height:52px;"
                     >
 
@@ -285,19 +285,19 @@
 
             <div class="card-body">
 
-                <div class="d-flex justify-content-between align-items-start">
+                <div class="d-flex justify-content-between align-items-start gap-3">
 
-                    <div class="flex-grow-1 text-center">
+                    <div class="flex-grow-1 text-start">
 
                         <small class="text-muted fw-semibold">
                             PENDAPATAN BRUTO
                         </small>
 
-                        <h4 class="fw-bold mb-1 mt-2">
+                        <div class="fs-4 fw-bold mb-1 mt-2">
 
                             Rp {{ number_format($totalPendapatanBruto, 0, ',', '.') }}
 
-                        </h4>
+                        </div>
 
                         <small class="text-muted">
                             Total pendapatan tercatat
@@ -306,7 +306,7 @@
                     </div>
 
                     <div
-                        class="rounded-3 bg-success-subtle text-success d-flex align-items-center justify-content-center"
+                        class="rounded-3 bg-success-subtle text-success d-flex align-items-center justify-content-center flex-shrink-0"
                         style="width:52px;height:52px;"
                     >
 
@@ -334,19 +334,19 @@
 
             <div class="card-body">
 
-                <div class="d-flex justify-content-between align-items-start">
+                <div class="d-flex justify-content-between align-items-start gap-3">
 
-                    <div class="flex-grow-1 text-center">
+                    <div class="flex-grow-1 text-start">
 
                         <small class="text-muted fw-semibold">
                             TOTAL PENERIMAAN
                         </small>
 
-                        <h4 class="fw-bold mb-1 mt-2">
+                        <div class="fs-4 fw-bold mb-1 mt-2">
 
                             Rp {{ number_format($totalJumlahSetoran, 0, ',', '.') }}
 
-                        </h4>
+                        </div>
 
                         <small class="text-muted">
                             Total penerimaan yang masuk
@@ -355,7 +355,7 @@
                     </div>
 
                     <div
-                        class="rounded-3 bg-info-subtle text-info d-flex align-items-center justify-content-center"
+                        class="rounded-3 bg-info-subtle text-info d-flex align-items-center justify-content-center flex-shrink-0"
                         style="width:52px;height:52px;"
                     >
 
@@ -383,19 +383,19 @@
 
             <div class="card-body">
 
-                <div class="d-flex justify-content-between align-items-start">
+                <div class="d-flex justify-content-between align-items-start gap-3">
 
-                    <div class="flex-grow-1 text-center">
+                    <div class="flex-grow-1 text-start">
 
                         <small class="text-muted fw-semibold">
                             TOTAL SELISIH
                         </small>
 
-                        <h4 class="fw-bold mb-1 mt-2">
+                        <div class="fs-4 fw-bold mb-1 mt-2">
 
                             Rp {{ number_format($totalSelisih, 0, ',', '.') }}
 
-                        </h4>
+                        </div>
 
                         <small class="text-muted">
                             Bruto dikurangi setoran
@@ -404,7 +404,7 @@
                     </div>
 
                     <div
-                        class="rounded-3 bg-warning-subtle text-warning d-flex align-items-center justify-content-center"
+                        class="rounded-3 bg-warning-subtle text-warning d-flex align-items-center justify-content-center flex-shrink-0"
                         style="width:52px;height:52px;"
                     >
 
@@ -448,16 +448,18 @@
 
             </div>
 
-            <a
-                href="{{ route('admin.laporan.setoran') }}"
-                class="btn btn-sm btn-outline-primary"
-            >
+            @if(in_array(auth()->user()->role, ['admin', 'pimpinan'], true))
+                <a
+                    href="{{ route('admin.laporan.setoran') }}"
+                    class="btn btn-sm btn-outline-primary"
+                >
 
-                <i class="bi bi-bar-chart-line me-1"></i>
+                    <i class="bi bi-bar-chart-line me-1"></i>
 
-                Lihat Laporan
+                    Lihat Laporan
 
-            </a>
+                </a>
+            @endif
 
         </div>
 
@@ -579,7 +581,7 @@
         <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
             <div>
                 <h6 class="mb-1 fw-bold"><i class="bi bi-bar-chart-line me-2 text-primary"></i>Capaian Target Harian Petugas</h6>
-                <small class="text-muted">Perbandingan target titik/objek pendapatan dan penerimaan untuk tanggal {{ \Carbon\Carbon::parse($tanggalFilter)->format('d/m/Y') }}.</small>
+                <small class="text-muted">Perbandingan target titik dan objek pendapatan serta penerimaan untuk tanggal {{ \Carbon\Carbon::parse($tanggalFilter)->format('d/m/Y') }}.</small>
             </div>
             <div class="d-flex flex-wrap gap-3 small">
                 <span class="text-success"><i class="bi bi-circle-fill me-1"></i>Tercapai: {{ $jumlahPetugasTercapai }}</span>
@@ -587,7 +589,7 @@
                 <span class="text-secondary"><i class="bi bi-circle-fill me-1"></i>Tanpa target: {{ $jumlahPetugasTanpaTarget }}</span>
             </div>
         </div>
-        <div class="card-header bg-white border-top py-3">
+        <div class="pt-3 mt-3 border-top">
             <form method="GET" action="{{ route('admin.dashboard') }}" class="d-flex gap-2 align-items-end flex-wrap">
                 <div class="flex-grow-1" style="min-width: 250px;">
                     <label for="tanggalFilter" class="form-label fw-semibold mb-2">Filter Tanggal</label>
@@ -625,13 +627,13 @@
                     <div class="table-responsive">
                         <table class="table table-sm table-hover align-middle mb-0">
                             <thead class="table-light">
-                                <tr><th>Petugas</th><th>Titik Bertugas</th><th class="text-end">Target</th><th class="text-end">Realisasi</th><th class="text-end">Kekurangan</th></tr>
+                                <tr><th class="text-start">Petugas</th><th class="text-start">Titik Bertugas</th><th class="text-end">Target</th><th class="text-end">Realisasi</th><th class="text-end">Kekurangan</th></tr>
                             </thead>
                             <tbody>
                                 @foreach($petugasCapaianHarian->where('status', 'belum_tercapai') as $item)
                                     <tr>
-                                        <td class="fw-semibold">{{ $item['nama'] }}</td>
-                                        <td>{{ $item['titik']->join(', ') ?: '-' }}</td>
+                                        <td class="text-start fw-semibold">{{ $item['nama'] }}</td>
+                                        <td class="text-start">{{ $item['titik']->join(', ') ?: '-' }}</td>
                                         <td class="text-end">Rp {{ number_format($item['target'], 0, ',', '.') }}</td>
                                         <td class="text-end">Rp {{ number_format($item['realisasi'], 0, ',', '.') }}</td>
                                         <td class="text-end text-danger fw-semibold">Rp {{ number_format(max(0, $item['target'] - $item['realisasi']), 0, ',', '.') }}</td>
@@ -668,9 +670,9 @@
     <div class="col-lg-7">
         <div class="card h-100">
             <div class="card-header bg-white border-bottom py-3"><h6 class="mb-1 fw-bold"><i class="bi bi-trophy me-2 text-primary"></i>Ranking Kinerja Sumber</h6><small class="text-muted">Urutan capaian target bulan berjalan.</small></div>
-            <div class="table-responsive"><table class="table table-sm table-hover align-middle mb-0"><thead class="table-light"><tr><th>#</th><th>Sumber Pendapatan</th><th class="text-end">Realisasi</th><th class="text-end">Capaian</th></tr></thead><tbody>
+            <div class="table-responsive"><table class="table table-sm table-hover align-middle mb-0"><thead class="table-light"><tr><th>#</th><th class="text-start">Sumber Pendapatan</th><th class="text-end">Realisasi</th><th class="text-end">Capaian</th></tr></thead><tbody>
                 @forelse($rankingPendapatan as $peringkat => $item)
-                    <tr><td>{{ $peringkat + 1 }}</td><td class="fw-semibold">{{ $item->nama }}</td><td class="text-end">Rp {{ number_format($item->realisasi_bulan_ini, 0, ',', '.') }}</td><td class="text-end">{{ number_format($item->persentase_capaian_bulan_ini, 2, ',', '.') }}%</td></tr>
+                    <tr><td>{{ $peringkat + 1 }}</td><td class="text-start fw-semibold">{{ $item->nama }}</td><td class="text-end">Rp {{ number_format($item->realisasi_bulan_ini, 0, ',', '.') }}</td><td class="text-end">{{ number_format($item->persentase_capaian_bulan_ini, 2, ',', '.') }}%</td></tr>
                 @empty
                     <tr><td colspan="4" class="text-center text-muted py-4">Belum ada target untuk membuat ranking.</td></tr>
                 @endforelse
@@ -695,9 +697,9 @@
     <div class="col-lg-7">
         <div class="card h-100">
             <div class="card-header bg-white border-bottom py-3"><h6 class="mb-1 fw-bold"><i class="bi bi-pin-map me-2 text-primary"></i>Ranking Kinerja Lokasi</h6><small class="text-muted">Lokasi dengan target per objek pada bulan berjalan.</small></div>
-            <div class="table-responsive"><table class="table table-sm table-hover align-middle mb-0"><thead class="table-light"><tr><th>#</th><th>Lokasi</th><th class="text-end">Target</th><th class="text-end">Realisasi</th><th class="text-end">Capaian</th></tr></thead><tbody>
+            <div class="table-responsive"><table class="table table-sm table-hover align-middle mb-0"><thead class="table-light"><tr><th>#</th><th class="text-start">Lokasi</th><th class="text-end">Target</th><th class="text-end">Realisasi</th><th class="text-end">Capaian</th></tr></thead><tbody>
                 @forelse($rankingLokasi as $peringkat => $lokasi)
-                    <tr><td>{{ $peringkat + 1 }}</td><td class="fw-semibold">{{ $lokasi['nama'] }}</td><td class="text-end">Rp {{ number_format($lokasi['target'], 0, ',', '.') }}</td><td class="text-end">Rp {{ number_format($lokasi['realisasi'], 0, ',', '.') }}</td><td class="text-end">{{ number_format($lokasi['persentase'], 2, ',', '.') }}%</td></tr>
+                    <tr><td>{{ $peringkat + 1 }}</td><td class="text-start fw-semibold">{{ $lokasi['nama'] }}</td><td class="text-end">Rp {{ number_format($lokasi['target'], 0, ',', '.') }}</td><td class="text-end">Rp {{ number_format($lokasi['realisasi'], 0, ',', '.') }}</td><td class="text-end">{{ number_format($lokasi['persentase'], 2, ',', '.') }}%</td></tr>
                 @empty
                     <tr><td colspan="5" class="text-center text-muted py-4">Belum ada target per lokasi.</td></tr>
                 @endforelse
@@ -708,9 +710,9 @@
 
 <div class="card mb-4">
     <div class="card-header bg-white border-bottom py-3"><h6 class="mb-1 fw-bold"><i class="bi bi-person-check me-2 text-primary"></i>Ranking Kinerja Petugas</h6><small class="text-muted">Capaian petugas berdasarkan penempatan aktif dan target lokasi.</small></div>
-    <div class="table-responsive"><table class="table table-sm table-hover align-middle mb-0"><thead class="table-light"><tr><th>#</th><th>Petugas</th><th class="text-end">Target</th><th class="text-end">Realisasi</th><th class="text-end">Capaian</th></tr></thead><tbody>
+    <div class="table-responsive"><table class="table table-sm table-hover align-middle mb-0"><thead class="table-light"><tr><th>#</th><th class="text-start">Petugas</th><th class="text-end">Target</th><th class="text-end">Realisasi</th><th class="text-end">Capaian</th></tr></thead><tbody>
         @forelse($rankingPetugas as $peringkat => $petugas)
-            <tr><td>{{ $peringkat + 1 }}</td><td class="fw-semibold">{{ $petugas['nama'] }}</td><td class="text-end">Rp {{ number_format($petugas['target'], 0, ',', '.') }}</td><td class="text-end">Rp {{ number_format($petugas['realisasi'], 0, ',', '.') }}</td><td class="text-end">{{ number_format($petugas['persentase'], 2, ',', '.') }}%</td></tr>
+            <tr><td>{{ $peringkat + 1 }}</td><td class="text-start fw-semibold">{{ $petugas['nama'] }}</td><td class="text-end">Rp {{ number_format($petugas['target'], 0, ',', '.') }}</td><td class="text-end">Rp {{ number_format($petugas['realisasi'], 0, ',', '.') }}</td><td class="text-end">{{ number_format($petugas['persentase'], 2, ',', '.') }}%</td></tr>
         @empty
             <tr><td colspan="5" class="text-center text-muted py-4">Belum ada target lokasi dengan petugas aktif.</td></tr>
         @endforelse
@@ -728,7 +730,7 @@
     <div class="table-responsive dashboard-source-table-wrap">
         <table class="table table-hover align-middle mb-0 dashboard-source-table">
             <thead class="table-light">
-                <tr><th class="text-center">Sumber Pendapatan</th><th class="text-center">Target Bulan Ini</th><th class="text-center">Realisasi</th><th class="text-center">Capaian</th><th class="text-center">Total Penerimaan<br><small>(Semua Waktu)</small></th><th class="text-center">Selisih<br><small>(Semua Waktu)</small></th></tr>
+                <tr><th class="text-center">Sumber Pendapatan</th><th class="text-center">Target Bulan Ini</th><th class="text-center">Realisasi</th><th class="text-center">Capaian</th><th class="text-center">Total Penerimaan<br><small>Semua Waktu</small></th><th class="text-center">Selisih<br><small>Semua Waktu</small></th></tr>
             </thead>
             <tbody>
                 @forelse($pendapatanPerSumber as $item)
@@ -764,7 +766,7 @@
                 class="btn btn-sm btn-outline-primary"
             >
 
-                {{ auth()->user()->role === 'pimpinan' ? 'Lihat Laporan' : 'Lihat Semua' }}
+                {{ auth()->user()->role === 'pimpinan' ? 'Lihat Laporan' : 'Lihat Semua Setoran' }}
 
             </a>
 
@@ -789,19 +791,19 @@
                                 Tanggal
                             </th>
 
-                            <th>
+                            <th class="text-start">
                                 Petugas
                             </th>
 
-                            <th>
-                                Titik/Objek Pendapatan
+                            <th class="text-start">
+                                Objek Pendapatan
                             </th>
 
-                            <th>
+                            <th class="text-start">
                                 Kategori
                             </th>
 
-                            <th class="text-center">
+                            <th class="text-end">
                                 Pendapatan<br>Bruto
                             </th>
 
@@ -843,7 +845,7 @@
 
                                 {{-- Petugas --}}
 
-                                <td>
+                                <td class="text-start">
 
                                     @if($setoran->jukir)
 
@@ -866,7 +868,7 @@
 
                                 {{-- TITIK PARKIR --}}
 
-                                <td>
+                                <td class="text-start">
 
                                     @if($setoran->titikParkir)
 
@@ -889,7 +891,7 @@
 
                                 {{-- BRUTO --}}
 
-                                <td>
+                                <td class="text-start">
                                     {{ $setoran->sumberPemasukan?->nama ?? $setoran->titikParkir?->jenisParkir?->nama ?? '-' }}
                                 </td>
 
@@ -1003,25 +1005,26 @@
 </div>
 
 
-{{-- ==========================================================
-    DATA TERBARU
-========================================================== --}}
-
-<div class="row g-4">
-
-
-</div>
-
 @endsection
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <script>
+        const getChartTheme = () => {
+            const isDark = document.body.classList.contains('dark-theme');
+            return {
+                text: isDark ? '#cbd5e1' : '#475569',
+                grid: isDark ? 'rgba(148, 163, 184, 0.16)' : 'rgba(15, 23, 42, 0.08)',
+            };
+        };
+
+        const initialTheme = getChartTheme();
         const petugasCapaianHarian = @json($petugasCapaianHarian);
         const petugasCapaianCanvas = document.getElementById('petugasCapaianHarianChart');
+        let petugasChart = null;
 
         if (petugasCapaianCanvas) {
-            new Chart(petugasCapaianCanvas, {
+            petugasChart = new Chart(petugasCapaianCanvas, {
                 type: 'bar',
                 data: {
                     labels: petugasCapaianHarian.map((item) => item.nama),
@@ -1050,9 +1053,15 @@
                     maintainAspectRatio: false,
                     interaction: { mode: 'index', intersect: false },
                     scales: {
-                        y: { beginAtZero: true, ticks: { callback: (value) => 'Rp ' + Number(value).toLocaleString('id-ID') } },
+                        x: { ticks: { color: initialTheme.text }, grid: { color: initialTheme.grid } },
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: initialTheme.text, callback: (value) => 'Rp ' + Number(value).toLocaleString('id-ID') },
+                            grid: { color: initialTheme.grid },
+                        },
                     },
                     plugins: {
+                        legend: { labels: { color: initialTheme.text } },
                         tooltip: {
                             callbacks: {
                                 title: (items) => {
@@ -1069,9 +1078,10 @@
 
         const trenPendapatanDashboard = @json($trenPendapatanDashboard);
         const trenPendapatanCanvas = document.getElementById('trenPendapatanDashboardChart');
+        let trenChart = null;
 
         if (trenPendapatanCanvas) {
-            new Chart(trenPendapatanCanvas, {
+            trenChart = new Chart(trenPendapatanCanvas, {
                 type: 'line',
                 data: {
                     labels: trenPendapatanDashboard.map((item) => item.bulan),
@@ -1086,12 +1096,42 @@
                     maintainAspectRatio: false,
                     interaction: { mode: 'index', intersect: false },
                     scales: {
-                        y: { beginAtZero: true, ticks: { callback: (value) => 'Rp ' + Number(value).toLocaleString('id-ID') } },
-                        yCapaian: { beginAtZero: true, suggestedMax: 100, position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: (value) => value + '%' } },
+                        x: { ticks: { color: initialTheme.text }, grid: { color: initialTheme.grid } },
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: initialTheme.text, callback: (value) => 'Rp ' + Number(value).toLocaleString('id-ID') },
+                            grid: { color: initialTheme.grid },
+                        },
+                        yCapaian: {
+                            beginAtZero: true,
+                            suggestedMax: 100,
+                            position: 'right',
+                            grid: { drawOnChartArea: false },
+                            ticks: { color: initialTheme.text, callback: (value) => value + '%' },
+                        },
                     },
-                    plugins: { tooltip: { callbacks: { label: (context) => context.dataset.label + ': ' + (context.dataset.yAxisID === 'yCapaian' ? Number(context.raw).toLocaleString('id-ID') + '%' : 'Rp ' + Number(context.raw).toLocaleString('id-ID')) } } },
+                    plugins: {
+                        legend: { labels: { color: initialTheme.text } },
+                        tooltip: { callbacks: { label: (context) => context.dataset.label + ': ' + (context.dataset.yAxisID === 'yCapaian' ? Number(context.raw).toLocaleString('id-ID') + '%' : 'Rp ' + Number(context.raw).toLocaleString('id-ID')) } },
+                    },
                 },
             });
         }
+
+        document.querySelector('.admin-theme-toggle')?.addEventListener('click', () => {
+            requestAnimationFrame(() => {
+                const theme = getChartTheme();
+                [petugasChart, trenChart].forEach((chart) => {
+                    if (!chart) return;
+                    if (chart.options.scales?.x?.ticks) chart.options.scales.x.ticks.color = theme.text;
+                    if (chart.options.scales?.x?.grid) chart.options.scales.x.grid.color = theme.grid;
+                    if (chart.options.scales?.y?.ticks) chart.options.scales.y.ticks.color = theme.text;
+                    if (chart.options.scales?.y?.grid) chart.options.scales.y.grid.color = theme.grid;
+                    if (chart.options.scales?.yCapaian?.ticks) chart.options.scales.yCapaian.ticks.color = theme.text;
+                    if (chart.options.plugins?.legend?.labels) chart.options.plugins.legend.labels.color = theme.text;
+                    chart.update('none');
+                });
+            });
+        });
     </script>
 @endpush

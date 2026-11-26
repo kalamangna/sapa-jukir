@@ -65,13 +65,15 @@
                         </h5>
 
                         <p class="text-muted mb-3">
-                            Menampilkan data Petugas berdasarkan
-                            jenis Petugas dan status.
+                            Menampilkan data petugas berdasarkan
+                            jenis petugas dan status.
                         </p>
 
 
                         <a
                             href="{{ route('admin.laporan.jukir.cetak') }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             class="btn btn-success"
                         >
 
@@ -119,11 +121,11 @@
                     <div class="flex-grow-1">
 
                         <h5 class="fw-bold mb-2">
-                            Laporan Titik/Objek Pendapatan
+                            Laporan Objek Pendapatan
                         </h5>
 
                         <p class="text-muted mb-3">
-                            Menampilkan data titik/objek pendapatan berdasarkan
+                            Menampilkan data objek pendapatan berdasarkan
                             kategori dan status.
                         </p>
 
@@ -135,7 +137,7 @@
 
                             <i class="bi bi-geo-alt me-1"></i>
 
-                            Buka Laporan Titik/Objek Pendapatan
+                            Buka Laporan Objek Pendapatan
 
                         </a>
 
@@ -181,8 +183,8 @@
                         </h5>
 
                         <p class="text-muted mb-3">
-                            Menampilkan data penempatan Petugas
-                            pada setiap titik/objek pendapatan berdasarkan status.
+                            Menampilkan data penempatan petugas
+                            pada setiap objek pendapatan berdasarkan status.
                         </p>
 
 
@@ -297,7 +299,7 @@
                         </h5>
 
                         <p class="text-muted mb-3">
-                            Menampilkan rekap setoran Petugas,
+                            Menampilkan rekap setoran petugas,
                             pendapatan bruto, jumlah setoran,
                             selisih, dan status verifikasi.
                         </p>

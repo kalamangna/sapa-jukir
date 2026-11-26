@@ -15,7 +15,7 @@
         </h4>
 
         <p class="text-muted mb-0">
-            Rekapitulasi penempatan Petugas pada setiap titik/objek pendapatan.
+            Rekapitulasi penempatan petugas pada setiap objek pendapatan.
         </p>
 
     </div>
@@ -84,7 +84,7 @@
                         id="search"
                         class="form-control"
                         value="{{ $search }}"
-                        placeholder="Kode/nama Petugas, kode/nama titik/objek pendapatan"
+                        placeholder="JKR-00001 atau Pasar Sentral"
                     >
 
                 </div>
@@ -98,7 +98,7 @@
                         for="titik_parkir_id"
                         class="form-label fw-semibold"
                     >
-                        Titik/Objek Pendapatan
+                        Objek Pendapatan
                     </label>
 
                     <select
@@ -108,7 +108,7 @@
                     >
 
                         <option value="">
-                            Semua Titik/Objek Pendapatan
+                            Semua Objek Pendapatan
                         </option>
 
                         @foreach($titikParkirs as $titikParkir)

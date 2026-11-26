@@ -9,13 +9,6 @@
     <p class="text-muted mb-0">Atur warna background, foto publik, dan tampilkan pada halaman publik.</p>
 </div>
 
-@if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show auto-dismiss-alert" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
-
 <form action="{{ $sambutan ? route('admin.sambutan.update', $sambutan) : route('admin.sambutan.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     @if($sambutan) @method('PUT') @endif
@@ -44,7 +37,8 @@
                 <div class="col-12 col-lg-5">
                     <div class="border rounded-4 p-3 bg-light-subtle">
                         <label for="background_color" class="form-label fw-semibold">Warna Background</label>
-                        <input id="background_color" name="background_color" type="color" value="{{ old('background_color', $sambutan?->background_color ?: '#3d2df5') }}" class="form-control form-control-color mb-3" title="Pilih warna background sambutan" style="max-width: 88px; height: 48px;">
+                        <input id="background_color" name="background_color" type="color" value="{{ old('background_color', $sambutan?->background_color ?: '#3d2df5') }}" class="form-control form-control-color mb-2 @error('background_color') is-invalid @enderror" title="Pilih warna background sambutan" style="max-width: 88px; height: 48px;">
+                        @error('background_color')<div class="invalid-feedback d-block mb-2">{{ $message }}</div>@enderror
 
                         <div class="form-check">
                             <input id="is_active" name="is_active" value="1" type="checkbox" class="form-check-input" @checked(old('is_active', $sambutan?->is_active ?? true))>

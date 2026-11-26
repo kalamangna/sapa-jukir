@@ -14,16 +14,13 @@
     </a>
 </div>
 
-@if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-@endif
 <div class="card">
     <div class="card-body border-bottom">
         <form method="GET" class="row g-2">
             <div class="col-md-5">
-                <input type="search" name="search" value="{{ $search }}" class="form-control" placeholder="Cari judul atau kategori">
+                <input type="search" name="search" value="{{ $search }}" class="form-control" placeholder="Kegiatan Pasar Sentral">
             </div>
-            <div class="col-auto"><button class="btn btn-outline-secondary" type="submit">Cari</button></div>
+            <div class="col-auto"><button class="btn btn-outline-secondary" type="submit">Filter</button></div>
             @if($search)<div class="col-auto"><a class="btn btn-light" href="{{ route('admin.gallery.index') }}">Reset</a></div>@endif
         </form>
     </div>
@@ -45,15 +42,15 @@
                     <td><span class="badge {{ $gallery->is_active ? 'text-bg-success' : 'text-bg-secondary' }}">{{ $gallery->is_active ? 'Aktif' : 'Tidak aktif' }}</span></td>
                     <td>{{ $gallery->urutan }}</td>
                     <td class="text-end text-nowrap">
-                        <a href="{{ route('admin.gallery.edit', $gallery) }}" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></a>
-                        <form action="{{ route('admin.gallery.destroy', $gallery) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus dokumentasi ini?')">
+                        <a href="{{ route('admin.gallery.edit', $gallery) }}" class="btn btn-sm btn-outline-warning" title="Ubah" aria-label="Ubah {{ $gallery->judul }}"><i class="bi bi-pencil"></i></a>
+                        <form action="{{ route('admin.gallery.destroy', $gallery) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus dokumentasi ini? Foto terkait akan ikut terhapus.')">
                             @csrf @method('DELETE')
-                            <button class="btn btn-sm btn-outline-danger" type="submit"><i class="bi bi-trash"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" type="submit" title="Hapus" aria-label="Hapus {{ $gallery->judul }}"><i class="bi bi-trash"></i></button>
                         </form>
                     </td>
                 </tr>
             @empty
-                <tr><td colspan="6" class="text-center text-muted py-5">Belum ada dokumentasi gallery.</td></tr>
+                <tr><td colspan="6" class="text-center text-muted py-5">Belum ada dokumentasi galeri.</td></tr>
             @endforelse
             </tbody>
         </table>

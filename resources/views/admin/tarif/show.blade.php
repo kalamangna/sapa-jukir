@@ -33,7 +33,7 @@
             class="btn btn-warning"
         >
             <i class="bi bi-pencil-square me-1"></i>
-            Edit Tarif
+            Ubah Tarif
         </a>
 
     </div>

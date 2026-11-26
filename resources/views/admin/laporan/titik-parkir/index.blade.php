@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Laporan Titik/Objek Pendapatan')
+@section('title', 'Laporan Objek Pendapatan')
 
-@section('page-title', 'Laporan Titik/Objek Pendapatan')
+@section('page-title', 'Laporan Objek Pendapatan')
 
 @section('content')
 
@@ -11,11 +11,11 @@
     <div>
 
         <h4 class="mb-1 fw-bold">
-            Laporan Data Titik/Objek Pendapatan
+            Laporan Data Objek Pendapatan
         </h4>
 
         <p class="text-muted mb-0">
-            Rekapitulasi data titik/objek pendapatan Kabupaten Sinjai.
+            Rekapitulasi data objek pendapatan Kabupaten Sinjai.
         </p>
 
     </div>
@@ -323,7 +323,7 @@
 
                 <i class="bi bi-geo-alt me-2 text-success"></i>
 
-                Daftar Titik/Objek Pendapatan
+                Daftar Objek Pendapatan
 
             </h6>
 
@@ -541,7 +541,7 @@
 
 
                 <p class="text-muted mb-0">
-                    Tidak ditemukan data titik/objek pendapatan sesuai filter.
+                    Tidak ditemukan data objek pendapatan sesuai filter.
                 </p>
 
             </div>

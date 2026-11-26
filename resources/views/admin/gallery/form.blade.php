@@ -57,7 +57,7 @@
         </div>
     </div>
 </div>
-<div class="d-flex gap-2"><button type="submit" class="btn btn-success"><i class="bi bi-check-lg me-1"></i>Simpan</button><a href="{{ route('admin.gallery.index') }}" class="btn btn-light">Batal</a></div>
+<div class="d-flex gap-2"><button type="submit" class="btn btn-success"><i class="bi bi-check-lg me-1"></i>Simpan Dokumentasi</button><a href="{{ route('admin.gallery.index') }}" class="btn btn-light">Batal</a></div>
 
 <script>
     const galleryUploads = [...document.querySelectorAll('[data-gallery-upload]')];

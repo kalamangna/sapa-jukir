@@ -16,7 +16,7 @@
         </h4>
 
         <p class="text-muted mb-0">
-            Kelola data Petugas Kabupaten Sinjai.
+            Kelola data petugas Kabupaten Sinjai.
         </p>
 
     </div>
@@ -67,7 +67,7 @@
                             type="text"
                             name="search"
                             class="form-control"
-                            placeholder="Cari nama, NIK, atau kode Petugas..."
+                            placeholder="JKR-00001 atau Budi Santoso"
                             value="{{ $search }}"
                         >
 
@@ -85,7 +85,7 @@
 
                         <i class="bi bi-search me-1"></i>
 
-                        Cari
+                        Filter
 
                     </button>
 
@@ -391,6 +391,7 @@
                                             href="{{ route('admin.jukir.show', $jukir) }}"
                                             class="btn btn-sm btn-outline-primary"
                                             title="Detail"
+                                            aria-label="Detail {{ $jukir->nama }}"
                                         >
 
                                             <i class="bi bi-eye"></i>
@@ -404,7 +405,8 @@
                                         <a
                                             href="{{ route('admin.jukir.edit', $jukir) }}"
                                             class="btn btn-sm btn-outline-warning"
-                                            title="Edit"
+                                            title="Ubah"
+                                            aria-label="Ubah {{ $jukir->nama }}"
                                         >
 
                                             <i class="bi bi-pencil-square"></i>
@@ -419,6 +421,7 @@
     type="button"
     class="btn btn-sm btn-outline-danger btn-delete-jukir"
     title="Hapus"
+    aria-label="Hapus {{ $jukir->nama }}"
     data-bs-toggle="modal"
     data-bs-target="#deleteJukirModal"
     data-url="{{ route('admin.jukir.destroy', $jukir) }}"
@@ -567,7 +570,7 @@
                     type="button"
                     class="btn-close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
+                    aria-label="Tutup dialog"
                 ></button>
 
             </div>
@@ -577,7 +580,7 @@
 
                 <p class="mb-2">
 
-                    Apakah Anda yakin ingin menghapus data Petugas:
+                    Hapus data petugas berikut?
 
                 </p>
 
@@ -592,7 +595,7 @@
                 <p class="text-muted small mt-3 mb-0">
 
                     Data yang sudah dihapus tidak dapat dikembalikan.
-                    Foto Petugas dan foto KTP yang terkait juga akan dihapus.
+                    Foto petugas dan foto KTP yang terkait juga akan dihapus.
 
                 </p>
 

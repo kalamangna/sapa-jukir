@@ -42,43 +42,6 @@
 
 
 {{-- ==========================================================
-    VALIDATION ERROR
-========================================================== --}}
-
-@if($errors->any())
-
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-
-        <div class="fw-semibold mb-2">
-            <i class="bi bi-exclamation-triangle me-2"></i>
-            Terdapat kesalahan pada data yang dimasukkan.
-        </div>
-
-        <ul class="mb-0">
-
-            @foreach($errors->all() as $error)
-
-                <li>
-                    {{ $error }}
-                </li>
-
-            @endforeach
-
-        </ul>
-
-        <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-        ></button>
-
-    </div>
-
-@endif
-
-
-{{-- ==========================================================
     FORM
 ========================================================== --}}
 
@@ -140,7 +103,7 @@
                     >
 
                         <option value="">
-                            -- Pilih Jenis Retribusi --
+                            Pilih jenis retribusi
                         </option>
 
 
@@ -205,7 +168,7 @@
                     >
 
                         <option value="">
-                            -- Pilih Jenis Kendaraan --
+                            Pilih jenis kendaraan
                         </option>
 
 
@@ -517,7 +480,7 @@
                 name="keterangan"
                 rows="4"
                 class="form-control @error('keterangan') is-invalid @enderror"
-                placeholder="Tambahkan keterangan jika diperlukan..."
+                placeholder="Contoh: Tarif berlaku harian"
             >{{ old('keterangan', $tarif->keterangan) }}</textarea>
 
 

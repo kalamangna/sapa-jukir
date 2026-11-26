@@ -84,7 +84,7 @@
             >
 
                 <option value="">
-                    -- Pilih Petugas --
+                    Pilih petugas
                 </option>
 
                 @foreach($jukirs as $jukir)
@@ -140,7 +140,7 @@
             >
 
                 <option value="">
-                    -- Pilih Titik Parkir --
+                    Pilih titik parkir
                 </option>
 
                 @foreach($titikParkirs as $titik)
@@ -180,7 +180,7 @@
             </label>
 
             <select name="role" id="role" class="form-select @error('role') is-invalid @enderror" required>
-                <option value="">-- Pilih Peran --</option>
+                <option value="">Pilih peran</option>
                 <option value="koordinator" @selected(old('role', $penempatanJukir->role ?? 'anggota') === 'koordinator')>Koordinator</option>
                 <option value="anggota" @selected(old('role', $penempatanJukir->role ?? 'anggota') === 'anggota')>Anggota</option>
             </select>
@@ -418,7 +418,7 @@
                 id="keterangan"
                 rows="4"
                 class="form-control @error('keterangan') is-invalid @enderror"
-                placeholder="Keterangan tambahan jika diperlukan..."
+                placeholder="Keterangan tambahan penempatan"
             >{{ old('keterangan', $penempatanJukir->keterangan) }}</textarea>
 
 

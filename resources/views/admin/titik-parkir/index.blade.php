@@ -79,7 +79,7 @@
                             id="search"
                             name="search"
                             class="form-control"
-                            placeholder="Cari kode, nama, atau alamat..."
+                            placeholder="TP-001 atau Pasar Sentral"
                             value="{{ $search }}"
                         >
 
@@ -89,7 +89,7 @@
 
                 <div class="col-md-4">
                     <label for="kategori_retribusi" class="form-label fw-semibold">
-                        Kategori Titik/Objek Pendapatan
+                        Kategori Objek Pendapatan
                     </label>
                     <select id="kategori_retribusi" name="kategori_retribusi" class="form-select">
                         <option value="all" @selected($kategoriRetribusi === 'all')>Semua Kategori</option>
@@ -109,7 +109,7 @@
 
                         <i class="bi bi-search me-1"></i>
 
-                        Cari
+                        Filter
 
                     </button>
 
@@ -247,9 +247,9 @@
                                         </td>
                                         <td class="text-center pe-4">
                                             <div class="btn-group">
-                                                <a href="{{ route('admin.titik-parkir.show', $titikParkir) }}" class="btn btn-sm btn-outline-primary" title="Detail"><i class="bi bi-eye"></i></a>
-                                                <a href="{{ route('admin.titik-parkir.edit', $titikParkir) }}" class="btn btn-sm btn-outline-warning" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                                                <button type="button" class="btn btn-sm btn-outline-danger btn-delete-titik-parkir" title="Hapus" data-bs-toggle="modal" data-bs-target="#deleteTitikParkirModal" data-url="{{ route('admin.titik-parkir.destroy', $titikParkir) }}" data-nama="{{ $titikParkir->nama }}" data-kode="{{ $titikParkir->kode_titik }}"><i class="bi bi-trash"></i></button>
+                                                <a href="{{ route('admin.titik-parkir.show', $titikParkir) }}" class="btn btn-sm btn-outline-primary" title="Detail" aria-label="Detail {{ $titikParkir->nama }}"><i class="bi bi-eye"></i></a>
+                                                <a href="{{ route('admin.titik-parkir.edit', $titikParkir) }}" class="btn btn-sm btn-outline-warning" title="Ubah" aria-label="Ubah {{ $titikParkir->nama }}"><i class="bi bi-pencil-square"></i></a>
+                                                <button type="button" class="btn btn-sm btn-outline-danger btn-delete-titik-parkir" title="Hapus" aria-label="Hapus {{ $titikParkir->nama }}" data-bs-toggle="modal" data-bs-target="#deleteTitikParkirModal" data-url="{{ route('admin.titik-parkir.destroy', $titikParkir) }}" data-nama="{{ $titikParkir->nama }}" data-kode="{{ $titikParkir->kode_titik }}"><i class="bi bi-trash"></i></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -285,7 +285,7 @@
                 @if($search || $kategoriRetribusi !== 'all')
                     <a href="{{ route('admin.titik-parkir.index') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i>Kembali ke Semua Data</a>
                 @else
-                    <a href="{{ route('admin.titik-parkir.create') }}" class="btn btn-success"><i class="bi bi-plus-circle me-1"></i>Tambah Titik/Objek Pendapatan Pertama</a>
+                    <a href="{{ route('admin.titik-parkir.create') }}" class="btn btn-success"><i class="bi bi-plus-circle me-1"></i>Tambah Objek Pendapatan Pertama</a>
                 @endif
             </div>
         </div>
@@ -319,7 +319,7 @@
 
                     <i class="bi bi-exclamation-triangle text-danger me-2"></i>
 
-                    Hapus Titik/Objek Pendapatan
+                    Hapus Objek Pendapatan
 
                 </h5>
 
@@ -328,7 +328,7 @@
                     type="button"
                     class="btn-close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
+                    aria-label="Tutup dialog"
                 ></button>
 
             </div>
@@ -339,7 +339,7 @@
 
                 <p class="mb-2">
 
-                    Apakah Anda yakin ingin menghapus titik/objek pendapatan:
+                    Hapus objek pendapatan berikut?
 
                 </p>
 
@@ -366,7 +366,7 @@
 
                     <i class="bi bi-exclamation-triangle me-2"></i>
 
-                    Titik/Objek Pendapatan yang masih digunakan oleh
+                    Objek Pendapatan yang masih digunakan oleh
                     Penempatan Petugas atau Tarif tidak dapat dihapus.
 
                 </div>

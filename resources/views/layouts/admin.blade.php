@@ -726,11 +726,6 @@
             text-align: center;
         }
 
-        .content table tbody td,
-        .content table tbody td * {
-            font-weight: 400 !important;
-        }
-
         .content table .text-start {
             text-align: left !important;
         }
@@ -865,9 +860,21 @@
             .admin-notification,
             .admin-theme-toggle,
             .mobile-sidebar-toggle {
-                width: 2.15rem;
-                height: 2.15rem;
-                flex-basis: 2.15rem;
+                width: 2.5rem;
+                height: 2.5rem;
+                flex-basis: 2.5rem;
+            }
+
+            .content .btn {
+                min-height: 2.5rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .content .form-control,
+            .content .form-select {
+                min-height: 2.5rem;
             }
 
             .topbar-greeting {
@@ -883,7 +890,7 @@
             }
 
             .global-alert {
-                top: 175px;
+                top: 74px;
                 right: 15px;
                 width: calc(100vw - 30px);
             }
@@ -1168,6 +1175,11 @@
     background-color: #1e293b;
 }
 
+.admin-site.dark-theme .content .table .table-warning {
+    --bs-table-bg: rgba(245, 158, 11, 0.16);
+    --bs-table-color: #fde68a;
+}
+
 .admin-site.dark-theme .form-control,
 .admin-site.dark-theme .form-select,
 .admin-site.dark-theme .input-group-text {
@@ -1195,6 +1207,7 @@
 
 .admin-site.dark-theme .bg-white,
 .admin-site.dark-theme .bg-light,
+.admin-site.dark-theme .bg-light-subtle,
 .admin-site.dark-theme .accordion-button,
 .admin-site.dark-theme .page-link {
     color: #e5e7eb !important;
@@ -1202,8 +1215,21 @@
     border-color: var(--border-color);
 }
 
-.admin-site.dark-theme .text-dark {
+.admin-site.dark-theme .form-text {
+    color: #94a3b8;
+}
+
+.admin-site.dark-theme .border-top,
+.admin-site.dark-theme .border-bottom {
+    border-color: var(--border-color) !important;
+}
+
+.admin-site.dark-theme .text-dark:not(.badge) {
     color: #e5e7eb !important;
+}
+
+.admin-site.dark-theme .badge.bg-warning.text-dark {
+    color: #111827 !important;
 }
 
 .admin-site.dark-theme .btn-light,
@@ -1278,6 +1304,33 @@
         animation-duration: 0.01ms;
         animation-delay: 0ms;
     }
+}
+
+.sidebar-menu a:focus-visible,
+.sidebar-toggle:focus-visible,
+.mobile-sidebar-toggle:focus-visible,
+.admin-theme-toggle:focus-visible,
+.admin-notification:focus-visible,
+.admin-profile-button:focus-visible,
+.content .btn:focus-visible,
+.content .form-control:focus-visible,
+.content .form-select:focus-visible,
+.dropdown-item:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.admin-site.dark-theme .sidebar-menu a:focus-visible,
+.admin-site.dark-theme .sidebar-toggle:focus-visible,
+.admin-site.dark-theme .mobile-sidebar-toggle:focus-visible,
+.admin-site.dark-theme .admin-theme-toggle:focus-visible,
+.admin-site.dark-theme .admin-notification:focus-visible,
+.admin-site.dark-theme .admin-profile-button:focus-visible,
+.admin-site.dark-theme .content .btn:focus-visible,
+.admin-site.dark-theme .content .form-control:focus-visible,
+.admin-site.dark-theme .content .form-select:focus-visible,
+.admin-site.dark-theme .dropdown-item:focus-visible {
+    outline-color: #60a5fa;
 }
 
     </style>
@@ -1365,6 +1418,7 @@ SIDEBAR
     <a
         href="{{ route('admin.dashboard') }}"
         class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
+        @if(request()->routeIs('admin.dashboard')) aria-current="page" @endif
     >
 
         <i class="bi bi-grid"></i>
@@ -1378,44 +1432,40 @@ SIDEBAR
 
     @if(in_array(auth()->user()->role, ['admin', 'pimpinan'], true))
         <div class="menu-label">Data Master</div>
-        <a href="{{ route('admin.jukir.index') }}" class="{{ request()->routeIs('admin.jukir.*') ? 'active' : '' }}"><i class="bi bi-person-badge"></i><span>Data Petugas</span></a>
-        <a href="{{ route('admin.sumber-pemasukan.index') }}" class="{{ request()->routeIs('admin.sumber-pemasukan.*') ? 'active' : '' }}"><i class="bi bi-p-square"></i><span>Jenis Sumber Pendapatan</span></a>
-        <a href="{{ route('admin.titik-parkir.index') }}" class="{{ request()->routeIs('admin.titik-parkir.*') ? 'active' : '' }}"><i class="bi bi-geo-alt"></i><span>Objek Pendapatan</span></a>
-        <a href="{{ route('admin.tarif.index') }}" class="{{ request()->routeIs('admin.tarif.*') ? 'active' : '' }}"><i class="bi bi-cash-stack"></i><span>Tarif Retribusi</span></a>
+        <a href="{{ route('admin.jukir.index') }}" class="{{ request()->routeIs('admin.jukir.*') ? 'active' : '' }}" @if(request()->routeIs('admin.jukir.*')) aria-current="page" @endif><i class="bi bi-person-badge"></i><span>Data Petugas</span></a>
+        <a href="{{ route('admin.sumber-pemasukan.index') }}" class="{{ request()->routeIs('admin.sumber-pemasukan.*') ? 'active' : '' }}" @if(request()->routeIs('admin.sumber-pemasukan.*')) aria-current="page" @endif><i class="bi bi-p-square"></i><span>Jenis Sumber Pendapatan</span></a>
+        <a href="{{ route('admin.titik-parkir.index') }}" class="{{ request()->routeIs('admin.titik-parkir.*') ? 'active' : '' }}" @if(request()->routeIs('admin.titik-parkir.*')) aria-current="page" @endif><i class="bi bi-geo-alt"></i><span>Objek Pendapatan</span></a>
+        <a href="{{ route('admin.tarif.index') }}" class="{{ request()->routeIs('admin.tarif.*') ? 'active' : '' }}" @if(request()->routeIs('admin.tarif.*')) aria-current="page" @endif><i class="bi bi-cash-stack"></i><span>Tarif Retribusi</span></a>
         @if(auth()->user()->role === 'admin')
-            <a href="{{ route('admin.karcis.index') }}" class="{{ request()->routeIs('admin.karcis.*') ? 'active' : '' }}"><i class="bi bi-ticket-perforated"></i><span>Penyerahan Karcis</span></a>
+            <a href="{{ route('admin.karcis.index') }}" class="{{ request()->routeIs('admin.karcis.*') ? 'active' : '' }}" @if(request()->routeIs('admin.karcis.*')) aria-current="page" @endif><i class="bi bi-ticket-perforated"></i><span>Penyerahan Karcis</span></a>
         @endif
     @endif
 
     @if(in_array(auth()->user()->role, ['admin', 'operator', 'pimpinan'], true))
         <div class="menu-label">Operasional</div>
-        <a href="{{ route('admin.penempatan-jukir.index') }}" class="{{ request()->routeIs('admin.penempatan-jukir.*') ? 'active' : '' }}"><i class="bi bi-geo"></i><span>Penempatan Petugas</span></a>
-        <a href="{{ route('admin.setoran.index') }}" class="{{ request()->routeIs('admin.setoran.*') ? 'active' : '' }}"><i class="bi bi-cash-coin"></i><span>Setoran</span></a>
-        <a href="{{ route('admin.target-pendapatan.index') }}" class="{{ request()->routeIs('admin.target-pendapatan.*') ? 'active' : '' }}"><i class="bi bi-bullseye"></i><span>Target Pendapatan</span></a>
+        <a href="{{ route('admin.penempatan-jukir.index') }}" class="{{ request()->routeIs('admin.penempatan-jukir.*') ? 'active' : '' }}" @if(request()->routeIs('admin.penempatan-jukir.*')) aria-current="page" @endif><i class="bi bi-geo"></i><span>Penempatan Petugas</span></a>
+        <a href="{{ route('admin.setoran.index') }}" class="{{ request()->routeIs('admin.setoran.*') ? 'active' : '' }}" @if(request()->routeIs('admin.setoran.*')) aria-current="page" @endif><i class="bi bi-cash-coin"></i><span>Setoran</span></a>
+        @if(in_array(auth()->user()->role, ['admin', 'pimpinan'], true))
+            <a href="{{ route('admin.target-pendapatan.index') }}" class="{{ request()->routeIs('admin.target-pendapatan.*') ? 'active' : '' }}" @if(request()->routeIs('admin.target-pendapatan.*')) aria-current="page" @endif><i class="bi bi-bullseye"></i><span>Target Pendapatan</span></a>
+        @endif
     @endif
 
-    @if(
-        in_array(
-            auth()->user()->role,
-            ['admin', 'operator', 'pimpinan'],
-            true
-        )
-    )
+    @if(in_array(auth()->user()->role, ['admin', 'pimpinan'], true))
         <div class="menu-label">Laporan</div>
-        <a href="{{ route('admin.capaian-bulanan.index') }}" class="{{ request()->routeIs('admin.capaian-bulanan.*') ? 'active' : '' }}"><i class="bi bi-file-earmark-text"></i><span>Capaian Bulanan</span></a>
-        <a href="{{ route('admin.laporan.capaian-realisasi') }}" class="{{ request()->routeIs('admin.laporan.capaian-realisasi*') ? 'active' : '' }}"><i class="bi bi-graph-up-arrow"></i><span>Laporan Capaian Realisasi</span></a>
-        <a href="{{ route('admin.laporan.setoran') }}" class="{{ request()->routeIs('admin.laporan.setoran*') ? 'active' : '' }}"><i class="bi bi-cash-coin"></i><span>Laporan Setoran</span></a>
-        <a href="{{ route('admin.pengaduan.index') }}" class="{{ request()->routeIs('admin.pengaduan.*') ? 'active' : '' }}"><i class="bi bi-chat-left-text"></i><span>Aduan</span></a>
+        <a href="{{ route('admin.capaian-bulanan.index') }}" class="{{ request()->routeIs('admin.capaian-bulanan.*') ? 'active' : '' }}" @if(request()->routeIs('admin.capaian-bulanan.*')) aria-current="page" @endif><i class="bi bi-file-earmark-text"></i><span>Capaian Bulanan</span></a>
+        <a href="{{ route('admin.laporan.capaian-realisasi') }}" class="{{ request()->routeIs('admin.laporan.capaian-realisasi*') ? 'active' : '' }}" @if(request()->routeIs('admin.laporan.capaian-realisasi*')) aria-current="page" @endif><i class="bi bi-graph-up-arrow"></i><span>Laporan Capaian Realisasi</span></a>
+        <a href="{{ route('admin.laporan.setoran') }}" class="{{ request()->routeIs('admin.laporan.setoran*') ? 'active' : '' }}" @if(request()->routeIs('admin.laporan.setoran*')) aria-current="page" @endif><i class="bi bi-cash-coin"></i><span>Laporan Setoran</span></a>
+        <a href="{{ route('admin.pengaduan.index') }}" class="{{ request()->routeIs('admin.pengaduan.*') ? 'active' : '' }}" @if(request()->routeIs('admin.pengaduan.*')) aria-current="page" @endif><i class="bi bi-chat-left-text"></i><span>Aduan</span></a>
     @endif
 
     @if(in_array(auth()->user()->role, ['admin', 'pimpinan'], true))
         <div class="menu-label">Pengaturan</div>
-        <a href="{{ route('admin.site-settings.index') }}" class="{{ request()->routeIs('admin.site-settings.*') ? 'active' : '' }}"><i class="bi bi-gear-wide-connected"></i><span>SEO &amp; Publik</span></a>
-        <a href="{{ route('admin.sambutan.index') }}" class="{{ request()->routeIs('admin.sambutan.*') ? 'active' : '' }}"><i class="bi bi-person-video3"></i><span>Sambutan Publik</span></a>
+        <a href="{{ route('admin.site-settings.index') }}" class="{{ request()->routeIs('admin.site-settings.*') ? 'active' : '' }}" @if(request()->routeIs('admin.site-settings.*')) aria-current="page" @endif><i class="bi bi-gear-wide-connected"></i><span>SEO &amp; Publik</span></a>
+        <a href="{{ route('admin.sambutan.index') }}" class="{{ request()->routeIs('admin.sambutan.*') ? 'active' : '' }}" @if(request()->routeIs('admin.sambutan.*')) aria-current="page" @endif><i class="bi bi-person-video3"></i><span>Sambutan Publik</span></a>
         @if(auth()->user()->role === 'admin')
-            <a href="{{ route('admin.gallery.index') }}" class="{{ request()->routeIs('admin.gallery.*') ? 'active' : '' }}"><i class="bi bi-images"></i><span>Galeri Publik</span></a>
-            <a href="{{ route('admin.news.index') }}" class="{{ request()->routeIs('admin.news.*') ? 'active' : '' }}"><i class="bi bi-newspaper"></i><span>Pengaturan Berita</span></a>
-            <a href="{{ route('admin.users.index') }}" class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}"><i class="bi bi-people"></i><span>Manajemen Pengguna</span></a>
+            <a href="{{ route('admin.gallery.index') }}" class="{{ request()->routeIs('admin.gallery.*') ? 'active' : '' }}" @if(request()->routeIs('admin.gallery.*')) aria-current="page" @endif><i class="bi bi-images"></i><span>Galeri Publik</span></a>
+            <a href="{{ route('admin.news.index') }}" class="{{ request()->routeIs('admin.news.*') ? 'active' : '' }}" @if(request()->routeIs('admin.news.*')) aria-current="page" @endif><i class="bi bi-newspaper"></i><span>Pengaturan Berita</span></a>
+            <a href="{{ route('admin.users.index') }}" class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}" @if(request()->routeIs('admin.users.*')) aria-current="page" @endif><i class="bi bi-people"></i><span>Manajemen Pengguna</span></a>
         @endif
     @endif
 
@@ -1487,39 +1537,41 @@ SIDEBAR
         <i class="bi bi-sun-fill" aria-hidden="true"></i>
     </button>
 
-    <div class="dropdown">
+    @if(auth()->user()->role === 'admin')
+        <div class="dropdown">
 
-        @php($unreadPengaduans = \App\Models\Pengaduan::whereNull('dibaca_at')->latest()->take(5)->get())
+            @php($unreadPengaduans = \App\Models\Pengaduan::whereNull('dibaca_at')->latest()->take(5)->get())
 
-        <button
-            type="button"
-            class="admin-notification"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            aria-label="Notifikasi aduan"
-        >
-            <i class="bi bi-bell fs-5"></i>
-            @if($unreadPengaduans->count())
-                <span class="badge rounded-pill text-bg-danger">{{ $unreadPengaduans->count() }}</span>
-            @endif
-        </button>
+            <button
+                type="button"
+                class="admin-notification"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-label="Notifikasi aduan"
+            >
+                <i class="bi bi-bell fs-5"></i>
+                @if($unreadPengaduans->count())
+                    <span class="badge rounded-pill text-bg-danger">{{ $unreadPengaduans->count() }}</span>
+                @endif
+            </button>
 
-        <ul class="dropdown-menu dropdown-menu-end shadow-sm" style="min-width: 320px;">
-            <li><h6 class="dropdown-header">Aduan Baru</h6></li>
-            @forelse($unreadPengaduans as $pengaduan)
-                <li>
-                    <a class="dropdown-item py-2" href="{{ route('admin.pengaduan.show', $pengaduan) }}">
-                        <strong class="d-block">{{ $pengaduan->nama }}</strong>
-                        <small class="text-muted">{{ \Illuminate\Support\Str::limit($pengaduan->detail, 48) }}</small>
-                    </a>
-                </li>
-            @empty
-                <li><span class="dropdown-item-text text-muted">Tidak ada aduan baru.</span></li>
-            @endforelse
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-center" href="{{ route('admin.pengaduan.index') }}">Lihat semua aduan</a></li>
-        </ul>
-    </div>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm" style="min-width: 320px;">
+                <li><h6 class="dropdown-header">Aduan Baru</h6></li>
+                @forelse($unreadPengaduans as $pengaduan)
+                    <li>
+                        <a class="dropdown-item py-2" href="{{ route('admin.pengaduan.show', $pengaduan) }}">
+                            <strong class="d-block">{{ $pengaduan->nama }}</strong>
+                            <small class="text-muted">{{ \Illuminate\Support\Str::limit($pengaduan->detail, 48) }}</small>
+                        </a>
+                    </li>
+                @empty
+                    <li><span class="dropdown-item-text text-muted">Tidak ada aduan baru.</span></li>
+                @endforelse
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-center" href="{{ route('admin.pengaduan.index') }}">Lihat semua aduan</a></li>
+            </ul>
+        </div>
+    @endif
 
     <div class="dropdown admin-profile">
 
@@ -1604,13 +1656,6 @@ SIDEBAR
             </li>
 
 
-            <li>
-
-                <hr class="dropdown-divider">
-
-            </li>
-
-
             {{-- LOGOUT --}}
 
             <li>
@@ -1671,7 +1716,29 @@ SIDEBAR
                     type="button"
                     class="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
+                    aria-label="Tutup notifikasi"
+                ></button>
+
+            </div>
+
+        @endif
+
+        @if(session('error'))
+
+            <div
+                class="alert alert-danger alert-dismissible fade show global-alert"
+                role="alert"
+            >
+
+                <i class="bi bi-exclamation-circle me-2"></i>
+
+                {{ session('error') }}
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Tutup notifikasi"
                 ></button>
 
             </div>
@@ -1683,7 +1750,7 @@ SIDEBAR
 
         @if($errors->any())
 
-            <div class="alert alert-danger alert-dismissible fade show auto-dismiss-alert global-alert" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show global-alert" role="alert">
 
                 <div class="fw-semibold mb-2">
 
@@ -1710,7 +1777,7 @@ SIDEBAR
                     type="button"
                     class="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
+                    aria-label="Tutup notifikasi"
                 ></button>
 
             </div>
@@ -1893,7 +1960,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     alert.remove();
                 }, 300);
             }
-        }, 3000);
+        }, 4000);
     });
 
 });
@@ -1908,6 +1975,54 @@ document.addEventListener('DOMContentLoaded', function () {
         const message = alert.textContent.replace(/\s+/g, ' ').trim();
         if (globalMessages.has(message)) {
             alert.remove();
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('submit', function (event) {
+        if (event.defaultPrevented) {
+            return;
+        }
+
+        const form = event.target;
+        if (!(form instanceof HTMLFormElement)) {
+            return;
+        }
+
+        const method = (form.getAttribute('method') || 'get').toLowerCase();
+        if (method === 'get' || form.target === '_blank' || form.hasAttribute('data-no-disable')) {
+            return;
+        }
+
+        if (form.dataset.submitting === 'true') {
+            event.preventDefault();
+            return;
+        }
+
+        form.dataset.submitting = 'true';
+
+        const submitButtons = form.querySelectorAll('button[type="submit"], button:not([type]), input[type="submit"]');
+        const activeSubmitter = event.submitter || submitButtons[0] || null;
+
+        if (activeSubmitter && activeSubmitter.name) {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = activeSubmitter.name;
+            hiddenInput.value = activeSubmitter.value || '';
+            form.appendChild(hiddenInput);
+        }
+
+        submitButtons.forEach((button) => {
+            button.disabled = true;
+        });
+
+        if (activeSubmitter) {
+            if (activeSubmitter.tagName === 'BUTTON') {
+                activeSubmitter.innerHTML = '<span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>Memproses...';
+            } else if (activeSubmitter.tagName === 'INPUT') {
+                activeSubmitter.value = 'Memproses...';
+            }
         }
     });
 });

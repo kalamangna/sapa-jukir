@@ -37,46 +37,6 @@
 
 
 
-{{-- ==========================================================
-    VALIDATION ERROR
-========================================================== --}}
-
-@if($errors->any())
-
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-
-        <div class="fw-semibold mb-2">
-
-            <i class="bi bi-exclamation-triangle me-2"></i>
-
-            Terdapat kesalahan pada data yang dimasukkan.
-
-        </div>
-
-
-        <ul class="mb-0">
-
-            @foreach($errors->all() as $error)
-
-                <li>
-                    {{ $error }}
-                </li>
-
-            @endforeach
-
-        </ul>
-
-
-        <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-        ></button>
-
-    </div>
-
-@endif
 
 
 
@@ -244,7 +204,7 @@
                         name="deskripsi"
                         rows="5"
                         class="form-control @error('deskripsi') is-invalid @enderror"
-                        placeholder="Masukkan deskripsi jenis parkir..."
+                        placeholder="Retribusi parkir tepi jalan umum dan area pasar"
                     >{{ old('deskripsi', $jenisParkir->deskripsi) }}</textarea>
 
 
