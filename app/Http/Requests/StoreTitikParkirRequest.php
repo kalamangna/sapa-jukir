@@ -40,6 +40,10 @@ class StoreTitikParkirRequest extends FormRequest
                 'luas_m2' => null,
             ]);
         }
+
+        if (! $this->filled('jumlah_koordinator')) {
+            $this->merge(['jumlah_koordinator' => 1]);
+        }
     }
 
     public function rules(): array

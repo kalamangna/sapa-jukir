@@ -1,24 +1,39 @@
-*.log
-.DS_Store
+# Dependensi dan hasil build
+/vendor
+/node_modules
+/public/hot
+/public/storage
+
+# Konfigurasi lingkungan dan kredensial
 .env
-.env.backup
-.env.production
-.phpactor.json
+.env.*
+!.env.example
+/auth.json
+/storage/*.key
+
+# Basis data lokal dan dump SQL
+*.sql
+*.sqlite
+*.sqlite-journal
+*.sqlite3
+
+# Log, cache, dan pengujian
+*.log
+/storage/pail
+/.phpunit.cache
 .phpunit.result.cache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor, IDE, dan sistem operasi
 /.fleet
 /.idea
 /.nova
-/.phpunit.cache
 /.vscode
 /.zed
-/auth.json
-/node_modules
-/public/build
-/public/hot
-/public/storage
-/storage/*.key
-/storage/pail
-/vendor
+.phpactor.json
 Homestead.json
 Homestead.yaml
+.DS_Store
 Thumbs.db

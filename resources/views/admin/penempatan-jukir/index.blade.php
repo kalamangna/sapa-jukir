@@ -25,6 +25,7 @@
     </div>
 
 
+    @unless(auth()->user()->isPimpinan())
     <a
         href="{{ route('admin.penempatan-jukir.create') }}"
         class="btn btn-success"
@@ -35,6 +36,7 @@
         Tambah Penempatan
 
     </a>
+    @endunless
 
 </div>
 
@@ -308,6 +310,7 @@
                                         </a>
 
 
+                                        @unless(auth()->user()->isPimpinan())
                                         {{-- EDIT --}}
 
                                         <a
@@ -345,6 +348,7 @@
                                             </button>
 
                                         </form>
+                                        @endunless
 
                                     </div>
 
@@ -393,6 +397,7 @@
                 </p>
 
 
+                @unless(auth()->user()->isPimpinan())
                 <a
                     href="{{ route('admin.penempatan-jukir.create') }}"
                     class="btn btn-success"
@@ -403,6 +408,7 @@
                     Tambah Penempatan
 
                 </a>
+                @endunless
 
             </div>
 

@@ -3,6 +3,26 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.1.0] - 2026-11-26
+
+### Ditambahkan
+- Pembatasan frekuensi permintaan pada endpoint login dan pengaduan publik melalui middleware `throttle`.
+- Pengontrol `PublicController` untuk menangani seluruh halaman publik tanpa closure pada `routes/web.php` sehingga mendukung `route:cache`.
+- Pengujian akses *read-only* untuk peran `pimpinan` pada modul operasional di `AccessControlTest`.
+- Penyertaan aset frontend terkompilasi pada `public/build` untuk kebutuhan deployment pada server tanpa Node.js.
+
+### Diubah
+- Penetapan nilai bawaan `jumlah_koordinator` menjadi `1` pada `StoreTitikParkirRequest` agar titik retribusi non-parkir tetap lolos validasi.
+- Pembatasan hak akses peran `pimpinan` pada route dan tampilan operasional menjadi *read-only*.
+- Penyelarasan label brand pada `AccessControlTest` ke `SAPA JUKIR`.
+- Perapian struktur `.gitignore`, pemindahan dokumen analisis dari root ke `docs/`, serta perapian copywriting pada opsi pengaduan dan subjudul tagihan.
+
+### Diperbaiki
+- Penghapusan tag `<a>` bersarang dan elemen `<img>` kosong pada header `welcome.blade.php`.
+
+### Dihapus
+- Penghapusan model di luar ruang lingkup Dishub `WajibPajak`, pemindahan berkas internal dari `public/images/` ke `docs/`, dan penghentian pelacakan Git terhadap dump SQL lokal `sijukir_sinjai.sql`.
+
 ## [1.0.0] - 2026-11-26
 
 ### Ditambahkan

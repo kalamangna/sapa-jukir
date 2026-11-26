@@ -36,7 +36,7 @@
 
             {{-- EDIT HANYA JIKA BELUM VERIFIKASI --}}
 
-            @if ($setoran->status === 'belum_verifikasi')
+            @if ($setoran->status === 'belum_verifikasi' && ! auth()->user()->isPimpinan())
 
                 <a
                     href="{{ route('admin.setoran.edit', $setoran->id) }}"
@@ -194,7 +194,7 @@
 
                             <div>
 
-                                @if ($setoran->status === 'belum_verifikasi')
+                                @if ($setoran->status === 'belum_verifikasi' && ! auth()->user()->isPimpinan())
 
                                     <span class="badge bg-warning-subtle text-warning-emphasis px-3 py-2">
 
@@ -417,7 +417,7 @@
                         BELUM VERIFIKASI
                     =================================================== --}}
 
-                    @if ($setoran->status === 'belum_verifikasi')
+                    @if ($setoran->status === 'belum_verifikasi' && ! auth()->user()->isPimpinan())
 
                         <div class="text-center py-3">
 
@@ -442,6 +442,7 @@
                             </p>
 
 
+                            @unless(auth()->user()->isPimpinan())
                             {{-- ==================================================
                                 TOMBOL VERIFIKASI
                             =================================================== --}}
@@ -492,6 +493,7 @@
                                 Tolak Setoran
 
                             </button>
+                            @endunless
 
                         </div>
 

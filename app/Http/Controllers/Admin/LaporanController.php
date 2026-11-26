@@ -1638,4 +1638,10 @@ public function setoran(Request $request)
         );
     }
 
+    public function jenis(Request $request, SumberPemasukan $sumberPemasukan)
+    {
+        $request->merge(['sumber_pemasukan_id' => $sumberPemasukan->id]);
+
+        return $this->analisisPendapatan($request);
+    }
 }

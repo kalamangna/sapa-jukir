@@ -24,6 +24,7 @@
             </p>
         </div>
 
+        @unless(auth()->user()->isPimpinan())
         <div>
             <a
                 href="{{ route('admin.setoran.create') }}"
@@ -33,6 +34,7 @@
                 Tambah Setoran
             </a>
         </div>
+        @endunless
 
     </div>
 
@@ -800,6 +802,7 @@
                                         </a>
 
 
+                                        @unless(auth()->user()->isPimpinan())
                                         {{-- EDIT --}}
 
                                         <a
@@ -837,6 +840,7 @@
                                             </button>
 
                                         </form>
+                                        @endunless
 
                                     </div>
 
@@ -871,6 +875,7 @@
                                         tidak ditemukan berdasarkan filter.
                                     </p>
 
+                                    @unless(auth()->user()->isPimpinan())
                                     <a
                                         href="{{ route('admin.setoran.create') }}"
                                         class="btn btn-primary"
@@ -881,6 +886,7 @@
                                         Tambah Setoran
 
                                     </a>
+                                    @endunless
 
                                 </td>
 

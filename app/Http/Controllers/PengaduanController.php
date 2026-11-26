@@ -12,7 +12,7 @@ class PengaduanController extends Controller
         'tarif_parkir_tidak_sesuai' => 'Tarif Parkir Tidak Sesuai',
         'pelayanan_jukir_tidak_sesuai' => 'Pelayanan Jukir Tidak Sesuai',
         'lokasi_parkir_belum_terdaftar' => 'Lokasi Parkir Belum Terdaftar',
-        'jukir_tidak_memakai_atribut' => 'Jukir Tidak Memakai Atribut (Rompi, QR, dll)',
+        'jukir_tidak_memakai_atribut' => 'Jukir Tidak Memakai Atribut Resmi',
         'lainnya' => 'Lainnya',
     ];
 

@@ -15,10 +15,8 @@
     <header class="public-header">
         <div class="container public-nav">
             <a class="public-brand" href="{{ route('home') }}">
-                <img>
-                 <a class="public-brand" href="{{ route('home') }}">
-                 <img src="{{ asset('images/logo-sapa-jukir.png') }}" alt="Logo SAPA JUKIR" style="height: 32px; width: auto; object-fit: contain;">
-                 <span>SAPA JUKIR</span>
+                <img src="{{ asset('images/logo-sapa-jukir.png') }}" alt="Logo SAPA JUKIR" style="height: 32px; width: auto; object-fit: contain;">
+                <span>SAPA JUKIR</span>
             </a>
 
             <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>

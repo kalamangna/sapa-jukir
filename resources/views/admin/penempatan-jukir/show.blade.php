@@ -23,6 +23,7 @@
 
 <div class="d-flex gap-2">
 
+    @unless(auth()->user()->isPimpinan())
     <a
         href="{{ route('admin.penempatan-jukir.edit', $penempatanJukir) }}"
         class="btn btn-warning"
@@ -33,6 +34,7 @@
         Edit
 
     </a>
+    @endunless
 
 
     <a

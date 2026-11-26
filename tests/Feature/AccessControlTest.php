@@ -42,10 +42,10 @@ class AccessControlTest extends TestCase
         $this->actingAs($user)
             ->get(route('admin.dashboard'))
             ->assertOk()
-            ->assertSee('Dashboard Pimpinan SIJUKIR')
+            ->assertSee('Dashboard Pimpinan SAPA JUKIR')
             ->assertSee('Ringkasan data dan kondisi pengelolaan pendapatan dan operasional Kabupaten Sinjai.')
             ->assertSee('Dashboard Pimpinan')
-            ->assertSee('SIJUKIR Sinjai');
+            ->assertSee('SAPA JUKIR Sinjai');
     }
 
     public function test_pimpinan_can_open_reports_but_not_master_data(): void
@@ -238,5 +238,18 @@ class AccessControlTest extends TestCase
         $this->actingAs($operator)
             ->get(route('admin.audit-logs.index'))
             ->assertForbidden();
+    }
+
+    public function test_pimpinan_has_read_only_access_to_operational_modules(): void
+    {
+        $pimpinan = User::factory()->create(['role' => 'pimpinan', 'status' => 'aktif']);
+
+        $this->actingAs($pimpinan)->get(route('admin.setoran.index'))->assertOk()->assertDontSee(route('admin.setoran.create'));
+        $this->actingAs($pimpinan)->get(route('admin.penempatan-jukir.index'))->assertOk()->assertDontSee(route('admin.penempatan-jukir.create'));
+        $this->actingAs($pimpinan)->get(route('admin.tagihan.index'))->assertOk()->assertDontSee(route('admin.tagihan.create'));
+
+        $this->actingAs($pimpinan)->get(route('admin.setoran.create'))->assertForbidden();
+        $this->actingAs($pimpinan)->get(route('admin.penempatan-jukir.create'))->assertForbidden();
+        $this->actingAs($pimpinan)->get(route('admin.tagihan.create'))->assertForbidden();
     }
 }
