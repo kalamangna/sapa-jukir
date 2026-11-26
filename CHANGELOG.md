@@ -3,6 +3,11 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.3.1] - 2026-11-26
+
+### Diperbaiki
+- Title beranda tidak lagi mengulang nama SAPA JUKIR ketika Judul Hero di Pengaturan Situs sudah memuatnya.
+
 ## [1.3.0] - 2026-11-26
 
 ### Ditambahkan

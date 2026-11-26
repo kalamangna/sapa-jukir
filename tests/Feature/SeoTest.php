@@ -68,4 +68,13 @@ class SeoTest extends TestCase
             ->assertOk()
             ->assertSee('<meta name="robots" content="noindex, nofollow">', false);
     }
+
+    public function test_home_title_does_not_repeat_brand_name(): void
+    {
+        \App\Models\SiteSetting::create(['hero_title' => 'Selamat Datang di SAPA JUKIR']);
+
+        $this->get(route('home'))
+            ->assertOk()
+            ->assertSee('<title>Selamat Datang di SAPA JUKIR</title>', false);
+    }
 }
