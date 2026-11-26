@@ -503,12 +503,13 @@
                 @if($jukir->foto_ktp)
 
                     <a
-                        href="{{ asset('storage/' . $jukir->foto_ktp) }}"
+                        href="{{ route('admin.jukir.document', [$jukir, 'ktp']) }}"
                         target="_blank"
+                        rel="noopener noreferrer"
                     >
 
                         <img
-                            src="{{ asset('storage/' . $jukir->foto_ktp) }}"
+                            src="{{ route('admin.jukir.document', [$jukir, 'ktp']) }}"
                             alt="KTP {{ $jukir->nama }}"
                             class="img-fluid rounded border"
                             style="max-height:250px;"
@@ -544,7 +545,7 @@
                 @if($jukir->dokumen_pendukung)
                     <div class="mt-3">
                         <div class="text-muted small mb-1">Dokumen Pendukung</div>
-                        <a href="{{ asset('storage/' . $jukir->dokumen_pendukung) }}" target="_blank" rel="noopener">Lihat dokumen pendukung</a>
+                        <a href="{{ route('admin.jukir.document', [$jukir, 'dokumen-pendukung']) }}" target="_blank" rel="noopener noreferrer">Lihat dokumen pendukung</a>
                     </div>
                 @endif
 

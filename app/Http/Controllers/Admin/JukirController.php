@@ -128,14 +128,14 @@ class JukirController extends Controller
 
                 $data['foto_ktp'] = $request
                     ->file('foto_ktp')
-                    ->store('jukir/ktp', 'public');
+                    ->store('jukir/ktp', 'local');
             }
 
-                    if ($request->hasFile('dokumen_pendukung')) {
-                    $data['dokumen_pendukung'] = $request
-                        ->file('dokumen_pendukung')
-                        ->store('jukir/dokumen-pendukung', 'public');
-                    }
+            if ($request->hasFile('dokumen_pendukung')) {
+                $data['dokumen_pendukung'] = $request
+                    ->file('dokumen_pendukung')
+                    ->store('jukir/dokumen-pendukung', 'local');
+            }
 
 
             /*
@@ -248,7 +248,7 @@ public function edit(Jukir $jukir)
 
                 $newFotoKtp = $request
                     ->file('foto_ktp')
-                    ->store('jukir/ktp', 'public');
+                    ->store('jukir/ktp', 'local');
 
                 $data['foto_ktp'] = $newFotoKtp;
             }
@@ -256,7 +256,7 @@ public function edit(Jukir $jukir)
             if ($request->hasFile('dokumen_pendukung')) {
                 $newDokumenPendukung = $request
                     ->file('dokumen_pendukung')
-                    ->store('jukir/dokumen-pendukung', 'public');
+                    ->store('jukir/dokumen-pendukung', 'local');
 
                 $data['dokumen_pendukung'] = $newDokumenPendukung;
             }
@@ -291,19 +291,17 @@ public function edit(Jukir $jukir)
         if (
             $newFotoKtp &&
             $oldFotoKtp &&
-            $oldFotoKtp !== $newFotoKtp &&
-            Storage::disk('public')->exists($oldFotoKtp)
+            $oldFotoKtp !== $newFotoKtp
         ) {
-            Storage::disk('public')->delete($oldFotoKtp);
+            $this->deletePrivateDocument($oldFotoKtp);
         }
 
         if (
             $newDokumenPendukung &&
             $oldDokumenPendukung &&
-            $oldDokumenPendukung !== $newDokumenPendukung &&
-            Storage::disk('public')->exists($oldDokumenPendukung)
+            $oldDokumenPendukung !== $newDokumenPendukung
         ) {
-            Storage::disk('public')->delete($oldDokumenPendukung);
+            $this->deletePrivateDocument($oldDokumenPendukung);
         }
 
 
@@ -345,19 +343,8 @@ public function edit(Jukir $jukir)
         }
 
 
-        if (
-            $fotoKtp &&
-            Storage::disk('public')->exists($fotoKtp)
-        ) {
-            Storage::disk('public')->delete($fotoKtp);
-        }
-
-        if (
-            $dokumenPendukung &&
-            Storage::disk('public')->exists($dokumenPendukung)
-        ) {
-            Storage::disk('public')->delete($dokumenPendukung);
-        }
+        $this->deletePrivateDocument($fotoKtp);
+        $this->deletePrivateDocument($dokumenPendukung);
 
 
         return redirect()
@@ -366,6 +353,47 @@ public function edit(Jukir $jukir)
                 'success',
                 'Data Jukir berhasil dihapus.'
             );
+    }
+
+    /**
+     * Menyajikan dokumen privat Jukir (KTP atau dokumen pendukung) hanya untuk admin.
+     */
+    public function document(Jukir $jukir, string $type)
+    {
+        $path = $type === 'ktp' ? $jukir->foto_ktp : $jukir->dokumen_pendukung;
+
+        if (blank($path)) {
+            abort(404);
+        }
+
+        $disk = Storage::disk('local')->exists($path)
+            ? 'local'
+            : (Storage::disk('public')->exists($path) ? 'public' : null);
+
+        if (! $disk) {
+            abort(404);
+        }
+
+        return Storage::disk($disk)->response($path, null, [
+            'Cache-Control' => 'private, no-store',
+            'X-Content-Type-Options' => 'nosniff',
+        ]);
+    }
+
+    /**
+     * Menghapus berkas dokumen privat dari disk local maupun fallback disk public.
+     */
+    private function deletePrivateDocument(?string $path): void
+    {
+        if (blank($path)) {
+            return;
+        }
+
+        foreach (['local', 'public'] as $disk) {
+            if (Storage::disk($disk)->exists($path)) {
+                Storage::disk($disk)->delete($path);
+            }
+        }
     }
 
 

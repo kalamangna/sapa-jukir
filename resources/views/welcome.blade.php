@@ -532,16 +532,34 @@
             });
         }
 
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function sanitizeDetailUrl(url) {
+            const raw = String(url ?? '').trim();
+            if (/^(https?:\/\/|\/)/i.test(raw)) {
+                return escapeHtml(raw);
+            }
+
+            return '#';
+        }
+
         function buildPopupMarkup(point) {
             return `
                 <div style="min-width: 210px; line-height: 1.6;">
-                    <strong style="display: block; font-size: 14px; margin-bottom: 6px;">${point.nama}</strong>
-                    <span>Lokasi: ${point.alamat || 'Alamat tidak tersedia'}</span><br>
-                    <small>${point.kecamatan || '-'} / ${point.kelurahan || '-'}</small><br>
-                    <small>Sumber: ${point.sumber_nama || 'Belum ditentukan'}</small><br>
-                    <small>Status: ${point.status || 'AKTIF'}</small><br>
-                    <small>Koordinat: ${point.lat.toFixed(5)}, ${point.lng.toFixed(5)}</small>
-                    <a href="${point.detail_url}" style="display: inline-block; margin-top: 2px;">Lihat Detail Lokasi</a>
+                    <strong style="display: block; font-size: 14px; margin-bottom: 6px;">${escapeHtml(point.nama)}</strong>
+                    <span>Lokasi: ${escapeHtml(point.alamat || 'Alamat tidak tersedia')}</span><br>
+                    <small>${escapeHtml(point.kecamatan || '-')} / ${escapeHtml(point.kelurahan || '-')}</small><br>
+                    <small>Sumber: ${escapeHtml(point.sumber_nama || 'Belum ditentukan')}</small><br>
+                    <small>Status: ${escapeHtml(point.status || 'AKTIF')}</small><br>
+                    <small>Koordinat: ${Number(point.lat).toFixed(5)}, ${Number(point.lng).toFixed(5)}</small>
+                    <a href="${sanitizeDetailUrl(point.detail_url)}" style="display: inline-block; margin-top: 2px;">Lihat Detail Lokasi</a>
                 </div>
             `;
         }

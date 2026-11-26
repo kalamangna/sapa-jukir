@@ -30,7 +30,7 @@ class SambutanController extends Controller
         $data = $request->validate([
             'foto' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'foto_kadis' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'background_color' => ['nullable', 'string', 'max:255'],
+            'background_color' => ['nullable', 'regex:/^#[0-9A-Fa-f]{6}$/'],
         ]);
 
         $data['is_active'] = $request->boolean('is_active');

@@ -42,6 +42,8 @@ SAPA JUKIR adalah aplikasi web berbasis Laravel untuk pengelolaan operasional pa
 - `DB_USERNAME`: Nama pengguna basis data
 - `DB_PASSWORD`: Kata sandi basis data
 - `FILESYSTEM_DISK`: Disk penyimpanan berkas, gunakan `public` untuk unggahan media
+- `SESSION_SECURE_COOKIE`: Setel `true` pada lingkungan produksi berbasis HTTPS
+- `SESSION_ENCRYPT`: Setel `true` untuk mengenkripsi data sesi
 
 ## Perintah Operasional Utama
 

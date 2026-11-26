@@ -24,9 +24,9 @@ class SiteSettingController extends Controller
             'hero_description' => ['nullable', 'string', 'max:2000'],
             'service_hours' => ['nullable', 'string', 'max:100'],
             'location_name' => ['nullable', 'string', 'max:255'],
-            'location_url' => ['nullable', 'url', 'max:500'],
+            'location_url' => ['nullable', 'url:http,https', 'max:500'],
             'whatsapp_number' => ['nullable', 'string', 'max:100'],
-            'whatsapp_url' => ['nullable', 'url', 'max:500'],
+            'whatsapp_url' => ['nullable', 'url:http,https', 'max:500'],
             'instagram' => ['nullable', 'string', 'max:255'],
             'email' => ['nullable', 'email', 'max:255'],
         ]);

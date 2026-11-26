@@ -27,6 +27,7 @@
 
         <a href="{{ route('admin.laporan.tarif.cetak', request()->query()) }}"
            target="_blank"
+           rel="noopener noreferrer"
            class="btn btn-danger">
 
             <i class="bi bi-printer me-2"></i>
@@ -335,6 +336,7 @@
 
                     <a href="{{ route('admin.laporan.tarif.cetak', request()->query()) }}"
                        target="_blank"
+                       rel="noopener noreferrer"
                        class="btn btn-secondary">
 
                         <i class="bi bi-printer me-1"></i>

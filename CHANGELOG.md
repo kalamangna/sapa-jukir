@@ -3,6 +3,24 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.5.0] - 2026-11-26
+
+### Ditambahkan
+- Middleware `SecurityHeaders` pada `bootstrap/app.php` untuk menyisipkan `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `Content-Security-Policy`, dan `Strict-Transport-Security` pada koneksi HTTPS.
+- Endpoint khusus admin `admin.jukir.document` dan `admin.pengaduan.photo` untuk menyajikan berkas KTP jukir, dokumen pendukung jukir, dan foto aduan masyarakat dari disk privat `local`.
+- Pengujian otomatis keamanan pada `tests/Feature/SecurityHardeningTest.php`.
+
+### Diubah
+- Penyimpanan `foto_ktp`, `dokumen_pendukung` jukir, dan `foto` pengaduan dipindahkan dari disk `public` ke disk privat `local` dengan fallback kompatibilitas berkas lama.
+- Route verifikasi setoran (`admin.setoran.verifikasi`) dan tombol verifikasi pada `admin/setoran/show.blade.php` dibatasi khusus untuk role `admin`.
+- Validasi `location_url` dan `whatsapp_url` pada `SiteSettingController` diperketat ke `url:http,https`, validasi `background_color` pada `SambutanController` diperketat ke format hex 6 digit, dan kata sandi pengguna pada `StoreUserRequest` serta `UpdateUserRequest` diwajibkan memuat huruf dan angka.
+
+### Diperbaiki
+- Mitigasi Stored XSS dan DOM XSS pada popup peta Leaflet di `welcome.blade.php` serta `public/titik-parkir/show.blade.php`, dan pratinjau unggahan galeri di `admin/gallery/form.blade.php`.
+- Mitigasi CSV dan Excel Formula Injection pada ekspor laporan analisis pendapatan di `LaporanController`.
+- Pencegahan *race condition* pembayaran tagihan melalui transaksi basis data dan `lockForUpdate()` di `TagihanController::bayar`.
+- Penambahan atribut `rel="noopener noreferrer"` pada seluruh tautan `target="_blank"` di halaman admin.
+
 ## [1.4.0] - 2026-11-26
 
 ### Ditambahkan

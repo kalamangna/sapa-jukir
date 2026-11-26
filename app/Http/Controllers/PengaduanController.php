@@ -42,7 +42,7 @@ class PengaduanController extends Controller
         ]);
 
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('pengaduan', 'public');
+            $data['foto'] = $request->file('foto')->store('pengaduan', 'local');
         }
 
         Pengaduan::create($data);

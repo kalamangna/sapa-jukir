@@ -24,6 +24,7 @@
     <a
         href="{{ route('admin.laporan.titik-parkir.cetak', request()->query()) }}"
         target="_blank"
+        rel="noopener noreferrer"
         class="btn btn-success"
     >
 

@@ -222,11 +222,24 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 maxZoom: 19,
             }).addTo(locationMap);
-            L.marker(locationCoordinates).addTo(locationMap).bindPopup(`
-                <strong>${locationName}</strong><br>
-                <span>Lokasi: ${locationAddress}</span><br>
-                <a href="https://www.google.com/maps/search/?api=1&query=${locationCoordinates[0]},${locationCoordinates[1]}" target="_blank" rel="noopener noreferrer">Buka di Google Maps</a>
-            `).openPopup();
+            const popupContent = document.createElement('div');
+            const titleEl = document.createElement('strong');
+            titleEl.textContent = locationName;
+            const addressEl = document.createElement('span');
+            addressEl.textContent = 'Lokasi: ' + locationAddress;
+            const mapLinkEl = document.createElement('a');
+            mapLinkEl.href = `https://www.google.com/maps/search/?api=1&query=${locationCoordinates[0]},${locationCoordinates[1]}`;
+            mapLinkEl.target = '_blank';
+            mapLinkEl.rel = 'noopener noreferrer';
+            mapLinkEl.textContent = 'Buka di Google Maps';
+            popupContent.append(
+                titleEl,
+                document.createElement('br'),
+                addressEl,
+                document.createElement('br'),
+                mapLinkEl
+            );
+            L.marker(locationCoordinates).addTo(locationMap).bindPopup(popupContent).openPopup();
         </script>
     @else
         <script>document.getElementById('location-map').textContent = 'Koordinat lokasi belum tersedia.';</script>

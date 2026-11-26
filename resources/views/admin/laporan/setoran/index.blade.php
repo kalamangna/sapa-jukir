@@ -28,6 +28,7 @@
             <a
                 href="{{ route('admin.laporan.setoran.cetak', request()->query()) }}"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="btn btn-primary"
             >
 

@@ -9,7 +9,9 @@ use App\Models\SumberPemasukan;
 use App\Models\Tagihan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class TagihanController extends Controller
 {
@@ -75,13 +77,24 @@ class TagihanController extends Controller
             'catatan' => ['nullable', 'string', 'max:1000'],
         ]);
 
-        if ((float) $data['jumlah_bayar'] > $tagihan->sisa_tagihan) {
-            return back()->withErrors(['jumlah_bayar' => 'Pembayaran melebihi sisa tagihan.'])->withInput();
-        }
+        DB::transaction(function () use ($tagihan, $data) {
+            $lockedTagihan = Tagihan::query()
+                ->whereKey($tagihan->id)
+                ->lockForUpdate()
+                ->firstOrFail();
 
-        $data['dibuat_oleh'] = Auth::id();
-        $tagihan->pembayarans()->create($data);
-        $tagihan->update(['status' => $tagihan->fresh()->sisa_tagihan <= 0 ? 'lunas' : 'sebagian']);
+            if ((float) $data['jumlah_bayar'] > $lockedTagihan->sisa_tagihan) {
+                throw ValidationException::withMessages([
+                    'jumlah_bayar' => 'Pembayaran melebihi sisa tagihan.',
+                ]);
+            }
+
+            $data['dibuat_oleh'] = Auth::id();
+            $lockedTagihan->pembayarans()->create($data);
+            $lockedTagihan->update([
+                'status' => $lockedTagihan->fresh()->sisa_tagihan <= 0 ? 'lunas' : 'sebagian',
+            ]);
+        });
 
         return back()->with('success', 'Pembayaran berhasil dicatat.');
     }

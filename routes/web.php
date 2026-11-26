@@ -160,6 +160,9 @@ Route::prefix('admin')
                 'jukir',
                 JukirController::class
             );
+            Route::get('jukir/{jukir}/dokumen/{type}', [JukirController::class, 'document'])
+                ->whereIn('type', ['ktp', 'dokumen-pendukung'])
+                ->name('jukir.document');
 
 
             /*
@@ -237,6 +240,7 @@ Route::prefix('admin')
 
             Route::get('pengaduan', [AdminPengaduanController::class, 'index'])->name('pengaduan.index');
             Route::get('pengaduan/{pengaduan}', [AdminPengaduanController::class, 'show'])->name('pengaduan.show');
+            Route::get('pengaduan/{pengaduan}/foto', [AdminPengaduanController::class, 'photo'])->name('pengaduan.photo');
             Route::put('pengaduan/{pengaduan}', [AdminPengaduanController::class, 'update'])->name('pengaduan.update');
             Route::delete('pengaduan/{pengaduan}', [AdminPengaduanController::class, 'destroy'])->name('pengaduan.destroy');
 
@@ -251,6 +255,8 @@ Route::prefix('admin')
                 'tarif',
                 TarifController::class
             );
+
+            Route::put('setoran/{setoran}/verifikasi', [SetoranController::class, 'verifikasi'])->name('setoran.verifikasi');
 
         });
 
@@ -282,7 +288,6 @@ Route::prefix('admin')
                 ->only(['create', 'store', 'edit', 'update', 'destroy']);
             Route::resource('setoran', SetoranController::class)
                 ->only(['create', 'store', 'edit', 'update', 'destroy']);
-            Route::put('setoran/{setoran}/verifikasi', [SetoranController::class, 'verifikasi'])->name('setoran.verifikasi');
 
         });
 

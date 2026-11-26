@@ -442,7 +442,7 @@
                             </p>
 
 
-                            @unless(auth()->user()->isPimpinan())
+                            @if(auth()->user()?->isAdmin())
                             {{-- ==================================================
                                 TOMBOL VERIFIKASI
                             =================================================== --}}
@@ -493,7 +493,7 @@
                                 Tolak Setoran
 
                             </button>
-                            @endunless
+                            @endif
 
                         </div>
 
@@ -707,7 +707,7 @@
 {{-- ==========================================================
     MODAL TOLAK SETORAN
 =========================================================== --}}
-
+@if(auth()->user()?->isAdmin())
 <div
     class="modal fade"
     id="modalTolakSetoran"
@@ -819,5 +819,6 @@
     </div>
 
 </div>
+@endif
 
 @endsection

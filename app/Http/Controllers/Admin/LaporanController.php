@@ -91,9 +91,9 @@ class LaporanController extends Controller
                 fputcsv($output, [
                     $tahun,
                     $periodeLabel,
-                    $target->sumberPemasukan?->nama ?? '-',
+                    $this->sanitizeSpreadsheetValue($target->sumberPemasukan?->nama ?? '-'),
                     $scope,
-                    $namaObjek,
+                    $this->sanitizeSpreadsheetValue($namaObjek),
                     $targetValue,
                     $realisasi,
                     $targetValue - $realisasi,
@@ -235,7 +235,18 @@ class LaporanController extends Controller
         }
 
         if ($request->boolean('excel')) {
-            $html = view('admin.laporan.excel-analisis-pendapatan', $reportData)->render();
+            $excelReportData = array_merge($reportData, [
+                'analisisSumber' => $analisisSumber->map(fn ($item) => array_merge($item, [
+                    'nama' => $this->sanitizeSpreadsheetValue($item['nama']),
+                ])),
+                'analisisLokasi' => $analisisLokasi->map(fn ($item) => array_merge($item, [
+                    'nama' => $this->sanitizeSpreadsheetValue($item['nama']),
+                ])),
+                'analisisObjek' => $analisisObjek->map(fn ($item) => array_merge($item, [
+                    'nama' => $this->sanitizeSpreadsheetValue($item['nama']),
+                ])),
+            ]);
+            $html = view('admin.laporan.excel-analisis-pendapatan', $excelReportData)->render();
 
             return response()->streamDownload(function () use ($html) {
                 echo $html;
@@ -251,7 +262,14 @@ class LaporanController extends Controller
             $row = 2;
             foreach ([['Sumber Pendapatan', $analisisSumber], ['Lokasi', $analisisLokasi], ['Objek Pendapatan', $analisisObjek]] as [$group, $items]) {
                 foreach ($items as $item) {
-                    $sheet->fromArray([$group, $item['nama'], $item['target'], $item['realisasi'], $item['selisih'], $item['persentase']], null, "A{$row}");
+                    $sheet->fromArray([
+                        $group,
+                        $this->sanitizeSpreadsheetValue($item['nama']),
+                        $item['target'],
+                        $item['realisasi'],
+                        $item['selisih'],
+                        $item['persentase'],
+                    ], null, "A{$row}");
                     $row++;
                 }
             }
@@ -270,6 +288,20 @@ class LaporanController extends Controller
         }
 
         return view('admin.laporan.analisis-pendapatan', $reportData);
+    }
+
+    private function sanitizeSpreadsheetValue(mixed $value): mixed
+    {
+        if (! is_string($value)) {
+            return $value;
+        }
+
+        // Awali karakter pemicu formula dengan tanda kutip tunggal agar tidak dieksekusi di aplikasi spreadsheet.
+        if (preg_match('/^\s*[=+\-@\t\r]/', $value) === 1) {
+            return "'" . $value;
+        }
+
+        return $value;
     }
 
     private function resolvePeriod(Request $request, int $bulan): array

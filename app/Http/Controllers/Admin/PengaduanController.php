@@ -41,10 +41,34 @@ class PengaduanController extends Controller
         return redirect()->route('admin.pengaduan.show', $pengaduan)->with('success', 'Status aduan berhasil diperbarui.');
     }
 
+    public function photo(Pengaduan $pengaduan)
+    {
+        if (blank($pengaduan->foto)) {
+            abort(404);
+        }
+
+        $disk = Storage::disk('local')->exists($pengaduan->foto)
+            ? 'local'
+            : (Storage::disk('public')->exists($pengaduan->foto) ? 'public' : null);
+
+        if (! $disk) {
+            abort(404);
+        }
+
+        return Storage::disk($disk)->response($pengaduan->foto, null, [
+            'Cache-Control' => 'private, no-store',
+            'X-Content-Type-Options' => 'nosniff',
+        ]);
+    }
+
     public function destroy(Pengaduan $pengaduan)
     {
         if ($pengaduan->foto) {
-            Storage::disk('public')->delete($pengaduan->foto);
+            foreach (['local', 'public'] as $disk) {
+                if (Storage::disk($disk)->exists($pengaduan->foto)) {
+                    Storage::disk($disk)->delete($pengaduan->foto);
+                }
+            }
         }
 
         $pengaduan->delete();

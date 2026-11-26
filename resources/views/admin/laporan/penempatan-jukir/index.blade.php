@@ -26,6 +26,7 @@
     <a
         href="{{ route('admin.laporan.penempatan-jukir.cetak', request()->query()) }}"
         target="_blank"
+        rel="noopener noreferrer"
         class="btn btn-success"
     >
 

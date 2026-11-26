@@ -77,7 +77,11 @@
         galleryUploads.forEach((input) => {
             const preview = input.closest('.gallery-upload-field')?.querySelector('[data-gallery-preview-slot]');
             if (!preview || !input.files[0]) return;
-            preview.innerHTML = `<img src="${URL.createObjectURL(input.files[0])}" alt="Preview ${input.files[0].name}" style="display:block;width:150px;height:100px;max-width:150px;object-fit:cover;">`;
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(input.files[0]);
+            img.alt = 'Preview ' + input.files[0].name;
+            img.style.cssText = 'display:block;width:150px;height:100px;max-width:150px;object-fit:cover;';
+            preview.replaceChildren(img);
         });
     }));
 </script>
