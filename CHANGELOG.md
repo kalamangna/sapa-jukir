@@ -3,6 +3,17 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.8.1] - 2026-11-26
+
+### Ditambahkan
+- Tombol tampilkan dan sembunyikan kata sandi serta tautan `Kembali ke Beranda` pada `auth/login.blade.php`.
+
+### Diubah
+- Penyelarasan font `DM Sans`, token warna tema, dukungan mode gelap, serta ukuran font input `16px` pada `auth/login.blade.php`.
+
+### Diperbaiki
+- Penghapusan duplikasi pesan galat antara banner atas dan pesan kontekstual di bawah kolom `username` serta `password` pada `auth/login.blade.php`.
+
 ## [1.8.0] - 2026-11-26
 
 ### Diubah
