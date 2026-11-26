@@ -3,6 +3,11 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.7.1] - 2026-11-26
+
+### Diubah
+- Kompilasi ulang aset CSS dan pembaruan `public/build/manifest.json` melalui `npm run build` untuk produksi.
+
 ## [1.7.0] - 2026-11-26
 
 ### Ditambahkan
