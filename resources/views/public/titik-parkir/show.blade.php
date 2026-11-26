@@ -11,7 +11,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         :root { --detail-ink: #172033; --detail-muted: #697386; --detail-line: #dce2ea; --detail-accent: #087f5b; }
-        body { margin: 0; color: var(--detail-ink); font-family: 'DM Sans', sans-serif; }
+        body { margin: 0; color: var(--public-ink, var(--detail-ink)); font-family: 'DM Sans', sans-serif; }
         .public-header { z-index: 1000; }
         .location-page .leaflet-pane,
         .location-page .leaflet-control { z-index: 400; }
@@ -19,15 +19,16 @@
         .location-back { display: inline-block; margin-bottom: 24px; color: var(--detail-accent); font-size: .9rem; font-weight: 700; }
         .location-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 1fr); gap: 38px; align-items: start; }
         .location-summary { text-align: center; }
-        .location-photo { width: 100%; max-width: 420px; height: 260px; margin: 0 auto 18px; border-radius: 4px; object-fit: cover; background: #edf2f5; }
-        .location-photo-fallback { display: grid; place-items: center; color: #78a095; font-size: 3rem; }
+        .location-photo { width: 100%; max-width: 420px; height: 260px; margin: 0 auto 18px; border-radius: 14px; border: 1px solid var(--public-line, var(--detail-line)); object-fit: cover; background: var(--public-card, #edf2f5); }
+        .location-photo-fallback { display: grid; place-items: center; color: var(--public-muted, #78a095); font-size: 3rem; }
         .location-summary h1 { margin: 0 0 6px; font-size: clamp(1.35rem, 2.5vw, 1.85rem); text-transform: uppercase; }
-        .location-address { margin: 0; color: var(--detail-muted); font-size: .88rem; font-style: italic; }
-        .location-map { width: 100%; height: 420px; border: 1px solid #e2e7ed; }
-        .location-map-note { margin: 8px 0 0; text-align: right; font-size: .74rem; color: var(--detail-muted); }
+        .location-address { margin: 0; color: var(--public-muted, var(--detail-muted)); font-size: .88rem; font-style: italic; }
+        .location-map { width: 100%; height: 420px; border: 1px solid var(--public-line, #e2e7ed); border-radius: 14px; overflow: hidden; }
+        .location-map-note { margin: 8px 0 0; text-align: right; font-size: .74rem; color: var(--public-muted, var(--detail-muted)); }
+        .table-responsive { width: 100%; overflow-x: auto; }
         .location-table { width: 100%; margin-top: 28px; border-collapse: collapse; table-layout: fixed; font-size: .88rem; }
-        .location-table th, .location-table td { padding: 12px 8px; border-bottom: 1px solid var(--detail-line); text-align: left; vertical-align: middle; }
-        .location-table thead th { color: #2c3748; font-weight: 500; }
+        .location-table th, .location-table td { padding: 12px 8px; border-bottom: 1px solid var(--public-line, var(--detail-line)); text-align: left; vertical-align: middle; }
+        .location-table thead th { color: var(--public-ink-soft, #2c3748); font-weight: 700; }
         .location-table tbody td:nth-child(1) { text-align: left; padding-top: 8px; padding-bottom: 8px; }
         .location-table tbody td:nth-child(2) { text-align: left; }
         .location-table tbody td:nth-child(3) { text-align: left; }
@@ -37,17 +38,17 @@
         .location-table thead th:nth-child(3), .location-table tbody td:nth-child(3) { width: 22%; }
         .location-table thead th:nth-child(4), .location-table tbody td:nth-child(4) { width: 20%; }
         .location-value { font-weight: 600; }
-        .status-badge { display: inline-block; padding: 2px 7px; color: #fff; background: var(--detail-accent); font-size: .78rem; font-weight: 700; }
-        .location-section { margin-top: 42px; padding: 22px 30px 14px; background: #f8fafb; }
+        .status-badge { display: inline-block; padding: 4px 10px; border-radius: 999px; color: #fff; background: var(--detail-accent); font-size: .78rem; font-weight: 700; }
+        .location-section { margin-top: 42px; padding: 24px 28px 18px; border: 1px solid var(--public-line, var(--detail-line)); border-radius: 16px; background: var(--public-panel, #f8fafb); }
         .location-section h2 { margin: 0 0 16px; font-size: 1.05rem; }
         .officer-grid { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 28px; align-items: start; }
-        .officer-photo { width: 118px; height: 142px; object-fit: cover; border: 2px solid #c7dfe8; background: #e8f0f2; }
-        .officer-photo-fallback { display: grid; place-items: center; color: #73949c; font-size: 2.5rem; }
-        .staff-photo { width: 70px; height: 70px; object-fit: cover; border-radius: 50%; border: 2px solid #dfe8ee; background: #eef4f6; display: block; margin: 0 auto; transform: translateY(2px); }
-        .staff-photo-fallback { display: grid; place-items: center; width: 70px; height: 70px; border-radius: 50%; background: #e7f0f2; color: #6c8690; font-size: 1.2rem; border: 2px solid #dfe8ee; margin: 0 auto; transform: translateY(2px); }
+        .officer-photo { width: 118px; height: 142px; object-fit: cover; border: 2px solid var(--public-line, #c7dfe8); background: var(--public-card, #e8f0f2); }
+        .officer-photo-fallback { display: grid; place-items: center; color: var(--public-muted, #73949c); font-size: 2.5rem; }
+        .staff-photo { width: 70px; height: 70px; object-fit: cover; border-radius: 50%; border: 2px solid var(--public-line, #dfe8ee); background: var(--public-card, #eef4f6); display: block; margin: 0 auto; transform: translateY(2px); }
+        .staff-photo-fallback { display: grid; place-items: center; width: 70px; height: 70px; border-radius: 50%; background: var(--public-card, #e7f0f2); color: var(--public-muted, #6c8690); font-size: 1.2rem; border: 2px solid var(--public-line, #dfe8ee); margin: 0 auto; transform: translateY(2px); }
         .target-time-group { display: flex; flex-direction: column; gap: 2px; line-height: 1.35; }
         .target-time-label { font-weight: 700; }
-        .empty-note { color: var(--detail-muted); font-size: .9rem; }
+        .empty-note { color: var(--public-muted, var(--detail-muted)); font-size: .9rem; }
         @media (max-width: 700px) {
             .location-page { width: min(100% - 24px, 560px); margin-top: 24px; }
             .location-top { grid-template-columns: 1fr; gap: 24px; }

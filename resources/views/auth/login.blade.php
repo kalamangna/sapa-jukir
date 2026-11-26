@@ -120,6 +120,17 @@
                 0 0 0 3px rgba(37, 99, 235, 0.12);
         }
 
+        .form-control.is-invalid {
+            border-color: #dc2626;
+        }
+
+        .field-error {
+            display: block;
+            margin-top: 6px;
+            color: #b91c1c;
+            font-size: 12px;
+        }
+
         .remember {
             display: flex;
             align-items: center;
@@ -156,6 +167,16 @@
 
         .btn-login:hover {
             background: #1d4ed8;
+        }
+
+        .btn-login:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .btn-login:focus-visible {
+            outline: 2px solid #2563eb;
+            outline-offset: 2px;
         }
 
         .alert {
@@ -212,9 +233,7 @@
         <div class="brand">
 
             <div class="brand-icon">
-                <div style="text-align: center; margin-bottom: 15px;">
-    <img src="{{ asset('images/logo-sapa-jukir.png') }}" alt="Logo" style="width: 50px; height: 50px; object-fit: contain; display: inline-block;">
-</div>
+                <img src="{{ asset('images/logo-sapa-jukir.png') }}" alt="Logo SAPA JUKIR" style="width: 56px; height: 56px; object-fit: contain;">
             </div>
 
             <h1>
@@ -274,14 +293,19 @@
                     type="text"
                     id="username"
                     name="username"
-                    class="form-control"
+                    class="form-control @error('username') is-invalid @enderror"
                     value="{{ old('username') }}"
                     placeholder="operator1"
                     autocomplete="username"
                     maxlength="50"
+                    @error('username') aria-invalid="true" @enderror
                     required
                     autofocus
                 >
+
+                @error('username')
+                    <span class="field-error">{{ $message }}</span>
+                @enderror
 
             </div>
 
@@ -298,12 +322,17 @@
                     type="password"
                     id="password"
                     name="password"
-                    class="form-control"
-                    placeholder="Masukkan password"
+                    class="form-control @error('password') is-invalid @enderror"
+                    placeholder="Minimal 8 karakter"
                     autocomplete="current-password"
                     maxlength="128"
+                    @error('password') aria-invalid="true" @enderror
                     required
                 >
+
+                @error('password')
+                    <span class="field-error">{{ $message }}</span>
+                @enderror
 
             </div>
 
@@ -331,7 +360,7 @@
                 type="submit"
                 class="btn-login"
             >
-                Masuk ke Sistem
+                Login
             </button>
 
         </form>

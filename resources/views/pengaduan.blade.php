@@ -19,7 +19,7 @@
     <main class="complaint-main">
         <div class="complaint-backdrop" aria-hidden="true"></div>
         <div class="complaint-card">
-            <div class="complaint-card-header"><h1>Form Aduan</h1><span aria-hidden="true">?</span></div>
+            <div class="complaint-card-header"><h1>Form Aduan</h1></div>
             <div class="complaint-card-body">
                 <p class="complaint-intro">Isi data diri dan detail laporan keluhan Anda. Kerahasiaan data pelapor dijaga oleh petugas.</p>
                 @if(session('success'))<div class="complaint-success">{{ session('success') }}</div>@endif

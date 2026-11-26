@@ -66,29 +66,24 @@
             </div>
         </section>
 
-        <section
-            class="director-message"
-            aria-label="Sambutan Kepala Dinas"
-            @if($sambutan?->background_color)
-                style="background: linear-gradient(135deg, {{ $sambutan->background_color }} 0%, {{ $sambutan->background_color }}cc 100%);"
-            @endif
-        >
-            @if($sambutan)
-                @php
-                    $kadisFoto = $sambutan->foto_kadis ?: $sambutan->foto;
-                @endphp
-
-                @if($kadisFoto)
-                    <div class="sambutan-container">
-                        <div class="sambutan-hero">
-                            <div class="single-photo-card">
-                                <img src="{{ asset('storage/' . $kadisFoto) }}" alt="{{ $sambutan->nama_kepala_dinas ?? 'Kepala Dinas' }}">
-                            </div>
+        @php($kadisFoto = $sambutan?->foto_kadis ?: $sambutan?->foto)
+        @if($sambutan && $kadisFoto)
+            <section
+                class="director-message"
+                aria-label="Sambutan Kepala Dinas"
+                @if($sambutan->background_color)
+                    style="background: linear-gradient(135deg, {{ $sambutan->background_color }} 0%, {{ $sambutan->background_color }}cc 100%);"
+                @endif
+            >
+                <div class="sambutan-container">
+                    <div class="sambutan-hero">
+                        <div class="single-photo-card">
+                            <img src="{{ asset('storage/' . $kadisFoto) }}" alt="{{ $sambutan->nama_kepala_dinas ?? 'Kepala Dinas' }}">
                         </div>
                     </div>
-                @endif
-            @endif
-        </section>
+                </div>
+            </section>
+        @endif
 
         <section class="info-section" id="features">
             <div class="container">

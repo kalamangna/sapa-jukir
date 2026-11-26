@@ -3,6 +3,21 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.8.0] - 2026-11-26
+
+### Diubah
+- Perapian tipografi, spasi, responsivitas pill kontak, kartu hero, bagian pencapaian, dan judul Tentang Kami pada `welcome.blade.php` serta `resources/css/app.css`.
+- Penyelarasan kartu, filter kategori, tombol aksi, dan modal pratinjau pada `gallery.blade.php` dengan token tema terang dan gelap serta penyembunyian panah navigasi untuk dokumentasi foto tunggal.
+- Perapian perataan header artikel, peningkatan kontras teks isi berita, dan penyesuaian posisi sticky panel Berita Terbaru pada `resources/css/app.css`.
+- Penambahan dukungan mode gelap pada halaman SKM serta peningkatan keterbacaan label, input, tombol aksi, dan penghapusan simbol dekoratif header pada `pengaduan.blade.php`.
+- Penyelarasan tema gelap, responsivitas tabel petugas, dan sudut elemen pada `public/titik-parkir/show.blade.php`.
+- Perapian logo, placeholder password, label tombol baku `Login`, serta pesan galat kontekstual per kolom pada `auth/login.blade.php`.
+- Kompilasi ulang aset frontend produksi pada `public/build`.
+
+### Diperbaiki
+- Pencegahan tampilan blok kosong pada bagian sambutan beranda saat foto sambutan tidak tersedia.
+- Penambahan indikator aktif `.nav-links a.active` dan cincin fokus `:focus-visible` pada elemen interaktif halaman publik.
+
 ## [1.7.1] - 2026-11-26
 
 ### Diubah

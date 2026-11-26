@@ -100,6 +100,8 @@
         const galleryModalDate = document.getElementById('gallery-modal-date');
         const galleryModalCategory = document.getElementById('gallery-modal-category');
         const galleryModalImage = document.getElementById('gallery-modal-image');
+        const galleryModalPrev = document.querySelector('.gallery-modal-prev');
+        const galleryModalNext = document.querySelector('.gallery-modal-next');
         let activeGalleryIndex = 0;
         let activeGalleryImages = [];
         let activeGalleryImageIndex = 0;
@@ -123,6 +125,9 @@
             activeGalleryImageIndex = 0;
             galleryModalImage.src = activeGalleryImages[activeGalleryImageIndex];
             galleryModalImage.alt = button.dataset.title;
+            const hasMultipleImages = activeGalleryImages.length > 1;
+            if (galleryModalPrev) galleryModalPrev.hidden = !hasMultipleImages;
+            if (galleryModalNext) galleryModalNext.hidden = !hasMultipleImages;
             galleryModal.hidden = false;
             document.body.classList.add('gallery-modal-open');
         }
