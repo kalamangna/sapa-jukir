@@ -25,7 +25,7 @@
                     <div class="hero-contact-strip" aria-label="Informasi kontak publik">
                         <div class="contact-pill">
                             <span class="contact-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24"><path d="M12 2.5a9.5 9.5 0 0 0-8.2 14.7l-1 3.8 3.9-1A9.5 9.5 0 1 0 12 2.5Zm5.5 13.2c-.3.8-1.6 1.5-2.2 1.6-.6.1-1.4.1-4.5-1-3.1-1.2-5.2-4.5-5.4-4.7-.2-.2-1.6-2.2-1.6-4.2 0-2 1.1-3.1 1.5-3.5.4-.4.9-.5 1.2-.5h.9c.3 0 .8.1 1.2.9l1.4 3.6c.1.3 0 .8-.3 1.1l-.8.9c-.2.2-.3.5-.1.8.5.9 1.7 2.4 3.1 3.7 1.2 1.1 2.8 2.1 3.8 2.5.3.2.6.1.8-.1l.9-.9c.3-.3.8-.4 1.1-.2l3.6 1.4c.8.4.9.9.9 1.2v.9c0 .4-.1.8-.5 1.2-.4.4-1.5 1.5-3.5 1.5Z" fill="currentColor"/></svg>
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </span>
                             <span class="contact-text">{{ $siteSettings?->service_hours ?? '08.00 – 16.00 WITA' }}</span>
                         </div>
@@ -46,7 +46,7 @@
                             href="{{ $siteSettings?->whatsapp_url ?? 'https://wa.me/628999084343' }}"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="Hubungi WhatsApp {{ $siteSettings?->location_name ?? 'Jl. Bulu Pattuku, Kel. Bongki, Kec. Sinjai Utara, Kab. Sinjai' }}"
+                            aria-label="Hubungi WhatsApp {{ $siteSettings?->whatsapp_number ?? '089 990 843 43' }}"
                         >
                             <span class="contact-icon whatsapp-icon" aria-hidden="true">
                                 <svg viewBox="0 0 24 24"><path d="M12.04 2a9.95 9.95 0 0 0-8.57 15.18L2.4 22l4.86-1.25A9.96 9.96 0 1 0 12.04 2Zm5.55 14.15c-.22.62-1.3 1.15-1.8 1.22-.48.07-1.09.09-3.53-.74-2.99-.98-4.91-3.54-5.07-3.72-.17-.18-1.37-1.82-1.37-3.48 0-1.66.88-2.48 1.19-2.82.31-.35.67-.43.9-.43h.65c.2 0 .47.01.72.55l.98 2.44c.09.21.03.5-.17.79l-.34.42c-.19.24-.22.42-.11.67.26.56.98 1.76 2.16 2.9 1.48 1.36 2.76 1.78 3.28 1.99.27.12.57.08.78-.15l.52-.6c.18-.2.39-.26.62-.17l2.58.97c.21.08.4.18.45.41.05.23.06.45-.15.75Z" fill="currentColor"/></svg>
@@ -105,7 +105,7 @@
                             <article class="feature-card">
                                 <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><circle cx="24" cy="24" r="18"></circle><circle cx="18" cy="20" r="2" class="icon-fill"></circle><circle cx="30" cy="20" r="2" class="icon-fill"></circle><path d="M16 28c2.2 3.2 5 4.8 8 4.8s5.8-1.6 8-4.8"></path></svg></span>
                                 <h3>Petugas</h3>
-                                <p>Terdapat <strong>{{ number_format($totalJukir, 0, ',', '.') }}</strong> Petugas terdaftar resmi di Kabupaten Sinjai.</p>
+                                <p>Terdapat <strong>{{ number_format($totalJukir, 0, ',', '.') }}</strong> petugas terdaftar resmi di Kabupaten Sinjai.</p>
                             </article>
                             <article class="feature-card">
                                 <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M24 42S12 30.8 12 20.5a12 12 0 1 1 24 0C36 30.8 24 42 24 42Z"></path><circle cx="24" cy="20" r="4"></circle></svg></span>
@@ -212,7 +212,7 @@
                 </p>
                 <p>
                     Pelaksanaan tugasnya mencakup administrasi, pendataan, pengaturan, pengawasan operasional,
-                    pembinaan Petugas, serta pengelolaan retribusi parkir sebagai bagian dari peningkatan
+                    pembinaan petugas, serta pengelolaan retribusi parkir sebagai bagian dari peningkatan
                     Pendapatan Asli Daerah Kabupaten Sinjai.
                 </p>
                 <div class="about-details">
@@ -316,24 +316,33 @@
         const trendRevenueData = @json($trenPendapatanPublik ?? []);
         const achievementSourceData = @json($capaianPerSumber ?? []);
         const achievementCurrency = (value) => `Rp ${new Intl.NumberFormat('id-ID').format(value)}`;
+        const getPublicChartTheme = () => {
+            const isDark = document.body.classList.contains('dark-theme');
+            return {
+                text: isDark ? '#cbd5e1' : '#475569',
+                grid: isDark ? 'rgba(148, 163, 184, 0.18)' : '#e5eaf2',
+            };
+        };
+        const initialChartTheme = getPublicChartTheme();
+        const publicCharts = [];
         const achievementChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
             plugins: {
-                legend: { position: 'bottom', labels: { usePointStyle: true, padding: 18 } },
+                legend: { position: 'bottom', labels: { usePointStyle: true, padding: 18, color: initialChartTheme.text } },
                 tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${achievementCurrency(context.raw)}` } },
             },
             scales: {
-                y: { beginAtZero: true, ticks: { callback: (value) => achievementCurrency(value) }, grid: { color: '#e5eaf2' } },
-                x: { grid: { display: false } },
+                y: { beginAtZero: true, ticks: { color: initialChartTheme.text, callback: (value) => achievementCurrency(value) }, grid: { color: initialChartTheme.grid } },
+                x: { ticks: { color: initialChartTheme.text }, grid: { display: false } },
             },
         };
 
         if (typeof Chart !== 'undefined') {
             const trendRevenueCanvas = document.getElementById('trend-revenue-chart');
             if (trendRevenueCanvas) {
-                new Chart(trendRevenueCanvas, {
+                publicCharts.push(new Chart(trendRevenueCanvas, {
                     type: 'line',
                     data: {
                         labels: trendRevenueData.map((item) => item.bulan),
@@ -348,12 +357,12 @@
                         maintainAspectRatio: false,
                         interaction: { mode: 'index', intersect: false },
                         scales: {
-                            y: { beginAtZero: true, ticks: { callback: (value) => achievementCurrency(value) }, grid: { color: '#e5eaf2' } },
-                            yCapaian: { beginAtZero: true, suggestedMax: 100, position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: (value) => `${value}%` } },
-                            x: { grid: { display: false } },
+                            y: { beginAtZero: true, ticks: { color: initialChartTheme.text, callback: (value) => achievementCurrency(value) }, grid: { color: initialChartTheme.grid } },
+                            yCapaian: { beginAtZero: true, suggestedMax: 100, position: 'right', grid: { drawOnChartArea: false }, ticks: { color: initialChartTheme.text, callback: (value) => `${value}%` } },
+                            x: { ticks: { color: initialChartTheme.text }, grid: { display: false } },
                         },
                         plugins: {
-                            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 18 } },
+                            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 18, color: initialChartTheme.text } },
                             tooltip: {
                                 callbacks: {
                                     label: (context) => `${context.dataset.label}: ${context.dataset.yAxisID === 'yCapaian' ? `${Number(context.raw).toLocaleString('id-ID')}%` : achievementCurrency(context.raw)}`,
@@ -361,10 +370,10 @@
                             },
                         },
                     },
-                });
+                }));
             }
 
-            new Chart(document.getElementById('monthly-achievement-chart'), {
+            publicCharts.push(new Chart(document.getElementById('monthly-achievement-chart'), {
                 type: 'bar',
                 data: {
                     labels: achievementMonthlyData.map((item) => item.bulan),
@@ -374,9 +383,9 @@
                     ],
                 },
                 options: achievementChartOptions,
-            });
+            }));
 
-            new Chart(document.getElementById('annual-achievement-chart'), {
+            publicCharts.push(new Chart(document.getElementById('annual-achievement-chart'), {
                 type: 'bar',
                 data: {
                     labels: ['{{ $tahunAktif }}'],
@@ -386,9 +395,9 @@
                     ],
                 },
                 options: achievementChartOptions,
-            });
+            }));
 
-            new Chart(document.getElementById('source-achievement-chart'), {
+            publicCharts.push(new Chart(document.getElementById('source-achievement-chart'), {
                 type: 'bar',
                 data: {
                     labels: achievementSourceData.map((item) => item.nama),
@@ -401,10 +410,27 @@
                     ...achievementChartOptions,
                     indexAxis: 'y',
                     scales: {
-                        x: { beginAtZero: true, ticks: { callback: (value) => achievementCurrency(value) }, grid: { color: '#e5eaf2' } },
-                        y: { grid: { display: false } },
+                        x: { beginAtZero: true, ticks: { color: initialChartTheme.text, callback: (value) => achievementCurrency(value) }, grid: { color: initialChartTheme.grid } },
+                        y: { ticks: { color: initialChartTheme.text }, grid: { display: false } },
                     },
                 },
+            }));
+
+            document.querySelectorAll('.theme-toggle').forEach((button) => {
+                button.addEventListener('click', () => {
+                    requestAnimationFrame(() => {
+                        const theme = getPublicChartTheme();
+                        publicCharts.forEach((chart) => {
+                            if (chart.options.plugins?.legend?.labels) chart.options.plugins.legend.labels.color = theme.text;
+                            if (chart.options.scales?.x?.ticks) chart.options.scales.x.ticks.color = theme.text;
+                            if (chart.options.scales?.x?.grid && chart.options.indexAxis === 'y') chart.options.scales.x.grid.color = theme.grid;
+                            if (chart.options.scales?.y?.ticks) chart.options.scales.y.ticks.color = theme.text;
+                            if (chart.options.scales?.y?.grid && chart.options.indexAxis !== 'y') chart.options.scales.y.grid.color = theme.grid;
+                            if (chart.options.scales?.yCapaian?.ticks) chart.options.scales.yCapaian.ticks.color = theme.text;
+                            chart.update('none');
+                        });
+                    });
+                });
             });
         }
     </script>
@@ -514,13 +540,14 @@
         }
 
         function buildPopupMarkup(point) {
+            const statusLabel = point.status === 'NONAKTIF' ? 'Tidak Aktif' : 'Aktif';
             return `
                 <div style="min-width: 210px; line-height: 1.6;">
                     <strong style="display: block; font-size: 14px; margin-bottom: 6px;">${escapeHtml(point.nama)}</strong>
                     <span>Lokasi: ${escapeHtml(point.alamat || 'Alamat tidak tersedia')}</span><br>
                     <small>${escapeHtml(point.kecamatan || '-')}, ${escapeHtml(point.kelurahan || '-')}</small><br>
                     <small>Sumber: ${escapeHtml(point.sumber_nama || 'Belum ditentukan')}</small><br>
-                    <small>Status: ${escapeHtml(point.status || 'AKTIF')}</small><br>
+                    <small>Status: ${escapeHtml(statusLabel)}</small><br>
                     <small>Koordinat: ${Number(point.lat).toFixed(5)}, ${Number(point.lng).toFixed(5)}</small>
                     <a href="${sanitizeDetailUrl(point.detail_url)}" style="display: inline-block; margin-top: 2px;">Lihat Detail Lokasi</a>
                 </div>
@@ -536,10 +563,11 @@
             mapMarkers = [];
 
             if (!points.length) {
-                L.marker([defaultLocation.lat, defaultLocation.lng])
+                const emptyMarker = L.marker([defaultLocation.lat, defaultLocation.lng])
                     .addTo(publicMap)
                     .bindPopup('Belum ada objek pendapatan di kecamatan ini.')
                     .openPopup();
+                mapMarkers.push(emptyMarker);
                 publicMap.setView([defaultLocation.lat, defaultLocation.lng], 11);
                 return;
             }
@@ -564,7 +592,7 @@
         if (mapContainer && typeof L !== 'undefined') {
             publicMap = L.map('public-map', {
                 zoomControl: true,
-                scrollWheelZoom: true,
+                scrollWheelZoom: false,
             }).setView([defaultLocation.lat, defaultLocation.lng], 11);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

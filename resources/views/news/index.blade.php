@@ -43,7 +43,7 @@
                                 @else
                                     <p>{{ \Illuminate\Support\Str::limit(strip_tags($news->konten), 150) }}</p>
                                 @endif
-                                <a class="news-read-more" href="{{ route('news.show', $news) }}">Baca Selengkapnya <span aria-hidden="true">&rarr;</span></a>
+                                <a class="news-read-more" href="{{ route('news.show', $news) }}">Baca Berita <span aria-hidden="true">&rarr;</span></a>
                             </div>
                         </article>
                     @endforeach

@@ -36,7 +36,7 @@
                 <button class="theme-toggle" type="button" aria-label="Ubah mode tampilan" aria-pressed="false" title="Mode gelap">
                     <span class="theme-toggle-icon" aria-hidden="true">☀️</span>
                 </button>
-                <a class="complaint-link" href="{{ $complaintUrl ?? route('pengaduan.create') }}">{{ $complaintLabel }}</a>
+                <a class="complaint-link" @if($active === 'pengaduan') aria-current="page" @endif href="{{ $complaintUrl ?? route('pengaduan.create') }}">{{ $complaintLabel }}</a>
             </div>
         </nav>
     </div>

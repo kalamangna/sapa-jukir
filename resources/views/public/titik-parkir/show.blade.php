@@ -16,7 +16,10 @@
         .location-page .leaflet-pane,
         .location-page .leaflet-control { z-index: 400; }
         .location-page { width: min(960px, calc(100% - 32px)); margin: 42px auto 64px; }
-        .location-back { display: inline-block; margin-bottom: 24px; color: var(--detail-accent); font-size: .9rem; font-weight: 700; }
+        .location-back { display: inline-flex; align-items: center; min-height: 40px; margin-bottom: 24px; border-radius: 8px; color: var(--detail-accent); font-size: .9rem; font-weight: 700; text-decoration: none; }
+        .location-back:hover { text-decoration: underline; }
+        .location-back:focus-visible { outline: 2px solid var(--blue, #1a5dff); outline-offset: 2px; }
+        .dark-theme .location-back { color: #34d399; }
         .location-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 1fr); gap: 38px; align-items: start; }
         .location-summary { text-align: center; }
         .location-photo { width: 100%; max-width: 420px; height: 260px; margin: 0 auto 18px; border-radius: 14px; border: 1px solid var(--public-line, var(--detail-line)); object-fit: cover; background: var(--public-card, #edf2f5); }
@@ -24,21 +27,22 @@
         .location-summary h1 { margin: 0 0 6px; font-size: clamp(1.35rem, 2.5vw, 1.85rem); text-transform: uppercase; }
         .location-address { margin: 0; color: var(--public-muted, var(--detail-muted)); font-size: .88rem; font-style: italic; }
         .location-map { width: 100%; height: 420px; border: 1px solid var(--public-line, #e2e7ed); border-radius: 14px; overflow: hidden; }
+        .location-map-empty { display: grid; place-items: center; padding: 16px; color: var(--public-muted, var(--detail-muted)); text-align: center; }
         .location-map-note { margin: 8px 0 0; text-align: right; font-size: .74rem; color: var(--public-muted, var(--detail-muted)); }
         .table-responsive { width: 100%; overflow-x: auto; }
         .location-table { width: 100%; margin-top: 28px; border-collapse: collapse; table-layout: fixed; font-size: .88rem; }
         .location-table th, .location-table td { padding: 12px 8px; border-bottom: 1px solid var(--public-line, var(--detail-line)); text-align: left; vertical-align: middle; }
+        .location-table th { width: 42%; }
         .location-table thead th { color: var(--public-ink-soft, #2c3748); font-weight: 700; }
-        .location-table tbody td:nth-child(1) { text-align: left; padding-top: 8px; padding-bottom: 8px; }
-        .location-table tbody td:nth-child(2) { text-align: left; }
-        .location-table tbody td:nth-child(3) { text-align: left; }
-        .location-table tbody td:nth-child(4) { text-align: left; }
-        .location-table thead th:nth-child(1), .location-table tbody td:nth-child(1) { width: 80px; }
-        .location-table thead th:nth-child(2), .location-table tbody td:nth-child(2) { width: 32%; }
-        .location-table thead th:nth-child(3), .location-table tbody td:nth-child(3) { width: 22%; }
-        .location-table thead th:nth-child(4), .location-table tbody td:nth-child(4) { width: 20%; }
+        .staff-table { min-width: 540px; }
+        .staff-table tbody td:nth-child(1) { padding-top: 8px; padding-bottom: 8px; }
+        .staff-table thead th:nth-child(1), .staff-table tbody td:nth-child(1) { width: 88px; }
+        .staff-table thead th:nth-child(2), .staff-table tbody td:nth-child(2) { width: 32%; }
+        .staff-table thead th:nth-child(3), .staff-table tbody td:nth-child(3) { width: 22%; }
+        .staff-table thead th:nth-child(4), .staff-table tbody td:nth-child(4) { width: auto; }
         .location-value { font-weight: 600; }
         .status-badge { display: inline-block; padding: 4px 10px; border-radius: 999px; color: #fff; background: var(--detail-accent); font-size: .78rem; font-weight: 700; }
+        .status-badge.is-inactive { background: #64748b; }
         .location-section { margin-top: 42px; padding: 24px 28px 18px; border: 1px solid var(--public-line, var(--detail-line)); border-radius: 16px; background: var(--public-panel, #f8fafb); }
         .location-section h2 { margin: 0 0 16px; font-size: 1.05rem; }
         .officer-grid { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 28px; align-items: start; }
@@ -73,12 +77,11 @@
                 @endif
                 <h1>{{ $titikParkir->nama }}</h1>
                 <p class="location-address">{{ $titikParkir->alamat }}, Kelurahan {{ $titikParkir->kelurahan?->nama ?? '-' }}, Kecamatan {{ $titikParkir->kecamatan?->nama ?? '-' }}</p>
-                @php($namaBulan = [1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'])
                 @php($targetLokasi = (float) ($titikParkir->penempatanJukirs
                     ->filter(fn ($penempatan) => $penempatan->status === 'aktif' && $penempatan->role === 'koordinator')
                     ->first()->target_per_hari ?? 0))
                 <table class="location-table">
-                    <tr><th>Status</th><td><span class="status-badge">{{ ucfirst($titikParkir->status ?? 'aktif') }}</span></td></tr>
+                    <tr><th>Status</th><td><span class="status-badge {{ ($titikParkir->status ?? 'aktif') === 'aktif' ? '' : 'is-inactive' }}">{{ ($titikParkir->status ?? 'aktif') === 'aktif' ? 'Aktif' : 'Tidak Aktif' }}</span></td></tr>
                     <tr><th>Jenis Lokasi</th><td class="location-value">{{ $titikParkir->jenisParkir?->nama ?? 'Lokasi Parkir' }}</td></tr>
                     @forelse($titikParkir->jenisParkir?->tarifs ?? [] as $tarif)
                         <tr><th>Tarif {{ ucfirst($tarif->jenis_kendaraan) }}</th><td>Rp {{ number_format($tarif->nominal, 0, ',', '.') }},-</td></tr>
@@ -120,7 +123,7 @@
             @if($penempatansAktif->isNotEmpty())
                 <h2>Petugas Lokasi</h2>
                 <div class="table-responsive">
-                    <table class="location-table" style="margin-top: 12px;">
+                    <table class="location-table staff-table" style="margin-top: 12px;">
                         <thead>
                             <tr>
                                 <th>Foto</th>
@@ -188,7 +191,7 @@
             const locationCoordinates = [{{ (float) $titikParkir->latitude }}, {{ (float) $titikParkir->longitude }}];
             const locationName = @json($titikParkir->nama);
             const locationAddress = @json($titikParkir->alamat ?: 'Alamat tidak tersedia');
-            const locationMap = L.map('location-map').setView(locationCoordinates, 16);
+            const locationMap = L.map('location-map', { scrollWheelZoom: false }).setView(locationCoordinates, 16);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 maxZoom: 19,
@@ -213,7 +216,13 @@
             L.marker(locationCoordinates).addTo(locationMap).bindPopup(popupContent).openPopup();
         </script>
     @else
-        <script>document.getElementById('location-map').textContent = 'Koordinat lokasi belum tersedia.';</script>
+        <script>
+            const locationMapEl = document.getElementById('location-map');
+            if (locationMapEl) {
+                locationMapEl.classList.add('location-map-empty');
+                locationMapEl.textContent = 'Koordinat lokasi belum tersedia.';
+            }
+        </script>
     @endif
     <script>
         const detailNavToggle = document.querySelector('.nav-toggle');

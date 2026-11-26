@@ -3,6 +3,19 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.8.3] - 2026-11-26
+
+### Diubah
+- Penambahan atribut `aria-current="page"` pada tombol `Kirim Aduan` di `components/public-header.blade.php` serta label aksi `Baca Berita` pada `news/index.blade.php`.
+- Penyesuaian warna grafik Chart.js agar mengikuti mode terang dan gelap pada `welcome.blade.php`, serta penonaktifan `scrollWheelZoom` peta pada `welcome.blade.php` dan `public/titik-parkir/show.blade.php`.
+- Pemisahan aturan lebar kolom `.staff-table` dari tabel info lokasi 2 kolom, penambahan varian badge status `.is-inactive`, dan perapian fallback koordinat pada `public/titik-parkir/show.blade.php`.
+
+### Diperbaiki
+- Penghapusan kilatan layar putih (*white flash*) saat memuat halaman admin pada mode gelap melalui deteksi tema awal di `<head>` serta dukungan mode gelap untuk `.badge.text-bg-light`, `.btn-outline-dark`, `.border`, dan `.alert-*` di `layouts/admin.blade.php`.
+- Penggantian ikon SVG jam pelayanan dan perbaikan `aria-label` pill WhatsApp pada `welcome.blade.php`, serta pembersihan fallback marker peta kosong ke dalam `mapMarkers`.
+- Manajemen fokus dan guard navigasi foto tunggal pada modal galeri `gallery.blade.php`.
+- Sinkronisasi otomatis `dark-theme`, kelas kontras pesan galat `.complaint-field-error` dan `.complaint-input-invalid`, serta atribut `role` notifikasi pada `pengaduan.blade.php`.
+
 ## [1.8.2] - 2026-11-26
 
 ### Ditambahkan

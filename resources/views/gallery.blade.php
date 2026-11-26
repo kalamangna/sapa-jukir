@@ -59,7 +59,7 @@
         <div class="gallery-modal-dialog">
             <div class="gallery-modal-header">
                 <h2 id="gallery-modal-title"></h2>
-                <button class="gallery-modal-close" type="button" aria-label="Tutup" data-gallery-close>&times;</button>
+                <button class="gallery-modal-close" type="button" aria-label="Tutup pratinjau" data-gallery-close>&times;</button>
             </div>
             <div class="gallery-modal-body">
                 <div class="gallery-modal-meta">
@@ -102,13 +102,16 @@
         const galleryModalImage = document.getElementById('gallery-modal-image');
         const galleryModalPrev = document.querySelector('.gallery-modal-prev');
         const galleryModalNext = document.querySelector('.gallery-modal-next');
+        const galleryModalCloseBtn = document.querySelector('.gallery-modal-close');
         let activeGalleryIndex = 0;
         let activeGalleryImages = [];
         let activeGalleryImageIndex = 0;
+        let lastTriggerButton = null;
 
         function showGalleryItem(index) {
             const button = galleryViewButtons[index];
             if (!button) return;
+            lastTriggerButton = button;
             activeGalleryIndex = index;
             galleryModalTitle.textContent = button.dataset.title;
             galleryModalDescription.textContent = button.dataset.description || '-';
@@ -130,28 +133,34 @@
             if (galleryModalNext) galleryModalNext.hidden = !hasMultipleImages;
             galleryModal.hidden = false;
             document.body.classList.add('gallery-modal-open');
+            galleryModalCloseBtn?.focus();
         }
 
         function closeGalleryModal() {
             galleryModal.hidden = true;
             document.body.classList.remove('gallery-modal-open');
+            lastTriggerButton?.focus();
+            lastTriggerButton = null;
         }
 
         galleryViewButtons.forEach((button, index) => button.addEventListener('click', () => showGalleryItem(index)));
         document.querySelectorAll('[data-gallery-close]').forEach((element) => element.addEventListener('click', closeGalleryModal));
-        document.querySelector('.gallery-modal-prev')?.addEventListener('click', () => {
+        galleryModalPrev?.addEventListener('click', () => {
+            if (activeGalleryImages.length <= 1) return;
             activeGalleryImageIndex = (activeGalleryImageIndex - 1 + activeGalleryImages.length) % activeGalleryImages.length;
             galleryModalImage.src = activeGalleryImages[activeGalleryImageIndex];
         });
-        document.querySelector('.gallery-modal-next')?.addEventListener('click', () => {
+        galleryModalNext?.addEventListener('click', () => {
+            if (activeGalleryImages.length <= 1) return;
             activeGalleryImageIndex = (activeGalleryImageIndex + 1) % activeGalleryImages.length;
             galleryModalImage.src = activeGalleryImages[activeGalleryImageIndex];
         });
         document.addEventListener('keydown', (event) => {
             if (galleryModal.hidden) return;
             if (event.key === 'Escape') closeGalleryModal();
-            if (event.key === 'ArrowLeft') document.querySelector('.gallery-modal-prev')?.click();
-            if (event.key === 'ArrowRight') document.querySelector('.gallery-modal-next')?.click();
+            if (activeGalleryImages.length <= 1) return;
+            if (event.key === 'ArrowLeft') galleryModalPrev?.click();
+            if (event.key === 'ArrowRight') galleryModalNext?.click();
         });
     </script>
 </body>

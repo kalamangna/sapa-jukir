@@ -34,8 +34,26 @@
     >
 
 
+    {{-- Early Dark Theme Sync (prevent white flash on load) --}}
+    <script>
+        (function () {
+            try {
+                var storedTheme = localStorage.getItem('public-theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (storedTheme ? storedTheme === 'dark' : prefersDark) {
+                    document.documentElement.classList.add('dark-theme');
+                }
+            } catch (e) {}
+        })();
+    </script>
+
     {{-- Custom Style --}}
     <style>
+
+        html.dark-theme {
+            color-scheme: dark;
+            background: #0b1220;
+        }
 
         :root {
 
@@ -1220,7 +1238,8 @@
 }
 
 .admin-site.dark-theme .border-top,
-.admin-site.dark-theme .border-bottom {
+.admin-site.dark-theme .border-bottom,
+.admin-site.dark-theme .border {
     border-color: var(--border-color) !important;
 }
 
@@ -1228,22 +1247,55 @@
     color: #e5e7eb !important;
 }
 
-.admin-site.dark-theme .badge.bg-warning.text-dark {
+.admin-site.dark-theme .badge.bg-warning.text-dark,
+.admin-site.dark-theme .badge.text-bg-warning {
     color: #111827 !important;
 }
 
+.admin-site.dark-theme .badge.text-bg-light {
+    color: #e5e7eb !important;
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+}
+
 .admin-site.dark-theme .btn-light,
-.admin-site.dark-theme .btn-outline-secondary {
+.admin-site.dark-theme .btn-outline-secondary,
+.admin-site.dark-theme .btn-outline-dark {
     color: #e5e7eb;
     background-color: #1e293b;
     border-color: #475569;
 }
 
 .admin-site.dark-theme .btn-light:hover,
-.admin-site.dark-theme .btn-outline-secondary:hover {
+.admin-site.dark-theme .btn-outline-secondary:hover,
+.admin-site.dark-theme .btn-outline-dark:hover {
     color: #fff;
     background-color: #334155;
     border-color: #64748b;
+}
+
+.admin-site.dark-theme .alert-success {
+    color: #86efac;
+    background-color: rgba(21, 128, 61, 0.22);
+    border-color: rgba(74, 222, 128, 0.35);
+}
+
+.admin-site.dark-theme .alert-danger {
+    color: #fca5a5;
+    background-color: rgba(185, 28, 28, 0.22);
+    border-color: rgba(248, 113, 113, 0.35);
+}
+
+.admin-site.dark-theme .alert-warning {
+    color: #fde68a;
+    background-color: rgba(180, 83, 9, 0.22);
+    border-color: rgba(251, 191, 36, 0.35);
+}
+
+.admin-site.dark-theme .alert-info {
+    color: #93c5fd;
+    background-color: rgba(29, 78, 216, 0.22);
+    border-color: rgba(96, 165, 250, 0.35);
 }
 
 .admin-site.dark-theme .pagination {
@@ -1354,6 +1406,11 @@
 @endphp
 
 <body class="admin-site {{ request()->routeIs('admin.laporan.*') ? 'report-page' : '' }} {{ request()->routeIs('admin.dashboard') ? 'dashboard-page' : '' }}">
+<script>
+    if (document.documentElement.classList.contains('dark-theme')) {
+        document.body.classList.add('dark-theme');
+    }
+</script>
 
 
 {{-- ==========================================================
