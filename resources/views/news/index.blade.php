@@ -10,28 +10,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="public-site news-page">
-    <header class="public-header">
-        <div class="container public-nav">
-            <a class="public-brand" href="{{ route('home') }}"><span class="brand-mark">SJ</span><span>SAPA JUKIR</span></a>
-            <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
-            <nav class="nav-links" aria-label="Navigasi utama">
-                <a href="{{ route('home') }}#top">Beranda</a>
-                <a href="{{ route('home') }}#features">Fitur Utama</a>
-                <a href="{{ route('home') }}#achievement">Pencapaian</a>
-                <a href="{{ route('home') }}#area">Area Pendapatan</a>
-                <a href="{{ route('home') }}#about">Tentang</a>
-                <a href="{{ route('gallery') }}">Galeri</a>
-                <a class="active" href="{{ route('news.index') }}" aria-current="page">Berita</a>
-                <a href="{{ route('skm') }}">SKM</a>
-                <a href="{{ route('login') }}">Masuk</a>
-                <div class="public-nav-actions">
-                    <button class="theme-toggle" type="button" aria-label="Ubah mode tampilan" aria-pressed="false" title="Mode gelap">
-                        <span class="theme-toggle-icon" aria-hidden="true">☀️</span>
-                    </button>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <x-public-header active="news" />
 
     <main class="news-page-main">
         <div class="container">
@@ -80,12 +59,7 @@
         </div>
     </main>
 
-    <footer class="public-footer">
-        <div class="container footer-inner">
-            <div class="footer-copy">© SAPA JUKIR {{ date('Y') }}</div>
-            <p>UPTD Terminal dan Perparkiran<br>DINAS PERHUBUNGAN KABUPATEN SINJAI</p>
-        </div>
-    </footer>
+    <x-public-footer />
 
     <script>
         const toggle = document.querySelector('.nav-toggle');

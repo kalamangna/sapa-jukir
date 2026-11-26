@@ -11,34 +11,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="public-site">
-    <header class="public-header">
-        <div class="container public-nav">
-            <a class="public-brand" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo-sapa-jukir.png') }}" alt="Logo SAPA JUKIR" style="height: 32px; width: auto; object-fit: contain;">
-                <span>SAPA JUKIR</span>
-            </a>
-
-            <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
-
-            <nav class="nav-links" aria-label="Navigasi utama">
-                <a href="#top">Beranda</a>
-                <a href="#features">Fitur Utama</a>
-                <a href="#achievement">Pencapaian</a>
-                <a href="#area">Area Pendapatan</a>
-                <a href="#about">Tentang</a>
-                <a href="{{ route('gallery') }}">Galeri</a>
-                <a href="{{ route('news.index') }}">Berita</a>
-                <a href="{{ route('skm') }}">SKM</a>
-                <a href="{{ route('login') }}">Masuk</a>
-                <div class="public-nav-actions">
-                    <button class="theme-toggle" type="button" aria-label="Ubah mode tampilan" aria-pressed="false" title="Mode gelap">
-                        <span class="theme-toggle-icon" aria-hidden="true">☀️</span>
-                    </button>
-                    <a class="complaint-link" href="{{ route('pengaduan.create') }}">💬 Kirim Aduan</a>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <x-public-header active="home" />
 
     <main>
         <section class="hero" id="top">
@@ -46,7 +19,7 @@
                 <div class="hero-copy">
                     <h1>{{ $siteSettings?->hero_title ?? 'Selamat Datang di SAPA JUKIR' }}</h1>
                     <p class="lead">
-                        {{ $siteSettings?->hero_description ?? 'SAPA JUKIR (Sistem Informasi Petugas) adalah aplikasi yang membantu pencatatan, monitoring, dan pengelolaan pendapatan daerah serta objek pendapatan di Kabupaten Sinjai.' }}
+                        {{ $siteSettings?->hero_description ?? 'SAPA JUKIR adalah sistem informasi petugas untuk pencatatan, pemantauan, dan pengelolaan pendapatan daerah serta objek retribusi di Kabupaten Sinjai.' }}
                     </p>
 
                     <div class="hero-contact-strip" aria-label="Informasi kontak publik">
@@ -82,7 +55,7 @@
                         </a>
                     </div>
 
-                    <p class="powered-by">Powered &amp; Designed by UPTD Terminal &amp; Perparkiran<br>Dinas Perhubungan Kab. Sinjai</p>
+                    <p class="powered-by">Dikelola oleh UPTD Terminal dan Perparkiran<br>Dinas Perhubungan Kab. Sinjai</p>
                 </div>
 
                 <div class="hero-visual" aria-label="Bupati dan Wakil Bupati Kabupaten Sinjai">
@@ -141,8 +114,8 @@
                             </article>
                             <article class="feature-card">
                                 <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M24 42S12 30.8 12 20.5a12 12 0 1 1 24 0C36 30.8 24 42 24 42Z"></path><circle cx="24" cy="20" r="4"></circle></svg></span>
-                                <h3>Titik / Objek Pendapatan</h3>
-                                <p>Terdapat <strong>{{ number_format($totalTitikParkir, 0, ',', '.') }}</strong> titik/objek pendapatan terdaftar.</p>
+                                <h3>Titik dan Objek Pendapatan</h3>
+                                <p>Terdapat <strong>{{ number_format($totalTitikParkir, 0, ',', '.') }}</strong> titik dan objek pendapatan terdaftar.</p>
                             </article>
                             <article class="feature-card">
                                 <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M7 18V9h9M32 9h9v9M41 30v9h-9M16 39H7v-9"></path><path d="M13 13h8v8h-8zM27 13h8v8h-8zM13 27h8v8h-8zM28 28h4v4h-4zM35 35h4v4h-4zM28 36h4"></path></svg></span>
@@ -235,7 +208,7 @@
         <section class="about-section" id="about">
             <div class="about-backdrop" aria-hidden="true"></div>
             <div class="container about-content">
-                <p class="about-kicker">About Us</p>
+                <p class="about-kicker">Tentang Kami</p>
                 <h2>UPTD Terminal dan Perparkiran</h2>
                 <p class="about-lead">
                     UPTD Terminal dan Perparkiran Dinas Perhubungan Kabupaten Sinjai merupakan unit pelaksana teknis
@@ -268,7 +241,7 @@
                 <div class="map-panel">
                     <div class="map-header">
                         <span class="map-badge">Area Pendapatan</span>
-                        <span class="map-status">Live Map</span>
+                        <span class="map-status">Peta Interaktif</span>
                     </div>
 
                     <div class="map-toolbar" aria-label="Filter peta">
@@ -300,7 +273,7 @@
                         </div>
                         <div class="toolbar-item search-item">
                             <label for="point-search"><span class="filter-icon search-icon" aria-hidden="true"></span>Cari Titik:</label>
-                            <input id="point-search" type="search" placeholder="Ketik Nama Lokasi/Jalan" />
+                            <input id="point-search" type="search" placeholder="Contoh: Jl. Persatuan Raya" />
                         </div>
                         <button id="reset-map-btn" class="reset-map-btn" type="button">Reset</button>
                     </div>
@@ -340,12 +313,7 @@
 
     </main>
 
-    <footer class="public-footer" id="contact">
-        <div class="container footer-inner">
-            <div class="footer-copy">© SAPA JUKIR {{ date('Y') }}</div>
-            <p>UPTD Terminal dan Perparkiran<br>DINAS PERHUBUNGAN KABUPATEN SINJAI</p>
-        </div>
-    </footer>
+    <x-public-footer id="contact" />
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <script>
@@ -555,7 +523,7 @@
                 <div style="min-width: 210px; line-height: 1.6;">
                     <strong style="display: block; font-size: 14px; margin-bottom: 6px;">${escapeHtml(point.nama)}</strong>
                     <span>Lokasi: ${escapeHtml(point.alamat || 'Alamat tidak tersedia')}</span><br>
-                    <small>${escapeHtml(point.kecamatan || '-')} / ${escapeHtml(point.kelurahan || '-')}</small><br>
+                    <small>${escapeHtml(point.kecamatan || '-')}, ${escapeHtml(point.kelurahan || '-')}</small><br>
                     <small>Sumber: ${escapeHtml(point.sumber_nama || 'Belum ditentukan')}</small><br>
                     <small>Status: ${escapeHtml(point.status || 'AKTIF')}</small><br>
                     <small>Koordinat: ${Number(point.lat).toFixed(5)}, ${Number(point.lng).toFixed(5)}</small>

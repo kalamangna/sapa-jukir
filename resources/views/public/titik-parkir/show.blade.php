@@ -11,7 +11,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         :root { --detail-ink: #172033; --detail-muted: #697386; --detail-line: #dce2ea; --detail-accent: #087f5b; }
-        body { margin: 0; color: var(--detail-ink); background: #fff; font-family: 'DM Sans', sans-serif; }
+        body { margin: 0; color: var(--detail-ink); font-family: 'DM Sans', sans-serif; }
         .public-header { z-index: 1000; }
         .location-page .leaflet-pane,
         .location-page .leaflet-control { z-index: 400; }
@@ -57,35 +57,8 @@
         }
     </style>
 </head>
-<body>
-    <header class="public-header">
-        <div class="container public-nav">
-            <a class="public-brand" href="{{ route('home') }}">
-                <span class="brand-mark">SI</span>
-                <span>SAPA JUKIR</span>
-            </a>
-
-            <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false">&#9776;</button>
-
-            <nav class="nav-links" aria-label="Navigasi utama">
-                <a href="{{ route('home') }}#top">Beranda</a>
-                <a href="{{ route('home') }}#features">Fitur Utama</a>
-                <a href="{{ route('home') }}#achievement">Pencapaian</a>
-                <a href="{{ route('home') }}#area">Area Pendapatan</a>
-                <a href="{{ route('home') }}#about">Tentang</a>
-                <a href="{{ route('gallery') }}">Galeri</a>
-                <a href="{{ route('news.index') }}">Berita</a>
-                <a href="{{ route('skm') }}">SKM</a>
-                <a href="{{ route('login') }}">Masuk</a>
-                <div class="public-nav-actions">
-                    <button class="theme-toggle" type="button" aria-label="Ubah mode tampilan" aria-pressed="false" title="Mode gelap">
-                        <span class="theme-toggle-icon" aria-hidden="true">☀️</span>
-                    </button>
-                    <a class="complaint-link" href="{{ route('pengaduan.create', ['titik_parkir' => $titikParkir->id]) }}">&#128172; Adukan Jukir di Lokasi Ini</a>
-                </div>
-            </nav>
-        </div>
-    </header>
+<body class="public-site">
+    <x-public-header :complaint-url="route('pengaduan.create', ['titik_parkir' => $titikParkir->id])" complaint-label="Kirim Aduan Lokasi" />
 
     <main class="location-page">
         <a class="location-back" href="{{ route('home') }}">&larr; Kembali ke Peta Lokasi</a>
@@ -152,7 +125,7 @@
                                 <th>Foto</th>
                                 <th>Nama</th>
                                 <th>Jabatan</th>
-                                <th>Target / Waktu</th>
+                                <th>Target dan Waktu</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -162,7 +135,9 @@
                                         @if($penempatan->jukir?->foto)
                                             <img class="staff-photo" src="{{ asset('storage/' . $penempatan->jukir->foto) }}" alt="Foto {{ $penempatan->jukir->nama }}">
                                         @else
-                                            <div class="staff-photo-fallback" aria-label="Foto belum tersedia">👤</div>
+                                            <div class="staff-photo-fallback" aria-label="Foto belum tersedia">
+                                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M5 20c1.5-3.2 4.3-4.8 7-4.8s5.5 1.6 7 4.8"/></svg>
+                                            </div>
                                         @endif
                                     </td>
                                     <td class="location-value">{{ $penempatan->jukir?->nama ?? '-' }}</td>
@@ -204,12 +179,7 @@
         </section>
     </main>
 
-    <footer class="public-footer">
-        <div class="container footer-inner">
-            <div class="footer-copy">&copy; SAPA JUKIR {{ date('Y') }}</div>
-            <p>UPTD Terminal dan Perparkiran<br>DINAS PERHUBUNGAN KABUPATEN SINJAI</p>
-        </div>
-    </footer>
+    <x-public-footer />
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     @if($titikParkir->latitude !== null && $titikParkir->longitude !== null)

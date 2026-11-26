@@ -12,7 +12,7 @@
 <body class="public-site complaint-page">
     <header class="public-header">
         <div class="container public-nav">
-            <a class="public-brand" href="{{ route('home') }}"><span class="brand-mark">SJ</span><span>SAPA JUKIR</span></a>
+            <a class="public-brand" href="{{ route('home') }}"><img src="{{ asset('images/logo-sapa-jukir.png') }}" alt="Logo SAPA JUKIR" style="height: 32px; width: auto; object-fit: contain;"><span>SAPA JUKIR</span></a>
             <a class="secondary-btn" href="{{ route('home') }}">Kembali ke Beranda</a>
         </div>
     </header>
@@ -21,26 +21,62 @@
         <div class="complaint-card">
             <div class="complaint-card-header"><h1>Form Aduan</h1><span aria-hidden="true">?</span></div>
             <div class="complaint-card-body">
-                <p class="complaint-intro">Harap mengisi data diri beserta laporan keluhan. Kami senantiasa selalu menjaga privasi dan kerahasiaan data Anda.</p>
+                <p class="complaint-intro">Isi data diri dan detail laporan keluhan Anda. Kerahasiaan data pelapor dijaga oleh petugas.</p>
                 @if(session('success'))<div class="complaint-success">{{ session('success') }}</div>@endif
                 @if($errors->any())<div class="complaint-errors"><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
                 <form method="POST" action="{{ route('pengaduan.store') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="form_token" value="{{ $formToken }}">
+                    @error('form_token')<span style="color:#b91c1c;font-size:0.85rem;margin-bottom:8px;display:block;">{{ $message }}</span>@enderror
                     <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
                         <label for="website">Website</label>
                         <input id="website" name="website" type="text" value="" tabindex="-1" autocomplete="off">
                     </div>
-                    <label><span>Nama Lengkap</span><input name="nama" value="{{ old('nama') }}" placeholder="Nama Lengkap" required></label>
-                    <label><span>NIK Pelapor</span><input name="nik" value="{{ old('nik') }}" placeholder="NIK Pelapor (16 digit)" inputmode="numeric" maxlength="16" required></label>
-                    <label><span>Nomor Telepon/WA</span><input name="telepon" value="{{ old('telepon') }}" placeholder="Nomor Telepon/WA" required></label>
-                    <label><span>Titik Parkir (Nama Toko/Kantor)</span><input name="titik_parkir" value="{{ old('titik_parkir', $titikParkir?->nama) }}" placeholder="Titik Parkir (Nama Toko/Kantor)"></label>
-                    <label><span>Lokasi Parkir (Nama Jalan)</span><input name="lokasi_parkir" value="{{ old('lokasi_parkir', $titikParkir?->alamat) }}" placeholder="Lokasi Parkir (Nama Jalan)" required></label>
-                    <label><span>Jenis Aduan</span><select name="jenis" required><option value="">Pilih Jenis Aduan</option>@foreach($jenisPengaduan as $value => $label)<option value="{{ $value }}" @selected(old('jenis') === $value)>{{ $label }}</option>@endforeach</select></label>
-                    <label><span>Isi Detail Aduan</span><textarea name="detail" placeholder="Isi Detail Aduan" required>{{ old('detail') }}</textarea></label>
-                    <label><span>Foto Aduan <small>(Opsional, JPG/PNG/WEBP maksimal 5 MB)</small></span><input name="foto" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"></label>
-                    <button class="complaint-submit" type="submit">Submit</button>
-                    <p class="complaint-note">Catatan: Wajib isikan nomor telepon Anda untuk keperluan konfirmasi dari pihak Dinas Perhubungan.</p>
+                    <label>
+                        <span>Nama Lengkap</span>
+                        <input name="nama" value="{{ old('nama') }}" placeholder="Andi Pratama" @error('nama') aria-invalid="true" style="border-color:#b91c1c;" @enderror required>
+                        @error('nama')<span style="color:#b91c1c;font-size:0.85rem;margin-top:4px;display:block;">{{ $message }}</span>@enderror
+                    </label>
+                    <label>
+                        <span>NIK Pelapor</span>
+                        <input name="nik" value="{{ old('nik') }}" placeholder="16 digit NIK" inputmode="numeric" maxlength="16" @error('nik') aria-invalid="true" style="border-color:#b91c1c;" @enderror required>
+                        @error('nik')<span style="color:#b91c1c;font-size:0.85rem;margin-top:4px;display:block;">{{ $message }}</span>@enderror
+                    </label>
+                    <label>
+                        <span>Nomor Telepon</span>
+                        <input name="telepon" value="{{ old('telepon') }}" placeholder="081234567890" @error('telepon') aria-invalid="true" style="border-color:#b91c1c;" @enderror required>
+                        @error('telepon')<span style="color:#b91c1c;font-size:0.85rem;margin-top:4px;display:block;">{{ $message }}</span>@enderror
+                    </label>
+                    <label>
+                        <span>Nama Titik Parkir</span>
+                        <input name="titik_parkir" value="{{ old('titik_parkir', $titikParkir?->nama) }}" placeholder="Pasar Sentral Sinjai" @error('titik_parkir') aria-invalid="true" style="border-color:#b91c1c;" @enderror>
+                        @error('titik_parkir')<span style="color:#b91c1c;font-size:0.85rem;margin-top:4px;display:block;">{{ $message }}</span>@enderror
+                    </label>
+                    <label>
+                        <span>Lokasi Parkir</span>
+                        <input name="lokasi_parkir" value="{{ old('lokasi_parkir', $titikParkir?->alamat) }}" placeholder="Jl. Persatuan Raya" @error('lokasi_parkir') aria-invalid="true" style="border-color:#b91c1c;" @enderror required>
+                        @error('lokasi_parkir')<span style="color:#b91c1c;font-size:0.85rem;margin-top:4px;display:block;">{{ $message }}</span>@enderror
+                    </label>
+                    <label>
+                        <span>Jenis Aduan</span>
+                        <select name="jenis" @error('jenis') aria-invalid="true" style="border-color:#b91c1c;" @enderror required>
+                            <option value="">Pilih Jenis Aduan</option>
+                            @foreach($jenisPengaduan as $value => $label)<option value="{{ $value }}" @selected(old('jenis') === $value)>{{ $label }}</option>@endforeach
+                        </select>
+                        @error('jenis')<span style="color:#b91c1c;font-size:0.85rem;margin-top:4px;display:block;">{{ $message }}</span>@enderror
+                    </label>
+                    <label>
+                        <span>Detail Aduan</span>
+                        <textarea name="detail" placeholder="Jelaskan kronologi kejadian dan waktu peristiwa" @error('detail') aria-invalid="true" style="border-color:#b91c1c;" @enderror required>{{ old('detail') }}</textarea>
+                        @error('detail')<span style="color:#b91c1c;font-size:0.85rem;margin-top:4px;display:block;">{{ $message }}</span>@enderror
+                    </label>
+                    <label>
+                        <span>Foto Bukti Aduan <small>Opsional. Format JPG, PNG, atau WEBP maksimal 5 MB.</small></span>
+                        <input name="foto" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" @error('foto') aria-invalid="true" style="border-color:#b91c1c;" @enderror>
+                        @error('foto')<span style="color:#b91c1c;font-size:0.85rem;margin-top:4px;display:block;">{{ $message }}</span>@enderror
+                    </label>
+                    <button class="complaint-submit" type="submit">Kirim Aduan</button>
+                    <p class="complaint-note">Catatan: Wajib isikan nomor telepon aktif untuk keperluan konfirmasi dari pihak Dinas Perhubungan.</p>
                 </form>
             </div>
         </div>

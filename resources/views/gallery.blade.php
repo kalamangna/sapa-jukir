@@ -10,46 +10,27 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="public-site gallery-page">
-    <header class="public-header">
-        <div class="container public-nav">
-            <a class="public-brand" href="{{ route('home') }}"><span class="brand-mark">SJ</span><span>SAPA JUKIR</span></a>
-            <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
-            <nav class="nav-links" aria-label="Navigasi utama">
-                <a href="{{ route('home') }}#top">Beranda</a>
-                <a href="{{ route('home') }}#features">Fitur Utama</a>
-                <a href="{{ route('home') }}#achievement">Pencapaian</a>
-                <a href="{{ route('home') }}#area">Area Pendapatan</a>
-                <a href="{{ route('home') }}#about">Tentang</a>
-                <a class="active" href="{{ route('gallery') }}">Galeri</a>
-                <a href="{{ route('news.index') }}">Berita</a>
-                <a href="{{ route('skm') }}">SKM</a>
-                <a href="{{ route('login') }}">Masuk</a>
-                <div class="public-nav-actions">
-                    <button class="theme-toggle" type="button" aria-label="Ubah mode tampilan" aria-pressed="false" title="Mode gelap">
-                        <span class="theme-toggle-icon" aria-hidden="true">☀️</span>
-                    </button>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <x-public-header active="gallery" />
 
     <main class="gallery-page-main">
         <div class="container">
             <div class="gallery-page-heading">
                 <p class="eyebrow">Dokumentasi kegiatan</p>
+                <h1>Galeri Dokumentasi</h1>
             </div>
             @php($namaBulan = [1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'])
 
+            <form class="gallery-filter" method="GET" action="{{ route('gallery') }}">
+                <label for="gallery-category">Filter Kategori</label>
+                <select id="gallery-category" name="kategori" onchange="this.form.submit()">
+                    <option value="">Semua Kategori</option>
+                    @foreach($kategoriList as $itemKategori)
+                        <option value="{{ $itemKategori }}" @selected($kategori === $itemKategori)>{{ $itemKategori }}</option>
+                    @endforeach
+                </select>
+            </form>
+
             @if($galleries->isNotEmpty())
-                <form class="gallery-filter" method="GET" action="{{ route('gallery') }}">
-                    <label for="gallery-category">Filter Kategori</label>
-                    <select id="gallery-category" name="kategori" onchange="this.form.submit()">
-                        <option value="">Filter Kategori</option>
-                        @foreach($kategoriList as $itemKategori)
-                            <option value="{{ $itemKategori }}" @selected($kategori === $itemKategori)>{{ $itemKategori }}</option>
-                        @endforeach
-                    </select>
-                </form>
                 <div class="gallery-page-grid">
                     @foreach($galleries as $gallery)
                         <article class="gallery-card">
@@ -59,7 +40,7 @@
                                 <h2>{{ $gallery->judul }}</h2>
                                 @if($gallery->deskripsi)<p>{{ $gallery->deskripsi }}</p>@endif
                                 <div class="gallery-card-footer">
-                                    <button class="gallery-view-button" type="button" data-gallery-view data-title="{{ $gallery->judul }}" data-description="{{ $gallery->deskripsi }}" data-category="{{ $gallery->kategori ?: 'Dokumentasi' }}" data-date="{{ $gallery->tanggal_kegiatan ? $gallery->tanggal_kegiatan->format('d') . ' ' . $namaBulan[(int) $gallery->tanggal_kegiatan->format('n')] . ' ' . $gallery->tanggal_kegiatan->format('Y') : '-' }}" data-image="{{ asset('storage/' . $gallery->gambar) }}" data-images='@json(collect($gallery->gallery_images ?? [$gallery->gambar])->map(fn ($gambar) => asset("storage/" . $gambar))->values()->all())'>View</button>
+                                    <button class="gallery-view-button" type="button" data-gallery-view data-title="{{ $gallery->judul }}" data-description="{{ $gallery->deskripsi }}" data-category="{{ $gallery->kategori ?: 'Dokumentasi' }}" data-date="{{ $gallery->tanggal_kegiatan ? $gallery->tanggal_kegiatan->format('d') . ' ' . $namaBulan[(int) $gallery->tanggal_kegiatan->format('n')] . ' ' . $gallery->tanggal_kegiatan->format('Y') : '-' }}" data-image="{{ asset('storage/' . $gallery->gambar) }}" data-images='@json(collect($gallery->gallery_images ?? [$gallery->gambar])->map(fn ($gambar) => asset("storage/" . $gambar))->values()->all())'>Lihat Dokumentasi</button>
                                     <time datetime="{{ $gallery->created_at?->toIso8601String() }}">{{ $gallery->created_at?->diffForHumans() ?? 'Dokumentasi' }}</time>
                                 </div>
                             </div>
@@ -68,15 +49,6 @@
                 </div>
                 <div class="gallery-pagination">{{ $galleries->links() }}</div>
             @else
-                <form class="gallery-filter" method="GET" action="{{ route('gallery') }}">
-                    <label for="gallery-category">Filter Kategori</label>
-                    <select id="gallery-category" name="kategori" onchange="this.form.submit()">
-                        <option value="">Filter Kategori</option>
-                        @foreach($kategoriList as $itemKategori)
-                            <option value="{{ $itemKategori }}" @selected($kategori === $itemKategori)>{{ $itemKategori }}</option>
-                        @endforeach
-                    </select>
-                </form>
                 <div class="gallery-empty"><span class="gallery-empty-mark" aria-hidden="true">+</span><h2>Belum ada dokumentasi</h2><p>Dokumentasi kegiatan akan ditampilkan di halaman ini.</p></div>
             @endif
         </div>
@@ -104,7 +76,7 @@
         </div>
     </div>
 
-    <footer class="public-footer"><div class="container footer-inner"><div class="footer-copy">© SAPA JUKIR {{ date('Y') }}</div><p>UPTD Terminal dan Perparkiran<br>DINAS PERHUBUNGAN KABUPATEN SINJAI</p></div></footer>
+    <x-public-footer />
 
     <script>
         const toggle = document.querySelector('.nav-toggle');

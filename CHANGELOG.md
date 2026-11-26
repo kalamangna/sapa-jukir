@@ -3,6 +3,21 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.7.0] - 2026-11-26
+
+### Ditambahkan
+- Komponen reusable `public-header.blade.php` dan `public-footer.blade.php` dengan logo resmi SAPA JUKIR, indikator menu aktif (`aria-current="page"`), label baku `Login`, serta tombol `Kirim Aduan` yang seragam di seluruh halaman publik.
+- Pesan galat kontekstual dan atribut `aria-invalid` di bawah masing-masing kolom pada formulir pengaduan `pengaduan.blade.php`.
+- Heading utama `<h1>Galeri Dokumentasi</h1>` pada `gallery.blade.php`.
+
+### Diubah
+- Penyeragaman copywriting, tombol aksi spesifik (`Kirim Aduan`, `Lihat Dokumentasi`), placeholder contoh riil, serta penghapusan tanda kurung dan garis miring pada `welcome.blade.php`, `gallery.blade.php`, `pengaduan.blade.php`, dan `public/titik-parkir/show.blade.php`.
+- Penghapusan duplikasi form filter kategori pada `gallery.blade.php`.
+
+### Diperbaiki
+- Dukungan mode gelap pada `public/titik-parkir/show.blade.php` dengan menerapkan kelas `public-site` pada `body`.
+- Penggantian ikon Bootstrap Icons yang tidak dimuat pada `news/show.blade.php` dan fallback emoji petugas pada `public/titik-parkir/show.blade.php` menjadi ikon SVG inline.
+
 ## [1.6.0] - 2026-11-26
 
 ### Ditambahkan

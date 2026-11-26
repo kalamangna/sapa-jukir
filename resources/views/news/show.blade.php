@@ -10,26 +10,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="public-site news-page">
-    <header class="public-header">
-        <div class="container public-nav">
-            <a class="public-brand" href="{{ route('home') }}"><span class="brand-mark">SJ</span><span>SAPA JUKIR</span></a>
-            <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
-            <nav class="nav-links" aria-label="Navigasi utama">
-                <a href="{{ route('home') }}#top">Beranda</a>
-                <a href="{{ route('home') }}#features">Fitur Utama</a>
-                <a href="{{ route('home') }}#achievement">Pencapaian</a>
-                <a href="{{ route('home') }}#area">Area Pendapatan</a>
-                <a href="{{ route('home') }}#about">Tentang</a>
-                <a href="{{ route('gallery') }}">Galeri</a>
-                <a class="active" href="{{ route('news.index') }}" aria-current="page">Berita</a>
-                <a href="{{ route('skm') }}">SKM</a>
-                <a href="{{ route('login') }}">Masuk</a>
-                <div class="public-nav-actions">
-                    <button class="theme-toggle" type="button" aria-label="Ubah mode tampilan" aria-pressed="false" title="Mode gelap"><span class="theme-toggle-icon" aria-hidden="true">☀️</span></button>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <x-public-header active="news" />
 
     <main class="news-page-main">
         <div class="container">
@@ -45,10 +26,14 @@
                         @if($news->kategori)<span class="news-category">{{ $news->kategori }}</span>@endif
                         <h1>{{ $news->judul }}</h1>
                         <div class="news-article-meta">
-                            <span><i class="bi bi-calendar3" aria-hidden="true"></i>
+                            <span>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                                 <time datetime="{{ ($news->published_at ?? $news->created_at)->toDateString() }}">{{ ($news->published_at ?? $news->created_at)->translatedFormat('d F Y') }}</time>
                             </span>
-                            <span><i class="bi bi-person" aria-hidden="true"></i>UPTD Terminal dan Perparkiran</span>
+                            <span>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.8-3.5 5-5 8-5s6.2 1.5 8 5"/></svg>
+                                UPTD Terminal dan Perparkiran
+                            </span>
                         </div>
                     </header>
                     <figure class="news-article-image">
@@ -77,12 +62,7 @@
         </div>
     </main>
 
-    <footer class="public-footer">
-        <div class="container footer-inner">
-            <div class="footer-copy">© SAPA JUKIR {{ date('Y') }}</div>
-            <p>UPTD Terminal dan Perparkiran<br>DINAS PERHUBUNGAN KABUPATEN SINJAI</p>
-        </div>
-    </footer>
+    <x-public-footer />
 
     <script>
         const toggle = document.querySelector('.nav-toggle');

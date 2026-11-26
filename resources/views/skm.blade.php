@@ -10,31 +10,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="public-site skm-page">
-    <header class="public-header">
-        <div class="container public-nav">
-            <a class="public-brand" href="{{ route('home') }}">
-                <span class="brand-mark">SJ</span>
-                <span class="public-brand-copy"><strong>SAPA JUKIR</strong><small>Survei Kepuasan Masyarakat</small></span>
-            </a>
-            <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
-            <nav class="nav-links" aria-label="Navigasi utama">
-                <a href="{{ route('home') }}#top">Beranda</a>
-                <a href="{{ route('home') }}#features">Fitur Utama</a>
-                <a href="{{ route('home') }}#achievement">Pencapaian</a>
-                <a href="{{ route('home') }}#area">Area Pendapatan</a>
-                <a href="{{ route('home') }}#about">Tentang</a>
-                <a href="{{ route('gallery') }}">Galeri</a>
-                <a href="{{ route('news.index') }}">Berita</a>
-                <a class="active" href="{{ route('skm') }}" aria-current="page">SKM</a>
-                <a href="{{ route('login') }}">Masuk</a>
-                <div class="public-nav-actions">
-                    <button class="theme-toggle" type="button" aria-label="Ubah mode tampilan" aria-pressed="false" title="Mode gelap">
-                        <span class="theme-toggle-icon" aria-hidden="true">☀️</span>
-                    </button>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <x-public-header active="skm" subtitle="Survei Kepuasan Masyarakat" />
 
     <main class="skm-page-main">
         <section class="skm-hero" aria-labelledby="skm-title">
@@ -102,7 +78,7 @@
     <footer class="skm-footer">
         <div class="container skm-footer-inner">
             <a class="skm-footer-brand" href="{{ route('home') }}">
-                <span class="brand-mark">SJ</span>
+                <img src="{{ asset('images/logo-sapa-jukir.png') }}" alt="Logo SAPA JUKIR" style="height: 32px; width: auto; object-fit: contain;">
                 <span><strong>SAPA JUKIR</strong><small>Survei Kepuasan Masyarakat</small></span>
             </a>
             <p class="skm-footer-copy">© {{ date('Y') }}. UPTD Terminal dan Perparkiran<br>Dinas Perhubungan Kabupaten Sinjai.</p>
