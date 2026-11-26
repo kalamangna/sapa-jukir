@@ -67,7 +67,7 @@ Route::get('/guest/titik/{titikParkir}', [PublicController::class, 'titikParkirS
 
 Route::get('/pengaduan', [PengaduanController::class, 'create'])->name('pengaduan.create');
 Route::post('/pengaduan', [PengaduanController::class, 'store'])
-    ->middleware('throttle:10,1')
+    ->middleware('throttle:3,5')
     ->name('pengaduan.store');
 
 
@@ -88,7 +88,7 @@ Route::get(
 Route::post(
     '/login',
     [LoginController::class, 'login']
-)->middleware('throttle:5,1')->name('login.process');
+)->middleware('throttle:15,1')->name('login.process');
 
 
 /*

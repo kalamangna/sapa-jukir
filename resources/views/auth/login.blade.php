@@ -278,6 +278,7 @@
                     value="{{ old('username') }}"
                     placeholder="operator1"
                     autocomplete="username"
+                    maxlength="50"
                     required
                     autofocus
                 >
@@ -300,6 +301,7 @@
                     class="form-control"
                     placeholder="Masukkan password"
                     autocomplete="current-password"
+                    maxlength="128"
                     required
                 >
 
@@ -344,6 +346,17 @@
     </div>
 
 </div>
+
+<script>
+    const loginForm = document.querySelector('form[action="{{ route('login.process') }}"]');
+    const loginButton = loginForm?.querySelector('.btn-login');
+
+    loginForm?.addEventListener('submit', () => {
+        if (!loginButton) return;
+        loginButton.disabled = true;
+        loginButton.textContent = 'Memproses...';
+    });
+</script>
 
 </body>
 

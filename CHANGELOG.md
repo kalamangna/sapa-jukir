@@ -3,6 +3,19 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.6.0] - 2026-11-26
+
+### Ditambahkan
+- Rate limiting berbasis kombinasi `username` dan IP (maksimal 5 percobaan gagal per menit) serta pencatatan log kegagalan login pada `LoginController`.
+- Proteksi anti-bot (*honeypot* dan token waktu pengisian minimal 3 detik) pada `PengaduanController` dan `pengaduan.blade.php`.
+- Migrasi `2026_11_26_153500_widen_nik_column_on_pengaduans_table` untuk memperlebar kolom `nik` guna mendukung enkripsi at-rest pada model `Pengaduan`.
+- Pengujian otomatis keamanan form login dan pengaduan pada `tests/Feature/SecurityHardeningTest.php`.
+
+### Diubah
+- Rate limit route `POST /login` disesuaikan menjadi `throttle:15,1` sebagai lapisan luar NAT, dan `POST /pengaduan` diperketat menjadi `throttle:3,5`.
+- Validasi panjang maksimum `username` (`50`) dan `password` (`128`) pada `LoginController`, serta validasi format nomor telepon pada `PengaduanController`.
+- Penonaktifan tombol kirim saat proses berlangsung pada `auth/login.blade.php` dan `pengaduan.blade.php` untuk mencegah klik ganda.
+
 ## [1.5.0] - 2026-11-26
 
 ### Ditambahkan

@@ -26,6 +26,11 @@
                 @if($errors->any())<div class="complaint-errors"><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
                 <form method="POST" action="{{ route('pengaduan.store') }}" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="form_token" value="{{ $formToken }}">
+                    <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
+                        <label for="website">Website</label>
+                        <input id="website" name="website" type="text" value="" tabindex="-1" autocomplete="off">
+                    </div>
                     <label><span>Nama Lengkap</span><input name="nama" value="{{ old('nama') }}" placeholder="Nama Lengkap" required></label>
                     <label><span>NIK Pelapor</span><input name="nik" value="{{ old('nik') }}" placeholder="NIK Pelapor (16 digit)" inputmode="numeric" maxlength="16" required></label>
                     <label><span>Nomor Telepon/WA</span><input name="telepon" value="{{ old('telepon') }}" placeholder="Nomor Telepon/WA" required></label>
@@ -40,5 +45,15 @@
             </div>
         </div>
     </main>
+    <script>
+        const complaintForm = document.querySelector('form[action="{{ route('pengaduan.store') }}"]');
+        const complaintSubmitButton = complaintForm?.querySelector('.complaint-submit');
+
+        complaintForm?.addEventListener('submit', () => {
+            if (!complaintSubmitButton) return;
+            complaintSubmitButton.disabled = true;
+            complaintSubmitButton.textContent = 'Mengirim...';
+        });
+    </script>
 </body>
 </html>

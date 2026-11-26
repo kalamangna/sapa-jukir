@@ -18,6 +18,8 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -77,6 +79,7 @@ class SecurityHardeningTest extends TestCase
         $pimpinan = User::factory()->create(['role' => 'pimpinan', 'status' => 'aktif']);
 
         $response = $this->post(route('pengaduan.store'), [
+            'form_token' => Crypt::encryptString((string) now()->subSeconds(5)->timestamp),
             'nama' => 'Warga Sinjai',
             'nik' => '7307010101900002',
             'telepon' => '081234567890',
@@ -321,5 +324,122 @@ class SecurityHardeningTest extends TestCase
             ->assertRedirect(route('admin.setoran.show', $setoran->id));
 
         $this->assertSame('terverifikasi', $setoran->fresh()->status);
+    }
+
+    public function test_login_rate_limiter_blocks_repeated_failed_attempts_per_username_and_ip(): void
+    {
+        User::factory()->create([
+            'username' => 'petugas_valid',
+            'password' => 'Password123',
+            'role' => 'operator',
+            'status' => 'aktif',
+        ]);
+
+        for ($attempt = 0; $attempt < 5; $attempt++) {
+            $this->post(route('login.process'), [
+                'username' => 'akun_target',
+                'password' => 'Salah123',
+            ])->assertSessionHasErrors('username');
+        }
+
+        $blocked = $this->post(route('login.process'), [
+            'username' => 'akun_target',
+            'password' => 'Salah123',
+        ]);
+
+        $blocked->assertSessionHasErrors('username');
+        $this->assertStringContainsString(
+            'Terlalu banyak percobaan login gagal',
+            session('errors')->first('username')
+        );
+
+        // Akun lain dari IP yang sama tetap dapat login.
+        $this->post(route('login.process'), [
+            'username' => 'petugas_valid',
+            'password' => 'Password123',
+        ])->assertRedirect(route('admin.dashboard'));
+    }
+
+    public function test_login_rejects_oversized_credentials(): void
+    {
+        $this->post(route('login.process'), [
+            'username' => str_repeat('a', 51),
+            'password' => 'Password123',
+        ])->assertSessionHasErrors('username');
+
+        $this->post(route('login.process'), [
+            'username' => 'petugas_1',
+            'password' => str_repeat('a', 129),
+        ])->assertSessionHasErrors('password');
+    }
+
+    public function test_pengaduan_honeypot_silently_drops_bot_submission(): void
+    {
+        $this->post(route('pengaduan.store'), [
+            'form_token' => Crypt::encryptString((string) now()->subSeconds(5)->timestamp),
+            'website' => 'https://spam.test',
+            'nama' => 'Bot Spam',
+            'nik' => '7307010101900003',
+            'telepon' => '081234567890',
+            'lokasi_parkir' => 'Pasar Sentral',
+            'jenis' => 'tarif_parkir_tidak_sesuai',
+            'detail' => 'Konten spam otomatis.',
+        ])->assertRedirect(route('pengaduan.create'));
+
+        $this->assertSame(0, Pengaduan::count());
+    }
+
+    public function test_pengaduan_rejects_too_fast_or_invalid_form_token(): void
+    {
+        $payload = [
+            'nama' => 'Warga Sinjai',
+            'nik' => '7307010101900004',
+            'telepon' => '081234567890',
+            'lokasi_parkir' => 'Pasar Sentral',
+            'jenis' => 'tarif_parkir_tidak_sesuai',
+            'detail' => 'Tarif tidak sesuai karcis resmi.',
+        ];
+
+        $this->post(route('pengaduan.store'), $payload)
+            ->assertSessionHasErrors('form_token');
+
+        $this->post(route('pengaduan.store'), array_merge($payload, [
+            'form_token' => 'invalid-token',
+        ]))->assertSessionHasErrors('form_token');
+
+        $this->post(route('pengaduan.store'), array_merge($payload, [
+            'form_token' => Crypt::encryptString((string) now()->timestamp),
+        ]))->assertSessionHasErrors('form_token');
+
+        $this->assertSame(0, Pengaduan::count());
+    }
+
+    public function test_pengaduan_encrypts_nik_at_rest_and_validates_phone_format(): void
+    {
+        $this->post(route('pengaduan.store'), [
+            'form_token' => Crypt::encryptString((string) now()->subSeconds(5)->timestamp),
+            'nama' => 'Warga Sinjai',
+            'nik' => '7307010101900005',
+            'telepon' => 'abc!!!',
+            'lokasi_parkir' => 'Pasar Sentral',
+            'jenis' => 'tarif_parkir_tidak_sesuai',
+            'detail' => 'Tarif tidak sesuai karcis resmi.',
+        ])->assertSessionHasErrors('telepon');
+
+        $this->post(route('pengaduan.store'), [
+            'form_token' => Crypt::encryptString((string) now()->subSeconds(5)->timestamp),
+            'nama' => 'Warga Sinjai',
+            'nik' => '7307010101900005',
+            'telepon' => '0812-3456-7890',
+            'lokasi_parkir' => 'Pasar Sentral',
+            'jenis' => 'tarif_parkir_tidak_sesuai',
+            'detail' => 'Tarif tidak sesuai karcis resmi.',
+        ])->assertRedirect(route('pengaduan.create'));
+
+        $rawNik = DB::table('pengaduans')->value('nik');
+        $pengaduan = Pengaduan::firstOrFail();
+
+        $this->assertNotSame('7307010101900005', $rawNik);
+        $this->assertSame('7307010101900005', $pengaduan->nik);
     }
 }

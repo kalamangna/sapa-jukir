@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -31,13 +34,34 @@ class LoginController extends Controller
             'username' => [
                 'required',
                 'string',
+                'max:50',
             ],
 
             'password' => [
                 'required',
                 'string',
+                'max:128',
             ],
         ]);
+
+        $throttleKey = 'login:' . Str::lower(trim($credentials['username'])) . '|' . $request->ip();
+
+        if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
+            $seconds = RateLimiter::availableIn($throttleKey);
+
+            Log::warning('Login diblokir sementara karena terlalu banyak percobaan gagal.', [
+                'username' => $credentials['username'],
+                'ip' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'retry_after_seconds' => $seconds,
+            ]);
+
+            return back()
+                ->withErrors([
+                    'username' => "Terlalu banyak percobaan login gagal. Coba lagi dalam {$seconds} detik.",
+                ])
+                ->onlyInput('username');
+        }
 
 
         /*
@@ -53,6 +77,7 @@ class LoginController extends Controller
 
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
+            RateLimiter::clear($throttleKey);
 
             /*
             |--------------------------------------------------------------------------
@@ -119,6 +144,14 @@ class LoginController extends Controller
         | LOGIN GAGAL
         |--------------------------------------------------------------------------
         */
+
+        RateLimiter::hit($throttleKey, 60);
+
+        Log::warning('Percobaan login gagal.', [
+            'username' => $credentials['username'],
+            'ip' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+        ]);
 
         return back()
             ->withErrors([
