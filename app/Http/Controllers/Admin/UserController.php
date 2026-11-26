@@ -3,39 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    // Akun dibatasi satu per role, jadi tidak ada tambah atau hapus pengguna.
+    public function index()
     {
-        $search = $request->input('search');
-        $users = User::query()
-            ->when($search, fn ($query) => $query->where(function ($builder) use ($search) {
-                $builder->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%");
-            }))
-            ->orderBy('name')
-            ->paginate(15)
-            ->withQueryString();
+        $order = ['admin' => 1, 'operator' => 2, 'pimpinan' => 3];
+        $users = User::all()->sortBy(fn (User $user) => $order[$user->role] ?? 99)->values();
 
-        return view('admin.users.index', compact('users', 'search'));
-    }
-
-    public function create()
-    {
-        return view('admin.users.create');
-    }
-
-    public function store(StoreUserRequest $request)
-    {
-        User::create($request->validated());
-
-        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil ditambahkan.');
+        return view('admin.users.index', compact('users'));
     }
 
     public function edit(User $user)
@@ -50,19 +29,13 @@ class UserController extends Controller
             unset($data['password']);
         }
 
-        $user->update($data);
-
-        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil diperbarui.');
-    }
-
-    public function destroy(User $user)
-    {
-        if ($user->is(Auth::user())) {
-            return back()->with('error', 'Akun yang sedang digunakan tidak dapat dihapus.');
+        // Mencegah admin menonaktifkan akunnya sendiri sehingga tidak bisa login lagi.
+        if ($user->is(auth()->user())) {
+            $data['status'] = 'aktif';
         }
 
-        $user->delete();
+        $user->update($data);
 
-        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil dihapus.');
+        return redirect()->route('admin.users.index')->with('success', 'Data pengguna berhasil diperbarui.');
     }
 }

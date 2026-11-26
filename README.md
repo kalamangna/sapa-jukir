@@ -24,7 +24,8 @@ SAPA JUKIR adalah aplikasi web berbasis Laravel untuk pengelolaan operasional pa
    ```bash
    php artisan migrate
    ```
-4. Buat tautan penyimpanan publik:
+
+   Login memakai username. Akun dibatasi satu per role: `admin`, `operator`, dan `pimpinan`.4. Buat tautan penyimpanan publik:
    ```bash
    php artisan storage:link
    ```

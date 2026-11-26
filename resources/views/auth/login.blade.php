@@ -262,22 +262,22 @@
             @csrf
 
 
-            {{-- EMAIL --}}
+            {{-- USERNAME --}}
 
             <div class="form-group">
 
-                <label for="email">
-                    Email
+                <label for="username">
+                    Username
                 </label>
 
                 <input
-                    type="email"
-                    id="email"
-                    name="email"
+                    type="text"
+                    id="username"
+                    name="username"
                     class="form-control"
-                    value="{{ old('email') }}"
-                    placeholder="Masukkan email"
-                    autocomplete="email"
+                    value="{{ old('username') }}"
+                    placeholder="operator1"
+                    autocomplete="username"
                     required
                     autofocus
                 >

@@ -86,18 +86,19 @@ class AccessControlTest extends TestCase
     {
         $admin = User::factory()->create(['role' => 'admin', 'status' => 'aktif']);
 
+        $operator = User::factory()->create(['role' => 'operator', 'status' => 'aktif']);
+
         $this->actingAs($admin)
-            ->post(route('admin.users.store'), [
+            ->put(route('admin.users.update', $operator), [
                 'name' => 'Operator Audit',
-                'email' => 'operator-audit@example.test',
+                'username' => 'operator-audit',
                 'password' => 'password123',
                 'password_confirmation' => 'password123',
-                'role' => 'operator',
                 'status' => 'aktif',
             ])
             ->assertRedirect(route('admin.users.index'));
 
-        $user = User::where('email', 'operator-audit@example.test')->firstOrFail();
+        $user = User::where('username', 'operator-audit')->firstOrFail();
         $audit = \App\Models\AuditLog::where('auditable_type', User::class)
             ->where('auditable_id', $user->id)
             ->latest('id')
@@ -186,7 +187,7 @@ class AccessControlTest extends TestCase
             ->assertViewHas('sourceId', $sourceId);
     }
 
-    public function test_only_admin_can_manage_users_and_cannot_delete_self(): void
+    public function test_only_admin_can_manage_users(): void
     {
         $admin = User::factory()->create([
             'role' => 'admin',
@@ -204,12 +205,6 @@ class AccessControlTest extends TestCase
         $this->actingAs($operator)
             ->get(route('admin.users.index'))
             ->assertForbidden();
-
-        $this->actingAs($admin)
-            ->delete(route('admin.users.destroy', $admin))
-            ->assertRedirect();
-
-        $this->assertDatabaseHas('users', ['id' => $admin->id]);
     }
 
     public function test_pimpinan_can_review_warnings_but_operator_cannot(): void

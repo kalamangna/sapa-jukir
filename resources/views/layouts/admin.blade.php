@@ -1587,7 +1587,7 @@ SIDEBAR
 
                         <small class="text-muted">
 
-                            {{ auth()->user()->email ?? '' }}
+                            {{ auth()->user()->username ?? '' }}
 
                         </small>
 

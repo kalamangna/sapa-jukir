@@ -48,7 +48,7 @@ class RoleMiddleware
             return redirect()
                 ->route('login')
                 ->withErrors([
-                    'email' => 'Akun Anda tidak aktif.',
+                    'username' => 'Akun Anda tidak aktif.',
                 ]);
         }
 

@@ -28,9 +28,9 @@ class LoginController extends Controller
         */
 
         $credentials = $request->validate([
-            'email' => [
+            'username' => [
                 'required',
-                'email',
+                'string',
             ],
 
             'password' => [
@@ -108,9 +108,9 @@ class LoginController extends Controller
 
             return back()
                 ->withErrors([
-                    'email' => 'Role akun tidak dikenali.',
+                    'username' => 'Role akun tidak dikenali.',
                 ])
-                ->onlyInput('email');
+                ->onlyInput('username');
         }
 
 
@@ -122,9 +122,9 @@ class LoginController extends Controller
 
         return back()
             ->withErrors([
-                'email' => 'Email atau password tidak sesuai, atau akun tidak aktif.',
+                'username' => 'Username atau password tidak sesuai, atau akun tidak aktif.',
             ])
-            ->onlyInput('email');
+            ->onlyInput('username');
     }
 
 

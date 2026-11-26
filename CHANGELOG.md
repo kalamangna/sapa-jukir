@@ -3,6 +3,16 @@
 Seluruh perubahan penting pada proyek SAPA JUKIR Sinjai dicatat dalam berkas ini.
 Format mengacu pada [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 
+## [1.2.0] - 2026-11-26
+
+### Diubah
+- Login dan pengelolaan pengguna memakai `username` sebagai pengganti email pada `LoginController`, `RoleMiddleware`, form login, dan layout admin.
+- Manajemen pengguna dibatasi satu akun per role. Halaman pengguna hanya mengubah nama, username, password, dan status, tanpa tambah atau hapus pengguna.
+
+### Dihapus
+- Kolom `email` dan `email_verified_at` pada tabel `users`, serta `StoreUserRequest` dan halaman tambah pengguna.
+- Migrasi `add_username_to_users_table` menghapus akun berlebih per role dan hanya mempertahankan akun dengan id terkecil. Cadangkan tabel `users` sebelum `php artisan migrate` di server.
+
 ## [1.1.0] - 2026-11-26
 
 ### Ditambahkan

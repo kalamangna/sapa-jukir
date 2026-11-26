@@ -233,7 +233,7 @@ Route::prefix('admin')
                 ->parameters(['capaian-bulanan' => 'capaianBulanan'])
                 ->except(['show']);
 
-            Route::resource('users', UserController::class)->except(['show']);
+            Route::resource('users', UserController::class)->only(['index', 'edit', 'update']);
 
             Route::get('pengaduan', [AdminPengaduanController::class, 'index'])->name('pengaduan.index');
             Route::get('pengaduan/{pengaduan}', [AdminPengaduanController::class, 'show'])->name('pengaduan.show');
