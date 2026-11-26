@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 700" role="img" aria-labelledby="title desc">
+  <title id="title">Logo Kabupaten Sinjai</title>
+  <desc id="desc">Emblem resmi Kabupaten Sinjai dengan kepala kuda, garis kuning, dan pita SINJAI</desc>
+
+  <defs>
+    <linearGradient id="green-outer" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1ea25a"/>
+      <stop offset="100%" stop-color="#0d7d42"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f6dc5a"/>
+      <stop offset="100%" stop-color="#d9b421"/>
+    </linearGradient>
+  </defs>
+
+  <g>
+    <path d="M120 150 C120 95, 180 35, 400 35 C620 35, 680 95, 680 150 L680 350 C680 465, 590 555, 400 570 C210 555, 120 465, 120 350 Z" fill="url(#green-outer)" stroke="#f5d444" stroke-width="18"/>
+
+    <g fill="#fff">
+      <circle cx="80" cy="144" r="16"/>
+      <circle cx="142" cy="98" r="16"/>
+      <circle cx="206" cy="66" r="16"/>
+      <circle cx="286" cy="46" r="16"/>
+      <circle cx="400" cy="32" r="16"/>
+      <circle cx="514" cy="46" r="16"/>
+      <circle cx="594" cy="66" r="16"/>
+      <circle cx="658" cy="98" r="16"/>
+      <circle cx="720" cy="144" r="16"/>
+      <circle cx="80" cy="350" r="16"/>
+      <circle cx="142" cy="405" r="16"/>
+      <circle cx="206" cy="470" r="16"/>
+      <circle cx="286" cy="510" r="16"/>
+      <circle cx="400" cy="536" r="16"/>
+      <circle cx="514" cy="510" r="16"/>
+      <circle cx="594" cy="470" r="16"/>
+      <circle cx="658" cy="405" r="16"/>
+      <circle cx="720" cy="350" r="16"/>
+      <circle cx="122" cy="245" r="16"/>
+      <circle cx="168" cy="300" r="16"/>
+      <circle cx="222" cy="344" r="16"/>
+      <circle cx="276" cy="375" r="16"/>
+      <circle cx="524" cy="375" r="16"/>
+      <circle cx="578" cy="344" r="16"/>
+      <circle cx="632" cy="300" r="16"/>
+      <circle cx="678" cy="245" r="16"/>
+    </g>
+
+    <path d="M160 196 Q 95 215 85 270 Q85 300 120 302 Q155 304 165 278 Q178 248 160 196 Z" fill="url(#gold)"/>
+    <path d="M640 196 Q 705 215 715 270 Q715 300 680 302 Q645 304 635 278 Q622 248 640 196 Z" fill="url(#gold)"/>
+
+    <path d="M230 225 C260 170, 330 165, 360 176 C400 191, 447 222, 462 274 C476 324, 469 368, 432 391 C399 412, 332 417, 290 400 C246 382, 214 342, 208 290 C205 270, 214 248, 230 225 Z" fill="#f5f2ed" stroke="#1a1a1a" stroke-width="6"/>
+    <path d="M290 191 C315 168, 358 176, 382 201 C409 229, 415 272, 392 302 C370 331, 345 340, 316 343 C285 346, 257 328, 242 298 C227 269, 250 220, 290 191 Z" fill="#f3f1ee" stroke="#1a1a1a" stroke-width="6"/>
+    <path d="M334 188 C350 164, 384 152, 418 166 C445 177, 468 203, 475 234 C481 265, 473 299, 449 322 C421 347, 377 351, 344 337 C310 322, 285 293, 286 260 C286 230, 302 204, 334 188 Z" fill="#f3f1ee" stroke="#1a1a1a" stroke-width="6"/>
+    <path d="M332 207 C352 180, 382 170, 409 177 C431 182, 452 198, 463 220 C445 217, 425 220, 405 235 C382 252, 363 273, 350 303 C330 294, 312 278, 299 253 C295 239, 306 220, 332 207 Z" fill="#f0e7bb" opacity="0.9"/>
+
+    <path d="M300 258 C318 244, 344 242, 366 256 C386 269, 399 289, 403 312 C365 320, 336 332, 309 350 C286 329, 278 288, 300 258 Z" fill="#f5f2ed" stroke="#1a1a1a" stroke-width="5"/>
+    <path d="M453 245 C474 257, 491 280, 495 309 C470 328, 436 334, 412 327 C422 290, 438 264, 453 245 Z" fill="#f5f2ed" stroke="#1a1a1a" stroke-width="5"/>
+
+    <path d="M320 265 C339 275, 351 286, 360 298" fill="none" stroke="#222" stroke-width="4" stroke-linecap="round"/>
+    <path d="M383 286 C400 296, 413 312, 416 334" fill="none" stroke="#222" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="320" cy="238" r="7" fill="#1a1a1a"/>
+    <circle cx="370" cy="242" r="7" fill="#1a1a1a"/>
+    <path d="M318 290 Q351 314 382 290" fill="none" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+
+    <path d="M355 185 C363 165, 384 155, 403 160 C423 166, 437 181, 438 198 C440 214, 427 230, 410 236 C391 243, 367 239, 353 224 C345 214, 347 200, 355 185 Z" fill="#f1d4c5" opacity="0.9"/>
+
+    <path d="M140 290 Q240 400 332 382 Q390 370 452 386 Q507 402 660 285 L660 330 Q518 464 430 466 Q335 468 216 438 Q160 421 140 330 Z" fill="url(#gold)"/>
+    <path d="M162 330 Q206 303 230 342 Q252 376 244 416 Q208 409 175 398 Q150 382 162 330 Z" fill="#f3c840"/>
+    <path d="M568 333 Q594 301 630 300 Q650 300 665 328 Q642 350 610 354 Q582 354 568 333 Z" fill="#f3c840"/>
+
+    <path d="M245 388 C220 408, 201 438, 196 470 C204 463, 217 462, 234 464 C258 466, 268 482, 271 504 C290 496, 311 489, 321 492 C305 448, 275 413, 245 388 Z" fill="#d83a3a"/>
+    <path d="M312 404 C286 430, 272 469, 272 500 C282 492, 299 488, 316 488 C338 488, 350 503, 350 527 C369 518, 389 513, 400 517 C387 474, 359 432, 312 404 Z" fill="#0a5ab4"/>
+    <path d="M488 404 C516 430, 530 469, 530 500 C520 492, 503 488, 486 488 C464 488, 452 503, 452 527 C433 518, 413 513, 402 517 C415 474, 443 432, 488 404 Z" fill="#d83a3a"/>
+    <path d="M555 388 C580 408, 599 438, 604 470 C596 463, 583 462, 566 464 C542 466, 532 482, 529 504 C510 496, 489 489, 479 492 C495 448, 525 413, 555 388 Z" fill="#0a5ab4"/>
+
+    <path d="M192 488 C228 524, 258 549, 294 562 C291 581, 282 602, 268 618 C212 601, 177 560, 192 488 Z" fill="url(#gold)" stroke="#1a1a1a" stroke-width="4"/>
+    <path d="M608 488 C572 524, 542 549, 506 562 C509 581, 518 602, 532 618 C588 601, 623 560, 608 488 Z" fill="url(#gold)" stroke="#1a1a1a" stroke-width="4"/>
+
+    <path d="M90 420 C146 360, 180 358, 195 366 C181 414, 155 459, 119 488 C102 475, 90 446, 90 420 Z" fill="#f4d34d" opacity="0.9"/>
+    <path d="M710 420 C654 360, 620 358, 605 366 C619 414, 645 459, 681 488 C698 475, 710 446, 710 420 Z" fill="#f4d34d" opacity="0.9"/>
+
+    <path d="M107 606 C160 582, 215 576, 283 578 C300 632, 342 662, 400 662 C458 662, 500 632, 517 578 C585 576, 640 582, 693 606 L693 640 L107 640 Z" fill="#303030"/>
+    <text x="400" y="625" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="116" fill="#f4f4f4" letter-spacing="3">SINJAI</text>
+  </g>
+</svg>
